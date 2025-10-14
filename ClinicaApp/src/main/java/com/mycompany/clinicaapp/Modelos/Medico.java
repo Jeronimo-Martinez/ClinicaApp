@@ -9,5 +9,8 @@ package com.mycompany.clinicaapp.Modelos;
  * @author hecto
  */
 public class Medico {
+    private String cedula;
+    private String nombre;
+    private Especialidad especialidad;
     
 }
