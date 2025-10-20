@@ -4,8 +4,6 @@
  */
 package com.mycompany.clinicaapp.Utilidades;
 
-import java.awt.event.ActionEvent;
-
 /**
  *
  * @author johan
@@ -13,7 +11,7 @@ import java.awt.event.ActionEvent;
 public class PanelDelBoton extends javax.swing.JPanel {
 
     /**
-     * Creates new form PanelDelBoton
+     * Creates new form PanelBoton
      */
     public PanelDelBoton() {
         initComponents();
@@ -28,30 +26,12 @@ public class PanelDelBoton extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        verInformacion = new com.mycompany.clinicaapp.Utilidades.BotonJtable();
-        verInformacion1 = new com.mycompany.clinicaapp.Utilidades.BotonJtable();
-        verInformacion2 = new com.mycompany.clinicaapp.Utilidades.BotonJtable();
+        botonJtable1 = new com.mycompany.clinicaapp.Utilidades.BotonJtable();
+        botonJtable2 = new com.mycompany.clinicaapp.Utilidades.BotonJtable();
 
-        verInformacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/clinicaapp/Utilidades/Historial 20x20.png"))); // NOI18N
-        verInformacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                verInformacionActionPerformed(evt);
-            }
-        });
+        botonJtable1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/clinicaapp/Utilidades/Historial 20x20.png"))); // NOI18N
 
-        verInformacion1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/clinicaapp/Utilidades/TrashCan 20x20.png"))); // NOI18N
-        verInformacion1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                verInformacion1ActionPerformed(evt);
-            }
-        });
-
-        verInformacion2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/clinicaapp/Utilidades/Lupa 20x20.png"))); // NOI18N
-        verInformacion2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                verInformacion2ActionPerformed(evt);
-            }
-        });
+        botonJtable2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/clinicaapp/Utilidades/TrashCan 20x20.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -59,41 +39,25 @@ public class PanelDelBoton extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(verInformacion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botonJtable1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(verInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(verInformacion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botonJtable2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(verInformacion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(verInformacion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(verInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(botonJtable2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonJtable1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void verInformacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verInformacionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_verInformacionActionPerformed
-
-    private void verInformacion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verInformacion1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_verInformacion1ActionPerformed
-
-    private void verInformacion2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verInformacion2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_verInformacion2ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.mycompany.clinicaapp.Utilidades.BotonJtable verInformacion;
-    private com.mycompany.clinicaapp.Utilidades.BotonJtable verInformacion1;
-    private com.mycompany.clinicaapp.Utilidades.BotonJtable verInformacion2;
+    private com.mycompany.clinicaapp.Utilidades.BotonJtable botonJtable1;
+    private com.mycompany.clinicaapp.Utilidades.BotonJtable botonJtable2;
     // End of variables declaration//GEN-END:variables
 }

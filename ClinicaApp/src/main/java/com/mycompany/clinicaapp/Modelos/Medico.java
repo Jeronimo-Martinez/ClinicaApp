@@ -12,7 +12,7 @@ public class Medico {
     private String cedula;
     private String nombre;
     private Especialidad especialidad;
-
+   
     public Medico(String cedula, String nombre, Especialidad especialidad) {
         this.cedula = cedula;
         this.nombre = nombre;
