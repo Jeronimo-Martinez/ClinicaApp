@@ -18,7 +18,8 @@ public class VentanaMedica extends javax.swing.JPanel {
     public VentanaMedica() {
         initComponents();
         tablaMedica.getColumnModel().getColumn(3).setCellRenderer(new RenderizadoDeTabla());
-        
+        tablaMedica.getTableHeader().setReorderingAllowed(false);
+
         
         
         
