@@ -8,14 +8,14 @@ package com.mycompany.clinicaapp.Presentacion;
  *
  * @author johan
  */
-public class test extends javax.swing.JFrame {
+public class Test extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(test.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Test.class.getName());
 
     /**
-     * Creates new form test
+     * Creates new form Test
      */
-    public test() {
+    public Test() {
         initComponents();
     }
 
@@ -28,7 +28,7 @@ public class test extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ventanaMedica1 = new com.mycompany.clinicaapp.Presentacion.VentanaMedica();
+        ventanaMedica2 = new com.mycompany.clinicaapp.Presentacion.VentanaMedica();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -36,16 +36,16 @@ public class test extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(ventanaMedica1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ventanaMedica2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ventanaMedica1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(ventanaMedica2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -74,10 +74,10 @@ public class test extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new test().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new Test().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.mycompany.clinicaapp.Presentacion.VentanaMedica ventanaMedica1;
+    private com.mycompany.clinicaapp.Presentacion.VentanaMedica ventanaMedica2;
     // End of variables declaration//GEN-END:variables
 }

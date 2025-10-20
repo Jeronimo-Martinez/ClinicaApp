@@ -12,14 +12,23 @@ import javax.swing.table.DefaultTableCellRenderer;
  *
  * @author johan
  */
-public class RenderizadoDeTabla extends DefaultTableCellRenderer {
+public class RenderizadoTablaMedico extends DefaultTableCellRenderer {
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         Component com= super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
-        PanelDelBoton action= new PanelDelBoton();
-        return action;
-    
+        if (column == 3) { 
+        BotonesJtableMedico panel = new BotonesJtableMedico();
+        if (isSelected) {
+            panel.setBackground(table.getSelectionBackground());
+        } else {
+            panel.setBackground(table.getBackground());
+        }
+        return panel;
     }
+
+       return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+    }
+ 
     
 }

@@ -4,7 +4,10 @@
  */
 package com.mycompany.clinicaapp.Presentacion;
 
-import com.mycompany.clinicaapp.Utilidades.RenderizadoDeTabla;
+import com.mycompany.clinicaapp.Utilidades.ActivadorJtableMedicoBotones;
+import com.mycompany.clinicaapp.Utilidades.EventosParaBotones;
+import com.mycompany.clinicaapp.Utilidades.RenderizadoTablaMedico;
+import java.awt.Color;
 
 /**
  *
@@ -17,10 +20,23 @@ public class VentanaMedica extends javax.swing.JPanel {
      */
     public VentanaMedica() {
         initComponents();
-        tablaMedica.getColumnModel().getColumn(3).setCellRenderer(new RenderizadoDeTabla());
-        tablaMedica.getTableHeader().setReorderingAllowed(false);
+        EventosParaBotones evento = new EventosParaBotones() {
+            @Override
+            public void clickHistorial(int row) {
+                System.out.println("Historial" + row);
+            }
 
-        
+            @Override
+            public void clickEliminar(int row) {
+                System.out.println("Eliminar" + row);
+            }
+        };
+                
+        tablaMedica.getColumnModel().getColumn(3).setCellRenderer(new RenderizadoTablaMedico());
+        tablaMedica.getTableHeader().setReorderingAllowed(false);
+        tablaMedica.setShowGrid(true);
+        tablaMedica.setGridColor(Color.LIGHT_GRAY);
+        tablaMedica.getColumnModel().getColumn(3).setCellEditor(new ActivadorJtableMedicoBotones(evento));
         
         
         
@@ -48,14 +64,14 @@ public class VentanaMedica extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Nombre", "Cédula", "Especialidad", "Información"
+                "Nombre", "Cédula", "Especialidad", "Acción"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {

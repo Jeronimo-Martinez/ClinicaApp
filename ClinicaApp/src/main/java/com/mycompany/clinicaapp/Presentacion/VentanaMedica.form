@@ -59,7 +59,7 @@
                 <Column editable="false" title="Nombre" type="java.lang.String"/>
                 <Column editable="false" title="C&#xe9;dula" type="java.lang.String"/>
                 <Column editable="false" title="Especialidad" type="java.lang.String"/>
-                <Column editable="false" title="Informaci&#xf3;n" type="java.lang.Object"/>
+                <Column editable="true" title="Acci&#xf3;n" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="rowHeight" type="int" value="40"/>
