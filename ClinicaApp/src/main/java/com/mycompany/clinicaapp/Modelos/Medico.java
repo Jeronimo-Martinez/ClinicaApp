@@ -12,11 +12,13 @@ public class Medico {
     private String cedula;
     private String nombre;
     private Especialidad especialidad;
+    private String contrasena;
    
-    public Medico(String cedula, String nombre, Especialidad especialidad) {
+    public Medico(String cedula, String nombre, Especialidad especialidad, String contrasena) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.especialidad = especialidad;
+        this.contrasena = contrasena;
     }
 
     public String getCedula() {
@@ -42,6 +44,15 @@ public class Medico {
     public void setEspecialidad(Especialidad especialidad) {
         this.especialidad = especialidad;
     }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
     
     
     

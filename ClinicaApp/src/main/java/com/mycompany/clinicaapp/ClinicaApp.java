@@ -4,7 +4,7 @@
  */
 package com.mycompany.clinicaapp;
 
-import com.mycompany.clinicaapp.Presentacion.VentanaPrincipal;
+import com.mycompany.clinicaapp.Presentacion.VentanaRegistrarse;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -14,9 +14,10 @@ import java.awt.Toolkit;
  * @author hecto
  */
 public class ClinicaApp {
-    private static VentanaPrincipal main;
+    
+    private static VentanaRegistrarse main;
     public static void main(String[] args) {
-    main = new VentanaPrincipal();
+    main = new VentanaRegistrarse();
     main.setVisible(true);
     Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
     int x = (pantalla.width - main.getWidth()) / 2;
