@@ -4,7 +4,7 @@
  */
 package com.mycompany.clinicaapp;
 
-import com.mycompany.clinicaapp.Presentacion.VentanaRegistrarse;
+import com.mycompany.clinicaapp.Presentacion.VentanaIniciarSesion;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -15,9 +15,9 @@ import java.awt.Toolkit;
  */
 public class ClinicaApp {
     
-    private static VentanaRegistrarse main;
+    private static VentanaIniciarSesion main;
     public static void main(String[] args) {
-    main = new VentanaRegistrarse();
+    main = new VentanaIniciarSesion();
     main.setVisible(true);
     Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
     int x = (pantalla.width - main.getWidth()) / 2;

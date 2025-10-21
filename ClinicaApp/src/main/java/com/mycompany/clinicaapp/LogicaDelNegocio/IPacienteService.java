@@ -8,12 +8,12 @@ package com.mycompany.clinicaapp.LogicaDelNegocio;
  *
  * @author hecto
  */
-public class IMedicoService extends javax.swing.JFrame {
+public class IPacienteService extends javax.swing.JFrame {
 
     /**
-     * Creates new form IMedicoService
+     * Creates new form IPacienteService
      */
-    public IMedicoService() {
+    public IPacienteService() {
         initComponents();
     }
 
@@ -59,20 +59,20 @@ public class IMedicoService extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(IMedicoService.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IPacienteService.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(IMedicoService.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IPacienteService.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(IMedicoService.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IPacienteService.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(IMedicoService.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IPacienteService.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IMedicoService().setVisible(true);
+                new IPacienteService().setVisible(true);
             }
         });
     }

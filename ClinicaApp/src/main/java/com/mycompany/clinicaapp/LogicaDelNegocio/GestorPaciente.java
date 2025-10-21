@@ -14,15 +14,16 @@ import java.util.ArrayList;
 public class GestorPaciente{
     private final ArrayList<Paciente> listaPacientes = new ArrayList<>();
 
+    
     public boolean registrarPaciente(Paciente paciente) {
         listaPacientes.add(paciente);
         return true;
     }
 
     public Paciente iniciarSesion(String cedula, String contrasena) {
-        for (Paciente p : listaPacientes) {
-            if (p.getCedula().equals(cedula) && p.getContrasena().equals(contrasena)) {
-                return p;
+        for (Paciente pacienteingresado : listaPacientes) {
+            if (pacienteingresado.getCedula().equals(cedula) && pacienteingresado.getContrasena().equals(contrasena)) {
+                return pacienteingresado;
             }
         }
         return null;

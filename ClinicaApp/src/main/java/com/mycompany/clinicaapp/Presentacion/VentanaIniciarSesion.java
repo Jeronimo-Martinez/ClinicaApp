@@ -3,7 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.clinicaapp.Presentacion;
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorPaciente;
+import com.mycompany.clinicaapp.LogicaDelNegocio.IMedicoService;
+import com.mycompany.clinicaapp.LogicaDelNegocio.IPacienteService;
+import com.mycompany.clinicaapp.Modelos.Medico;
+import com.mycompany.clinicaapp.Modelos.Paciente;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,14 +23,15 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
     /**
      * Creates new form VentanaPrincipal
      */
-    
+    private GestorPaciente gestorPaciente = new GestorPaciente();
+    private GestorMedico gestorMedico = new GestorMedico();
     
     public VentanaIniciarSesion() {
         initComponents();
         
         ButtonGroup grupoUsuarios = new ButtonGroup();
-        grupoUsuarios.add(rbpaciente);
-        grupoUsuarios.add(rbmedico);
+        grupoUsuarios.add(rbPaciente);
+        grupoUsuarios.add(rbMedico);
         
    
   
@@ -47,8 +57,8 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtusuario = new javax.swing.JTextField();
         txtpassword = new javax.swing.JPasswordField();
-        rbpaciente = new javax.swing.JRadioButton();
-        rbmedico = new javax.swing.JRadioButton();
+        rbPaciente = new javax.swing.JRadioButton();
+        rbMedico = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -89,6 +99,11 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
 
         btnregistrarse.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnregistrarse.setText("Registrarse");
+        btnregistrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnregistrarseActionPerformed(evt);
+            }
+        });
 
         btnsalir.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnsalir.setText("Salir");
@@ -104,19 +119,19 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel2.setText("Contraseña:");
 
-        rbpaciente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        rbpaciente.setText("Paciente");
-        rbpaciente.addActionListener(new java.awt.event.ActionListener() {
+        rbPaciente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        rbPaciente.setText("Paciente");
+        rbPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbpacienteActionPerformed(evt);
+                rbPacienteActionPerformed(evt);
             }
         });
 
-        rbmedico.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        rbmedico.setText("Medico");
-        rbmedico.addActionListener(new java.awt.event.ActionListener() {
+        rbMedico.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        rbMedico.setText("Medico");
+        rbMedico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbmedicoActionPerformed(evt);
+                rbMedicoActionPerformed(evt);
             }
         });
 
@@ -131,35 +146,37 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
                 .addContainerGap(90, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(82, 82, 82)
-                                .addComponent(lbltitle))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(194, 194, 194)
-                                .addComponent(btningresar))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(134, 134, 134)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(rbpaciente)
+                                        .addGap(82, 82, 82)
+                                        .addComponent(lbltitle))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(194, 194, 194)
+                                        .addComponent(btningresar))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(134, 134, 134)
+                                        .addComponent(rbPaciente)
                                         .addGap(56, 56, 56)
-                                        .addComponent(rbmedico))))
+                                        .addComponent(rbMedico))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel1))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(34, 34, 34))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(34, 34, 34))
+                                .addComponent(btnregistrarse)
+                                .addGap(159, 159, 159)))
+                        .addComponent(btnsalir)
+                        .addGap(18, 18, 18))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnregistrarse)
-                        .addGap(164, 164, 164)))
-                .addComponent(btnsalir)
-                .addGap(18, 18, 18))
+                        .addComponent(jLabel3)
+                        .addGap(204, 204, 204))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,14 +193,14 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
                     .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(rbpaciente)
-                    .addComponent(rbmedico))
+                    .addComponent(rbPaciente)
+                    .addComponent(rbMedico))
                 .addGap(18, 18, 18)
                 .addComponent(btningresar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnsalir)
                     .addComponent(btnregistrarse))
                 .addGap(20, 20, 20))
@@ -193,20 +210,82 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btningresarActionPerformed
+        String usuarioingresado = txtusuario.getText();
+        String contrasenaingresada = new String(txtpassword.getPassword());
 
+        if (usuarioingresado.isEmpty() || contrasenaingresada.isEmpty()) {
+        JOptionPane.showMessageDialog(this, 
+            "Por favor, complete todos los campos.", 
+            "Campos vacíos", 
+            JOptionPane.WARNING_MESSAGE);
+        return;
+        }
+        
+        if (!rbPaciente.isSelected() && !rbMedico.isSelected()) {
+        JOptionPane.showMessageDialog(this, 
+            "Seleccione si es Paciente o Médico antes de iniciar sesión.", 
+            "Selección requerida", 
+            JOptionPane.WARNING_MESSAGE);
+        return;
+        }
+        
+        
+        if (rbPaciente.isSelected()) {
+        Paciente paciente = gestorPaciente.iniciarSesion(usuarioingresado, contrasenaingresada);
+        if (paciente != null) {
+            JOptionPane.showMessageDialog(this, 
+                "Inicio de sesión exitoso. ¡Bienvenido, " + paciente.getNombre() + "!");
+            
+           
+            new IPacienteService().setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, 
+                "Credenciales incorrectas para paciente.", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+        }
+
+    } else if (rbMedico.isSelected()) {
+        Medico medico = gestorMedico.iniciarSesion(usuarioingresado, contrasenaingresada);
+        if (medico != null) {
+            JOptionPane.showMessageDialog(this, 
+                "Inicio de sesión exitoso. Bienvenido Dr(a). " + medico.getNombre() + "!");
+            
+           
+            new IMedicoService().setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, 
+                "Credenciales incorrectas para médico.", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+        }
+        }
+    
     }//GEN-LAST:event_btningresarActionPerformed
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnsalirActionPerformed
 
-    private void rbmedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbmedicoActionPerformed
+    private void rbMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbMedicoActionPerformed
       
-    }//GEN-LAST:event_rbmedicoActionPerformed
+    }//GEN-LAST:event_rbMedicoActionPerformed
 
-    private void rbpacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbpacienteActionPerformed
+    private void rbPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPacienteActionPerformed
         
-    }//GEN-LAST:event_rbpacienteActionPerformed
+    }//GEN-LAST:event_rbPacienteActionPerformed
+
+    private void btnregistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrarseActionPerformed
+        VentanaRegistrarse ventanaRegistro = new VentanaRegistrarse();
+        ventanaRegistro.setVisible(true);
+        Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (pantalla.width - ventanaRegistro.getWidth()) / 2;
+        int y = (pantalla.height - ventanaRegistro.getHeight()) / 2;
+        ventanaRegistro.setLocation(x, y);
+        this.dispose();
+    }//GEN-LAST:event_btnregistrarseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -254,8 +333,8 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbltitle;
-    private javax.swing.JRadioButton rbmedico;
-    private javax.swing.JRadioButton rbpaciente;
+    private javax.swing.JRadioButton rbMedico;
+    private javax.swing.JRadioButton rbPaciente;
     private javax.swing.JPasswordField txtpassword;
     private javax.swing.JTextField txtusuario;
     // End of variables declaration//GEN-END:variables
