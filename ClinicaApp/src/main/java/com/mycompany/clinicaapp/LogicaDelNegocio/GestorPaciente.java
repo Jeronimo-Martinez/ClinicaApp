@@ -14,6 +14,11 @@ import java.util.ArrayList;
 public class GestorPaciente{
     private final ArrayList<Paciente> listaPacientes = new ArrayList<>();
 
+    public GestorPaciente() {
+        listaPacientes.add(new Paciente("0000", "Juan Pérez", "3001234567", 28, "0000"));
+        listaPacientes.add(new Paciente("2020", "María López", "3107654321", 35, "abcd"));
+        listaPacientes.add(new Paciente("3030", "Carlos Ruiz", "3209876543", 42, "clave"));
+    }
     
     public boolean registrarPaciente(Paciente paciente) {
         listaPacientes.add(paciente);
