@@ -6,9 +6,8 @@ import java.util.List;
 import com.mycompany.clinicaapp.Modelos.Cita;
 
 /**
- * @author Silvana
- * 
  * Esta interfaz se encarga de definir las operaciones para consultar el historial de un paciente
+ * @author Silvana
  */
 
 public interface IHistorialService {
