@@ -20,15 +20,28 @@ public class GestorPaciente{
         listaPacientes.add(new Paciente("3030", "Carlos Ruiz", "3209876543", 42, "clave"));
     }
     
-    public boolean registrarPaciente(Paciente paciente) {
+    public String registrarPaciente(Paciente paciente) {
+       
+        if (paciente.getCedula().isEmpty() || paciente.getNombre().isEmpty() ||
+            paciente.getTelefono().isEmpty() || paciente.getContrasena().isEmpty()) {
+            return "Por favor complete todos los campos obligatorios.";
+        }
+
+   
+        for (Paciente p : listaPacientes) {
+            if (p.getCedula().equals(paciente.getCedula())) {
+                return "Ya existe un paciente registrado con esa cédula.";
+            }
+        }
+
         listaPacientes.add(paciente);
-        return true;
+        return "Paciente registrado correctamente.";
     }
 
     public Paciente iniciarSesion(String cedula, String contrasena) {
-        for (Paciente pacienteingresado : listaPacientes) {
-            if (pacienteingresado.getCedula().equals(cedula) && pacienteingresado.getContrasena().equals(contrasena)) {
-                return pacienteingresado;
+        for (Paciente paciente : listaPacientes) {
+            if (paciente.getCedula().equals(cedula) && paciente.getContrasena().equals(contrasena)) {
+                return paciente;
             }
         }
         return null;
