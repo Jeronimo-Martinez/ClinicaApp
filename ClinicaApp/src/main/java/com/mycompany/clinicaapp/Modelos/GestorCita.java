@@ -9,6 +9,8 @@ import com.mycompany.clinicaapp.LogicaDelNegocio.IGestorCita;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -48,27 +50,42 @@ public class GestorCita implements IGestorCita {
         }
 
         @Override
-        public List<Cita> consultarCitasPaciente
-        (Paciente paciente
-        
-            ) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        public List<Cita> consultarCitasPaciente(Paciente paciente){
+        try {
+            return this.listaCitas.stream().filter(c -> c.getPaciente() == paciente).collect(Collectors.toList()); // haskell me traumo con los maps y filter ;-;
+        }catch (Exception exception) {
+            System.out.println("Error inesperado");
+            return null;
+        }
+
         }
 
         @Override
-        public boolean eliminarCita
-        (String idCita
-        
-            ) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        }
+        public boolean eliminarCita(String idCita) {
+        try {
+            return this.listaCitas.removeIf(c -> c.getId() == idCita); // la funcion remove if retorna un valor booleano dependiendo de si se elimino o no un elemento de la lista 
+        }catch (Exception exception) {                                  
+            System.out.println("Error inesperado");
+            return false;
+        }}
 
         @Override
-        public boolean modificarCita
-        (String idCita, Cita nueva
-        
-            ) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        }
+        public boolean modificarCita(String idCita, Cita nueva) {
+            try{
+                AtomicBoolean flag = new AtomicBoolean(false); // se usa AtomicBoolean para permitir usar el valor booleano dentro de la funcion 
+
+                this.listaCitas.replaceAll(c -> {
+                    if (c.getId() == idCita) {
+                        flag.set(true);
+                        return nueva; // le retorna la nueva cita a replaceAll
+                    }
+                    return c; // le retorna la misma cita a replaceAll(el id no coicide , no hay cambios)
+                });
+
+                return flag.get();
+            }catch (Exception exception) {                                  
+                System.out.println("Error inesperado");
+                return false;
+        }}
 
     }
