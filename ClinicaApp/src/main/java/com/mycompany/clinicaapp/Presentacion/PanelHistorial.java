@@ -27,8 +27,8 @@ public class PanelHistorial extends JPanel {
     public PanelHistorial(IHistorialService gestorHistorial) {
         this.gestorHistorial = gestorHistorial;
         inicializarComponentes();
-        configurarEstilos();
-        configurarEventos();
+        configurarEstilosDelHistorial();
+        configurarEventosHistorial();
     }
 
     /**
@@ -98,4 +98,75 @@ public class PanelHistorial extends JPanel {
         btnBuscarHistorial.addActionListener((ActionEvent click) -> buscarHistorial());
     }
 
+
+    /**
+     * Inicia el proceso de búsqueda del historial de citas del paciente según el documento ingresado por el usuario. 
+     * <p>
+     * Este método se encarga de validar el campo, consultar la información
+     * en la capa lógica y delegar la visualización de los resultados.
+     */
+    private void buscarHistorial() {
+
+        String documentoIngresado = txtDocumentoPaciente.getText().trim();
+
+    // Validación de campo vacío
+    if (documentoIngresado.isEmpty()) {
+        JOptionPane.showMessageDialog(this,
+                "Ingrese el documento del paciente.",
+                "Campo vacío",
+                JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    // Validación de datos numéricos
+    if (!documentoIngresado.matches("\\d+")) {
+        JOptionPane.showMessageDialog(this,
+                "El documento solo debe contener números.",
+                "Formato inválido",
+                JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Consultar historial desde la lógica de negocio
+    List<Cita> historial = gestorHistorial.consultarHistorial(documentoIngresado);
+
+    // Manejo de posibles errores o lista nula
+    if (historial == null) {
+        JOptionPane.showMessageDialog(this,
+                "Ocurrió un error al consultar el historial.",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Llama al método que se encarga de mostrar el historial buscado
+    mostrarHistorial(historial);
+}
+
+
+    /**
+     * Este método muestra el historial de citas en la tabla del panel.
+     * @param historial lista de citas a mostrar en la tabla
+     */
+    private void mostrarHistorial(List<Cita> historial) {
+        // Limpia tabla previa
+        modeloTabla.setRowCount(0);
+
+        if (historial.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "No se encontraron registros para este paciente.",
+                    "Sin resultados",
+                    JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        // Carga los resultados en la tabla
+        for (Cita citaActual : historial) {
+            modeloTabla.addRow(new Object[]{
+                    citaActual.getFecha(),
+                    citaActual.getMedico().getNombre(),
+                    citaActual.getDiagnostico()
+            });
+        }
+    }
 }
