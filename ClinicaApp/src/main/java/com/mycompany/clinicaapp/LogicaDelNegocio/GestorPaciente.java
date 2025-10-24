@@ -1,36 +1,59 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.clinicaapp.LogicaDelNegocio;
-
 import com.mycompany.clinicaapp.Modelos.Paciente;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
- *
- * @author hecto
+ * Esta clase implementa la interfaz IPacienteService y se encarga de gestionar las operaciones CRUD sobre los objetos Paciente
+ * @author Valentina
  */
-public class GestorPaciente{
-    private final ArrayList<Paciente> listaPacientes = new ArrayList<>();
+
+public class GestorPaciente implements IPacienteService{
+
+    private List<Paciente> pacientes;
+
+    /**
+     * Constructor por defecto 
+     */
 
     public GestorPaciente() {
-        listaPacientes.add(new Paciente("0000", "Juan Pérez", "3001234567", 28, "0000"));
-        listaPacientes.add(new Paciente("2020", "María López", "3107654321", 35, "abcd"));
-        listaPacientes.add(new Paciente("3030", "Carlos Ruiz", "3209876543", 42, "clave"));
+        this.pacientes = new ArrayList<>();
     }
-    
-    public boolean registrarPaciente(Paciente paciente) {
-        listaPacientes.add(paciente);
-        return true;
+    /**
+     * Constructor con parámetros
+     * 
+     * @param gestorPaciente
+     * @param pacientes
+     */
+
+    public GestorPaciente (List<Paciente> pacientes) {
+        this.pacientes = pacientes;
     }
 
-    public Paciente iniciarSesion(String cedula, String contrasena) {
-        for (Paciente pacienteingresado : listaPacientes) {
-            if (pacienteingresado.getCedula().equals(cedula) && pacienteingresado.getContrasena().equals(contrasena)) {
-                return pacienteingresado;
-            }
-        }
-        return null;
+    @Override
+    public boolean registrarPaciente(Paciente paciente) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'registrarPaciente'");
     }
+
+    @Override
+    public boolean editarPaciente(Paciente paciente) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'editarPaciente'");
+    }
+
+    @Override
+    public boolean eliminarPaciente(Paciente paciente) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'eliminarPaciente'");
+    }
+
+    @Override
+    public List<Paciente> listarPacientes() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'listarPacientes'");
+    }
+
+    
 }
