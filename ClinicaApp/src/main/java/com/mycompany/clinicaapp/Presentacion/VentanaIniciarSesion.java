@@ -23,8 +23,8 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
     /**
      * Creates new form VentanaPrincipal
      */
-    private GestorPaciente gestorPaciente = new GestorPaciente();
-    private GestorMedico gestorMedico = new GestorMedico();
+    GestorPaciente gestorPaciente = GestorPaciente.getInstanciaPaciente();
+    GestorMedico gestorMedico = GestorMedico.getInstanciaMedico();
     
     public VentanaIniciarSesion() {
         initComponents();

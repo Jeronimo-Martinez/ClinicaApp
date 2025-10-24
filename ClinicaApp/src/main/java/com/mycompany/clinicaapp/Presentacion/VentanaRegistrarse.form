@@ -55,85 +55,45 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="40" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="268" max="-2" attributes="0"/>
+                      <Component id="btnvolver" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtnombre" min="-2" pref="295" max="-2" attributes="0"/>
-                                  <Component id="txtpassword" min="-2" pref="295" max="-2" attributes="0"/>
-                                  <Component id="txtcedula" alignment="0" min="-2" pref="295" max="-2" attributes="0"/>
-                                  <Component id="textcelular" alignment="0" min="-2" pref="295" max="-2" attributes="0"/>
-                              </Group>
+                              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                              <Component id="lbltitle" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="125" pref="125" max="-2" attributes="0"/>
-                              <Component id="textedad" min="-2" pref="295" max="-2" attributes="0"/>
+                              <Component id="btnpaciente" min="-2" pref="122" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                              <Component id="btnmedico" min="-2" pref="122" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
-                      <Component id="lbltitle" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="22" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="103" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              <Component id="btnregistrarse" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="216" max="-2" attributes="0"/>
-              <Component id="btnsalir" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Component id="lbltitle" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtnombre" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtcedula" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="textcelular" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="textedad" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtpassword" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="54" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnregistrarse" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnsalir" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnpaciente" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="btnmedico" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="51" max="32767" attributes="0"/>
+              <Component id="btnvolver" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -144,78 +104,36 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Por favor complete sus datos personales para crear su cuenta"/>
+        <Property name="text" type="java.lang.String" value="&#xbf;C&#xf3;mo desea registrarse?"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnregistrarse">
+    <Component class="javax.swing.JButton" name="btnvolver">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Registrarse"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnsalir">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="14" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Salir"/>
+        <Property name="text" type="java.lang.String" value="Volver"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnsalirActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnvolverActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JButton" name="btnpaciente">
       <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="18" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Nombre:"/>
+        <Property name="text" type="java.lang.String" value="Paciente"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnpacienteActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JButton" name="btnmedico">
       <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="18" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Contrase&#xf1;a:"/>
+        <Property name="text" type="java.lang.String" value="Medico"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtnombre">
-    </Component>
-    <Component class="javax.swing.JPasswordField" name="txtpassword">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel4">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="18" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Cedula:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtcedula">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel5">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="18" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Celular:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="textcelular">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel6">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="18" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Edad:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="textedad">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnmedicoActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
