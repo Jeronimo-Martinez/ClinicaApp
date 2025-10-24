@@ -1,0 +1,172 @@
+package com.mycompany.clinicaapp.Presentacion;
+import com.mycompany.clinicaapp.LogicaDelNegocio.IHistorialService;
+import com.mycompany.clinicaapp.Modelos.Cita;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.util.List;
+import java.awt.event.ActionEvent;
+
+/**
+ * Este panel está encargado de mostrar el historial clínico de un paciente.
+ */
+
+public class PanelHistorial extends JPanel {
+
+    private final IHistorialService gestorHistorial;
+    private DefaultTableModel modeloTabla;
+    private JTextField txtDocumentoPaciente;
+    private JButton btnBuscarHistorial;
+    private JTable tablaHistorial;
+    
+
+    /**
+     * Constructor del panel de historial.
+     * @param gestorHistorial 
+     */
+    public PanelHistorial(IHistorialService gestorHistorial) {
+        this.gestorHistorial = gestorHistorial;
+        inicializarComponentes();
+        configurarEstilosDelHistorial();
+        configurarEventosHistorial();
+    }
+
+    /**
+     * Este método inicializa y organiza los componentes principales del panel de historial.
+     * Configura el diseño, los colores de fondo y agrega las secciones visuales del área de búsqueda y de la tabla de resultados.
+     */
+    private void inicializarComponentes(){
+        setLayout(new BorderLayout(15,15));
+        setBackground(new Color(245, 247, 252));
+
+        add(crearPanelBusqueda(), BorderLayout.NORTH);
+        add(crearPanelTabla(), BorderLayout.CENTER);
+    }
+
+
+    /**
+     * Crea y configura el panel superior de búsqueda, donde el usuario puede ingresar el documento del paciente y ejecutar la consulta.
+     * @return un JPanel configurado con etiqueta, campo de texto y botón.
+     */
+    private JPanel crearPanelBusqueda() {
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
+        panel.setBackground(new Color(230, 235, 245));
+
+        JLabel etiquetaDocumento = new JLabel("Documento del paciente:");
+        txtDocumentoPaciente = new JTextField(15);
+        btnBuscarHistorial = new JButton("Buscar historial");
+
+        panel.add(etiquetaDocumento);
+        panel.add(txtDocumentoPaciente);
+        panel.add(btnBuscarHistorial);
+        return panel;
+    }
+    /**
+     * Este método crea el panel central que contiene la tabla del historial de citas.
+     * Esta tabla se envuelve dentro de un JScrollPane para permitir el desplazamiento
+     * @return JScrollPane configurado con la tabla del historial del paciente.
+     */
+    private JScrollPane crearPanelTabla() {
+        modeloTabla = new DefaultTableModel(new String[]{"Fecha", "Médico", "Diagnóstico"}, 0);
+        tablaHistorial = new JTable(modeloTabla);
+        JScrollPane scroll = new JScrollPane(tablaHistorial);
+        scroll.setBorder(BorderFactory.createTitledBorder("Historial del paciente"));
+        return scroll;
+    }
+
+
+    /**
+     * Este método es para aplicar estilos visuales a los componentes del panel.
+     * Define fuentes, colores y tamaños para mejorar la presentación y la experiencia visual.
+     */
+
+    private void configurarEstilosDelHistorial() {
+        Font fuente = new Font("Segoe UI", Font.PLAIN, 14);
+        txtDocumentoPaciente.setFont(fuente);
+        btnBuscarHistorial.setFont(fuente);
+        tablaHistorial.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        tablaHistorial.setRowHeight(22);
+        btnBuscarHistorial.setBackground(new Color(66, 133, 244));
+        btnBuscarHistorial.setForeground(Color.WHITE);
+    }
+
+
+    /**
+     * Este método le dice al botón que debe hacer cuando el usuario lo presione
+     */
+    private void configurarEventosHistorial() {
+        btnBuscarHistorial.addActionListener((ActionEvent click) -> buscarHistorial());
+    }
+
+
+    /**
+     * Inicia el proceso de búsqueda del historial de citas del paciente según el documento ingresado por el usuario. 
+     * <p>
+     * Este método se encarga de validar el campo, consultar la información
+     * en la capa lógica y delegar la visualización de los resultados.
+     */
+    private void buscarHistorial() {
+
+        String documentoIngresado = txtDocumentoPaciente.getText().trim();
+
+    // Validación de campo vacío
+    if (documentoIngresado.isEmpty()) {
+        JOptionPane.showMessageDialog(this,
+                "Ingrese el documento del paciente.",
+                "Campo vacío",
+                JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    // Validación de datos numéricos
+    if (!documentoIngresado.matches("\\d+")) {
+        JOptionPane.showMessageDialog(this,
+                "El documento solo debe contener números.",
+                "Formato inválido",
+                JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Consultar historial desde la lógica de negocio
+    List<Cita> historial = gestorHistorial.consultarHistorial(documentoIngresado);
+
+    // Manejo de posibles errores o lista nula
+    if (historial == null) {
+        JOptionPane.showMessageDialog(this,
+                "Ocurrió un error al consultar el historial.",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Llama al método que se encarga de mostrar el historial buscado
+    mostrarHistorial(historial);
+}
+
+
+    /**
+     * Este método muestra el historial de citas en la tabla del panel.
+     * @param historial lista de citas a mostrar en la tabla
+     */
+    private void mostrarHistorial(List<Cita> historial) {
+        // Limpia tabla previa
+        modeloTabla.setRowCount(0);
+
+        if (historial.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "No se encontraron registros para este paciente.",
+                    "Sin resultados",
+                    JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        // Carga los resultados en la tabla
+        for (Cita citaActual : historial) {
+            modeloTabla.addRow(new Object[]{
+                    citaActual.getFecha(),
+                    citaActual.getMedico().getNombre(),
+                    citaActual.getDiagnostico()
+            });
+        }
+    }
+}
