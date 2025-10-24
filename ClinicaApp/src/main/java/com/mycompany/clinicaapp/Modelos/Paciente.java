@@ -1,26 +1,39 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.clinicaapp.Modelos;
 
 /**
- *
- * @author hecto
- */
+ * Esta clase representa a un paciente de la clínica
+ * @author Valentina 
+ */ 
+
 public class Paciente {
+
     private String cedula;
     private String nombre;
     private String telefono;
     private int edad;
-   
 
+    /**
+     * Constructor vacío por defecto
+     */
+
+    public Paciente() {
+    }
+
+    /**
+     * Constructor para la instancia de un Paciente
+     * @param cedula Cédula (identificación) del paciente que se va a instanciar
+     * @param nombre Nombre del paciente que se va a instanciar
+     * @param telefono Número de telefóno del paciente que se va a instanciar
+     * @param edad Edad del paciente que se va a instanciar
+     */
+    
     public Paciente(String cedula, String nombre, String telefono, int edad) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.telefono = telefono;
         this.edad = edad;
     }
+
 
     public String getCedula() {
         return cedula;
@@ -53,6 +66,4 @@ public class Paciente {
     public void setEdad(int edad) {
         this.edad = edad;
     }
-
-    
 }
