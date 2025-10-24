@@ -18,6 +18,6 @@ public interface IHistorialService {
      * @param idPaciente Identificación única del paciente.
      * @return Lista de citas asociadas al paciente. 
      */
-    List<Cita> buscarHistorialPorPaciente(String idPaciente);
+    List<Cita> consultarHistorialPaciente(String idPaciente);
 
 }

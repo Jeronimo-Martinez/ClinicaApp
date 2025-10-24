@@ -88,4 +88,7 @@ public class GestorCita implements IGestorCita {
                 return false;
         }}
 
+        public List<Cita> getCitas() {
+            return listaCitas;
+
     }

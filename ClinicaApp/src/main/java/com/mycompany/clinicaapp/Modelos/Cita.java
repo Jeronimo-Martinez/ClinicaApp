@@ -9,13 +9,18 @@ import java.time.LocalDate;
  * @author hecto
  * @vesion 1.1.0
  */
+
 public class Cita {
     private String id;
     private LocalDate fecha;
     private String diagnostico;
     private Medico medico;
     private Paciente paciente;
+    
+    // Constructor vacío
+    public Cita(){
 
+    }
     public Cita(String id,LocalDate fecha, String diagnostico, Medico medico, Paciente paciente) {
         this.id = id;
         this.fecha = fecha;
