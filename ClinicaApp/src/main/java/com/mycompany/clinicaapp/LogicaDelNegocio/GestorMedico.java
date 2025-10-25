@@ -8,6 +8,7 @@ import com.mycompany.clinicaapp.Interfaces.IMedicoService;
 import com.mycompany.clinicaapp.Modelos.Especialidad;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -62,5 +63,18 @@ public class GestorMedico implements IMedicoService {
     }
     return false; // No se encontró el médico
     }
+
+
+
+
+
+
+
+// METODO QUE FALTA AGREGAR EN MEDICO
+
+    public List<Medico> listarMedicos() {
+        // Retorna una copia para no modificar la lista original desde fuera
+        return new ArrayList<>(listaMedicos);
    
     }
+}

@@ -18,56 +18,42 @@ import java.util.List;
  * y especialidades.
  */
 public class GestorAdministrador implements IGestorAdministrador {
+
     private static GestorAdministrador instancia;
     private final IMedicoService medicoService;
     private final IPacienteService pacienteService;
     private final IEspecialidadService especialidadService;
-    private final List<Administrador> listaAdministradores; 
-
+    private final List<Administrador> listaAdministradores;
 
     /**
      * Constructor que recibe las dependencias desde fuera.
      * Esto permite inyectar las implementaciones concretas.
-     * @param medicoService servicio para manejar las operaciones de médicos.
-     * @param pacienteService servicio para manejar las operaciones de pacientes.
-     * @param especialidadService servicio para manejar las operaciones de especialidades.
      */
-    public GestorAdministrador(IMedicoService medicoService, IPacienteService pacienteService,IEspecialidadService especialidadService) {
-                                                     
+    private GestorAdministrador(IMedicoService medicoService, IPacienteService pacienteService, IEspecialidadService especialidadService) {
         this.medicoService = medicoService;
         this.pacienteService = pacienteService;
         this.especialidadService = especialidadService;
-         this.listaAdministradores = new ArrayList<>();
-        // Se podría crear un admin por defecto
+        this.listaAdministradores = new ArrayList<>();
+
+        // Admin por defecto
         listaAdministradores.add(new Administrador("admin", "1234"));
     }
 
-
-
     /**
      * Devuelve la única instancia de GestorAdministrador.
-     * 
-     * @param medicoService gestor de médicos (inyectado)
-     * @param pacienteService gestor de pacientes (inyectado)
-     * @param especialidadService gestor de especialidades (inyectado)
-     * @return instancia única del GestorAdministrador
      */
-    public static GestorAdministrador getInstancia(IMedicoService medicoService,  IPacienteService pacienteService,   IEspecialidadService especialidadService) {
-                                                  
-                                                 
-        if (instancia == null) {
-            instancia = new GestorAdministrador(medicoService, pacienteService, especialidadService);
-        }
-        return instancia;
+    public static GestorAdministrador getInstancia(
+        IMedicoService medicoService,
+        IPacienteService pacienteService,
+        IEspecialidadService especialidadService
+) {
+    if (instancia == null) {
+        instancia = new GestorAdministrador(medicoService, pacienteService, especialidadService);
     }
-
-
-     
+    return instancia;
+}
     /**
-     * Este método permite iniciar sesión del administrador por usuario y contraseña.
-     * @param usuario nombre de usuario
-     * @param contrasena contraseña
-     * @return el Administrador si coincide, o null si no existe
+     * Permite iniciar sesión del administrador por usuario y contraseña.
      */
     public Administrador iniciarSesion(String cedula, String contrasena) {
         for (Administrador admin : listaAdministradores) {
@@ -78,53 +64,80 @@ public class GestorAdministrador implements IGestorAdministrador {
         return null;
     }
 
-    
     // -------------------------------------------------------------------------
     // MÉTODOS DE GESTIÓN DE MÉDICOS
     // -------------------------------------------------------------------------
-
     @Override
-    public void registrarMedico(Medico medico) {
-        medicoService.registrarMedico(medico);
+    public boolean registrarMedico(Medico medico) {
+        return medicoService.registrarMedico(medico);
     }
 
     @Override
-    public void editarMedico(Medico medico) {
-        medicoService.editarMedico(medico);
+    public boolean editarMedico(Medico medico) {
+        return medicoService.editarMedico(medico);
     }
 
     @Override
-    public void eliminarMedico(String id) {
-        medicoService.eliminarMedico(id);
+    public boolean eliminarMedico(String id) {
+        return medicoService.eliminarMedico(id);
     }
 
     // -------------------------------------------------------------------------
     // MÉTODOS DE GESTIÓN DE PACIENTES
     // -------------------------------------------------------------------------
-
     @Override
-    public void registrarPaciente(Paciente paciente) {
-        pacienteService.registrarPaciente(paciente);
+    public boolean registrarPaciente(Paciente paciente) {
+        return pacienteService.registrarPaciente(paciente);
     }
 
     @Override
-    public void editarPaciente(Paciente paciente) {
-        pacienteService.editarPaciente(paciente);
+    public boolean editarPaciente(Paciente paciente) {
+        return pacienteService.editarPaciente(paciente);
     }
 
     @Override
-    public void eliminarPaciente(String id) {
-        pacienteService.eliminarPaciente(id);
+    public boolean eliminarPaciente(String id) {
+        return pacienteService.eliminarPaciente(id);
     }
 
     // -------------------------------------------------------------------------
     // MÉTODOS DE GESTIÓN DE ESPECIALIDADES
     // -------------------------------------------------------------------------
+    @Override
+    public void registrarEspecialidad(Especialidad especialidad) {
+        especialidadService.ingresarEspecialidad(especialidad);
+    }
+
+    @Override
+    public void eliminarEspecialidad(Especialidad especialidad) {
+        especialidadService.EliminarEspecialidad(especialidad);
+    }
 
 
     @Override
-    public void registrarEspecialidad(Especialidad especialidad) {
-        especialidadService.registrarEspecialidad(especialidad);
-    }
+public List<Medico> listarMedicos() {
+    return medicoService.listarMedicos();
 }
 
+@Override
+public List<Paciente> listarPacientes() {
+    return pacienteService.listarPacientes();
+}
+
+@Override
+public List<Especialidad> listarEspecialidades() {
+    return especialidadService.listarEspecialidades();
+}
+
+public IMedicoService getMedicoService() {
+        return medicoService;
+    }
+
+    public IPacienteService getPacienteService() {
+        return pacienteService;
+    }
+
+    public IEspecialidadService getEspecialidadService() {
+        return especialidadService;
+    }
+}
