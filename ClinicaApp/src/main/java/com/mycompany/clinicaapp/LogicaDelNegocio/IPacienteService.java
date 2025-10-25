@@ -2,7 +2,7 @@ package com.mycompany.clinicaapp.LogicaDelNegocio;
 import java.util.List;
 import com.mycompany.clinicaapp.Modelos.Paciente;
 /**
- * Esta interfaz se encarga de definir las operaciones que pueden realizarse sobre los pacientes
+ * Esta interfaz se encarga de definir las operaciones CRUD que deben realizarse sobre los pacientes
  * @author Valentina
  */
 

@@ -34,6 +34,11 @@ public class Paciente {
         this.edad = edad;
     }
 
+    /**
+     * Constructor para la instancia de un Paciente
+     * @param cedula Cédula (identificación) del paciente que se va a instanciar
+     * 
+     */
     public Paciente (String cedula){
         this.cedula = cedula;
     }
@@ -69,5 +74,15 @@ public class Paciente {
 
     public void setEdad(int edad) {
         this.edad = edad;
+    }
+
+    /**
+     * Este método sobrescribe el método toString de la clase Object para mostar de manera legible la información
+     * del paciente, ya sea en consola o en componentes gráficos
+     * @return Una representación en texto del paciente (su información)
+     */
+    @Override
+    public String toString() {
+        return "Nombre: " + nombre + " - Cédula: " + cedula + " - Edad: " + edad + " - Teléfono: " + telefono; 
     }
 }

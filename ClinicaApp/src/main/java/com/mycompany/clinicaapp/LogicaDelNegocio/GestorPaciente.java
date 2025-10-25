@@ -20,6 +20,7 @@ public class GestorPaciente implements IPacienteService{
     public GestorPaciente() {
         this.pacientes = new ArrayList<>();
     }
+
     /**
      * Constructor con parámetros
      * 
@@ -31,6 +32,11 @@ public class GestorPaciente implements IPacienteService{
         this.pacientes = pacientes;
     }
 
+    /**
+     * Este método registra a un nuevo paciente
+     * @param paciente  Paciente nuevo
+     * @return true  (En caso de que el paciente sea creado con éxito)
+     */
     @Override
     public boolean registrarPaciente(Paciente paciente) {
         // en caso de que este vacío
@@ -48,6 +54,11 @@ public class GestorPaciente implements IPacienteService{
         return true;
     }
 
+    /**
+     * Este método edita los datos de un paciente
+     * @param paciente  Paciente a editar
+     * @return true  (En caso de que el paciente sea encontrado y editado con éxito)
+     */
     @Override
     public boolean editarPaciente(Paciente paciente) {
         for (int i=0; i < pacientes.size(); i++){
@@ -59,6 +70,11 @@ public class GestorPaciente implements IPacienteService{
         return false;
     }
 
+    /**
+     * Este método elimina a un paciente
+     * @param paciente  Paciente a eliminar
+     * @return true  (En caso de que el paciente sea eliminado con éxito)
+     */
     @Override
     public boolean eliminarPaciente(Paciente paciente) {
         for (int i=0; i < pacientes.size(); i++){
@@ -70,6 +86,10 @@ public class GestorPaciente implements IPacienteService{
         return false;
     }
 
+    /**
+     * Este método lista a los pacientes registrados
+     * @return pacientes (la lista de pacientes registrados)
+     */
     @Override
     public List<Paciente> listarPacientes() {
         return pacientes;
