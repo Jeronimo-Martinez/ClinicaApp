@@ -16,6 +16,10 @@ public class Administrador {
 	 */
 	public Administrador() {
 	}
+    public Administrador(String nombre, String contrasena){
+        this.nombre = nombre;
+        this.contrasena= contrasena;
+    }
 
 	// Getters y setters
 	public String getNombre() {
