@@ -4,13 +4,15 @@
  */
 package com.mycompany.clinicaapp.Presentacion.AdminMedicos;
 
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
+import com.mycompany.clinicaapp.Modelos.Medico;
 import com.mycompany.clinicaapp.Utilidades.AdminMedica.ActivadorJtableMedicoBotones;
 import com.mycompany.clinicaapp.Utilidades.AdminMedica.EventosParaBotones;
 import com.mycompany.clinicaapp.Utilidades.AdminMedica.RenderizadoTablaMedico;
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
-import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
@@ -27,6 +29,24 @@ public class VentanaMedica extends javax.swing.JPanel {
     public VentanaMedica() {
 
         initComponents();
+        
+        GestorMedico gestor= GestorMedico.getInstancia();
+        ArrayList<Medico> medicos = GestorMedico.getInstancia().getListaMedicos();
+
+        DefaultTableModel model= (DefaultTableModel) tablaMedica.getModel();
+        model.setRowCount(0);
+        for (Medico m: medicos)
+        {
+            model.addRow(new Object[]{
+                m.getNombre(),
+                m.getCedula(),
+                m.getEspecialidad().getNombre(),
+            });
+        }
+       
+        
+        
+        
         setBorder(BorderFactory.createTitledBorder(
             BorderFactory.createEtchedBorder(), "Administrar médicos",
             TitledBorder.LEFT, TitledBorder.TOP
@@ -64,7 +84,9 @@ public class VentanaMedica extends javax.swing.JPanel {
                 if (tablaMedica.isEditing()) tablaMedica.getCellEditor().stopCellEditing();
                 DefaultTableModel model = (DefaultTableModel) tablaMedica.getModel();
                 model.removeRow(row);
-                //acá debe ir lo de eliminar el médico en la lista, porque sino queda creado
+                GestorMedico.getInstancia().eliminarMedico(row);
+                
+               
             }
         };
 
@@ -92,9 +114,7 @@ public class VentanaMedica extends javax.swing.JPanel {
 
         tablaMedica.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"asdads", null, null, null},
-                {"asdas", null, null, null},
-                {"fasfas", null, null, null}
+
             },
             new String [] {
                 "Nombre", "Cédula", "Especialidad", "Acción"
@@ -104,7 +124,7 @@ public class VentanaMedica extends javax.swing.JPanel {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true
+                false, false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {

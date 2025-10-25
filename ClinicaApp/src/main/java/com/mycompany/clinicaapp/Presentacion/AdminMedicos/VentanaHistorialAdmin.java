@@ -78,6 +78,7 @@ public class VentanaHistorialAdmin extends javax.swing.JPanel {
                     panel.setLocation(0, 0);
                     java.awt.Window window = SwingUtilities.getWindowAncestor(this);
                     if (window instanceof JFrame frame) {
+                        frame.setTitle("");
                         frame.setContentPane(panel);
                         frame.revalidate();
                         frame.repaint();
