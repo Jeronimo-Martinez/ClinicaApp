@@ -1,36 +1,99 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.clinicaapp.LogicaDelNegocio;
-
 import com.mycompany.clinicaapp.Modelos.Paciente;
+import com.mycompany.clinicaapp.Interfaces.IPacienteService;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
- *
- * @author hecto
+ * Esta clase implementa la interfaz IPacienteService y se encarga de gestionar las operaciones CRUD sobre los objetos Paciente
+ * @author Valentina
  */
-public class GestorPaciente{
-    private final ArrayList<Paciente> listaPacientes = new ArrayList<>();
+
+public class GestorPaciente implements IPacienteService{
+
+    private List<Paciente> pacientes;
+
+    /**
+     * Constructor por defecto 
+     */
 
     public GestorPaciente() {
-        listaPacientes.add(new Paciente("0000", "Juan Pérez", "3001234567", 28, "0000"));
-        listaPacientes.add(new Paciente("2020", "María López", "3107654321", 35, "abcd"));
-        listaPacientes.add(new Paciente("3030", "Carlos Ruiz", "3209876543", 42, "clave"));
+        this.pacientes = new ArrayList<>();
     }
-    
+
+    /**
+     * Constructor con parámetros
+     * 
+     * @param gestorPaciente
+     * @param pacientes
+     */
+
+    public GestorPaciente (List<Paciente> pacientes) {
+        this.pacientes = pacientes;
+    }
+
+    /**
+     * Este método registra a un nuevo paciente
+     * @param paciente  Paciente nuevo
+     * @return true  (En caso de que el paciente sea creado con éxito)
+     */
+    @Override
     public boolean registrarPaciente(Paciente paciente) {
-        listaPacientes.add(paciente);
+        // en caso de que este vacío
+        if (paciente == null) {
+            return false;
+        }
+
+        for (Paciente pac : pacientes) {
+            if (pac.getCedula().equals(paciente.getCedula())) {
+                return false; // si ya existe un paciente con esa cédula
+            }
+        }
+        
+        pacientes.add(paciente);
         return true;
     }
 
-    public Paciente iniciarSesion(String cedula, String contrasena) {
-        for (Paciente pacienteingresado : listaPacientes) {
-            if (pacienteingresado.getCedula().equals(cedula) && pacienteingresado.getContrasena().equals(contrasena)) {
-                return pacienteingresado;
+    /**
+     * Este método edita los datos de un paciente
+     * @param paciente  Paciente a editar
+     * @return true  (En caso de que el paciente sea encontrado y editado con éxito)
+     */
+    @Override
+    public boolean editarPaciente(Paciente paciente) {
+        for (int i=0; i < pacientes.size(); i++){
+            if (paciente.getCedula().equals(pacientes.get(i).getCedula())){
+                pacientes.set(i, paciente);
+                return true;
             }
         }
-        return null;
+        return false;
     }
+
+    /**
+     * Este método elimina a un paciente
+     * @param paciente  Paciente a eliminar
+     * @return true  (En caso de que el paciente sea eliminado con éxito)
+     */
+    @Override
+    public boolean eliminarPaciente(Paciente paciente) {
+        for (int i=0; i < pacientes.size(); i++){
+            if (paciente.getCedula().equals(pacientes.get(i).getCedula())) {
+                pacientes.remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Este método lista a los pacientes registrados
+     * @return pacientes (la lista de pacientes registrados)
+     */
+    @Override
+    public List<Paciente> listarPacientes() {
+        return pacientes;
+    }
+
+    
 }
