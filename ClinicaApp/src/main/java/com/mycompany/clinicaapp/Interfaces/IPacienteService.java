@@ -1,4 +1,4 @@
-package com.mycompany.clinicaapp.LogicaDelNegocio;
+package com.mycompany.clinicaapp.Interfaces;
 import java.util.List;
 import com.mycompany.clinicaapp.Modelos.Paciente;
 /**

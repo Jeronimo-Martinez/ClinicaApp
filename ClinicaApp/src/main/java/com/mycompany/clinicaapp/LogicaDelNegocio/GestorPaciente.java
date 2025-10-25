@@ -1,6 +1,6 @@
 package com.mycompany.clinicaapp.LogicaDelNegocio;
 import com.mycompany.clinicaapp.Modelos.Paciente;
-
+import com.mycompany.clinicaapp.Interfaces.IPacienteService;
 import java.util.ArrayList;
 import java.util.List;
 
