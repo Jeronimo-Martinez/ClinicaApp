@@ -34,6 +34,10 @@ public class Paciente {
         this.edad = edad;
     }
 
+    public Paciente (String cedula){
+        this.cedula = cedula;
+    }
+
 
     public String getCedula() {
         return cedula;
