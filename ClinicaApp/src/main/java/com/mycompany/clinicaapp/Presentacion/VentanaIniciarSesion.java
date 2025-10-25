@@ -5,8 +5,8 @@
 package com.mycompany.clinicaapp.Presentacion;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorPaciente;
-import com.mycompany.clinicaapp.LogicaDelNegocio.IMedicoService;
-import com.mycompany.clinicaapp.LogicaDelNegocio.IPacienteService;
+import com.mycompany.clinicaapp.Interfaces.IMedicoService;
+import com.mycompany.clinicaapp.Interfaces.IPacienteService;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import com.mycompany.clinicaapp.Modelos.Paciente;
 import java.awt.Dimension;
@@ -23,8 +23,8 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
     /**
      * Creates new form VentanaPrincipal
      */
-    private GestorPaciente gestorPaciente = new GestorPaciente();
-    private GestorMedico gestorMedico = new GestorMedico();
+    GestorPaciente gestorPaciente = GestorPaciente.getInstanciaPaciente();
+    GestorMedico gestorMedico = GestorMedico.getInstanciaMedico();
     
     public VentanaIniciarSesion() {
         initComponents();
