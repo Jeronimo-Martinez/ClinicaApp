@@ -31,6 +31,7 @@ public class GestorHistorial implements IHistorialService {
     public ArrayList<Cita> consultarHistorialPaciente(String documentoPac) {
         ArrayList<Cita> historial = new ArrayList<>();
 
+        
         for (Cita c : gestorCita.getCitas()) {
             if (c.getPaciente().getNombre().equalsIgnoreCase(documentoPac)
                     && c.getDiagnostico() != null && !c.getDiagnostico().isEmpty()) {
