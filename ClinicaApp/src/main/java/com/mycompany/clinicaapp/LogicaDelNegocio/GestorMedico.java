@@ -4,6 +4,7 @@
  */
 package com.mycompany.clinicaapp.LogicaDelNegocio;
 
+import com.mycompany.clinicaapp.Interfaces.IMedicoService;
 import com.mycompany.clinicaapp.Modelos.Especialidad;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author hecto
  */
-public class GestorMedico {
+public class GestorMedico implements IMedicoService {
     private final ArrayList<Medico> listaMedicos = new ArrayList<>();
 
     public GestorMedico() {
@@ -22,11 +23,13 @@ public class GestorMedico {
         listaMedicos.add(new Medico("222", "Laura Torres", general, "2222"));
     }
     
-    public boolean registrarPaciente(Medico medico) {
+    @Override
+    public boolean registrarMedico(Medico medico) {
         listaMedicos.add(medico);
         return true;
     }
 
+    @Override
     public Medico iniciarSesion(String cedula, String contrasena) {
         for (Medico medicoingresado : listaMedicos) {
             if (medicoingresado.getCedula().equals(cedula) && medicoingresado.getContrasena().equals(contrasena)) {
