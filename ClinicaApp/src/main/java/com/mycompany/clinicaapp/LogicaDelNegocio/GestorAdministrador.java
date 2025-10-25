@@ -13,22 +13,24 @@ import java.util.List;
 
 
 /**
- * GestorAdministrador actúa como fachada para las operaciones
+ * Esta clase se encarga de implementar las operaciones
  * que el administrador puede realizar sobre médicos, pacientes
  * y especialidades.
- * 
- * Cumple el principio de inversión de dependencias (D de SOLID)
- * ya que depende de las interfaces, no de las implementaciones concretas.
  */
 public class GestorAdministrador implements IGestorAdministrador {
     private static GestorAdministrador instancia;
     private final IMedicoService medicoService;
     private final IPacienteService pacienteService;
     private final IEspecialidadService especialidadService;
-    private final List<Administrador> listaAdministradores; // para simular registro/login
+    private final List<Administrador> listaAdministradores; 
+
+
     /**
      * Constructor que recibe las dependencias desde fuera.
      * Esto permite inyectar las implementaciones concretas.
+     * @param medicoService servicio para manejar las operaciones de médicos.
+     * @param pacienteService servicio para manejar las operaciones de pacientes.
+     * @param especialidadService servicio para manejar las operaciones de especialidades.
      */
     public GestorAdministrador(IMedicoService medicoService, IPacienteService pacienteService,IEspecialidadService especialidadService) {
                                                      
@@ -39,6 +41,8 @@ public class GestorAdministrador implements IGestorAdministrador {
         // Se podría crear un admin por defecto
         listaAdministradores.add(new Administrador("admin", "1234"));
     }
+
+
 
     /**
      * Devuelve la única instancia de GestorAdministrador.
@@ -56,11 +60,11 @@ public class GestorAdministrador implements IGestorAdministrador {
         }
         return instancia;
     }
-     // -------------------- MÉTODOS DE INICIO DE SESIÓN --------------------
 
+
+     
     /**
-     * Permite iniciar sesión del administrador por usuario y contraseña.
-     * 
+     * Este método permite iniciar sesión del administrador por usuario y contraseña.
      * @param usuario nombre de usuario
      * @param contrasena contraseña
      * @return el Administrador si coincide, o null si no existe
@@ -74,7 +78,10 @@ public class GestorAdministrador implements IGestorAdministrador {
         return null;
     }
 
-    // -------------------- MÉTODOS ADMIN --------------------
+    
+    // -------------------------------------------------------------------------
+    // MÉTODOS DE GESTIÓN DE MÉDICOS
+    // -------------------------------------------------------------------------
 
     @Override
     public void registrarMedico(Medico medico) {
@@ -91,6 +98,10 @@ public class GestorAdministrador implements IGestorAdministrador {
         medicoService.eliminarMedico(id);
     }
 
+    // -------------------------------------------------------------------------
+    // MÉTODOS DE GESTIÓN DE PACIENTES
+    // -------------------------------------------------------------------------
+
     @Override
     public void registrarPaciente(Paciente paciente) {
         pacienteService.registrarPaciente(paciente);
@@ -105,6 +116,11 @@ public class GestorAdministrador implements IGestorAdministrador {
     public void eliminarPaciente(String id) {
         pacienteService.eliminarPaciente(id);
     }
+
+    // -------------------------------------------------------------------------
+    // MÉTODOS DE GESTIÓN DE ESPECIALIDADES
+    // -------------------------------------------------------------------------
+
 
     @Override
     public void registrarEspecialidad(Especialidad especialidad) {
