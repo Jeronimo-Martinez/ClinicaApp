@@ -38,7 +38,7 @@ public class VentanaRegistrarse extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         lbltitle = new javax.swing.JLabel();
         btnregistrarse = new javax.swing.JButton();
-        btnsalir = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtnombre = new javax.swing.JTextField();
@@ -81,11 +81,11 @@ public class VentanaRegistrarse extends javax.swing.JFrame {
         btnregistrarse.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnregistrarse.setText("Registrarse");
 
-        btnsalir.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnsalir.setText("Salir");
-        btnsalir.addActionListener(new java.awt.event.ActionListener() {
+        btnRegresar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnsalirActionPerformed(evt);
+                btnRegresarActionPerformed(evt);
             }
         });
 
@@ -137,7 +137,7 @@ public class VentanaRegistrarse extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnregistrarse)
                 .addGap(216, 216, 216)
-                .addComponent(btnsalir)
+                .addComponent(btnRegresar)
                 .addGap(38, 38, 38))
         );
         layout.setVerticalGroup(
@@ -168,16 +168,16 @@ public class VentanaRegistrarse extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnregistrarse)
-                    .addComponent(btnsalir))
+                    .addComponent(btnRegresar))
                 .addGap(39, 39, 39))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_btnsalirActionPerformed
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,8 +216,8 @@ public class VentanaRegistrarse extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnregistrarse;
-    private javax.swing.JButton btnsalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

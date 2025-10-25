@@ -213,9 +213,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Paciente"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbPacienteActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="rbMedico">
       <Properties>
@@ -224,9 +221,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Medico"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbMedicoActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
