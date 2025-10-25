@@ -4,11 +4,19 @@
  */
 package com.mycompany.clinicaapp.Interfaces;
 
+import com.mycompany.clinicaapp.Modelos.Paciente;
+
 /**
  *
  * @author hecto
  */
 public interface IPacienteService {
+
+    public boolean registrarPaciente(Paciente paciente);
+
+    public void editarPaciente(Paciente paciente);
+
+    public void eliminarPaciente(String id);
 
     
 } 

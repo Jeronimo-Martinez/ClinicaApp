@@ -4,10 +4,16 @@
  */
 package com.mycompany.clinicaapp.Interfaces;
 
+import com.mycompany.clinicaapp.Modelos.Especialidad;
+
 /**
  *
  * @author hecto
  */
 public class IEspecialidadService {
+
+    public void registrarEspecialidad(Especialidad especialidad) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

@@ -4,11 +4,19 @@
  */
 package com.mycompany.clinicaapp.Interfaces;
 
+import com.mycompany.clinicaapp.Modelos.Medico;
+
 /**
  *
  * @author hecto
  */
 public interface IMedicoService {
+
+    public void editarMedico(Medico medico);
+
+    public void registrarMedico(Medico medico);
+
+    public void eliminarMedico(String id);
 
     
 } 

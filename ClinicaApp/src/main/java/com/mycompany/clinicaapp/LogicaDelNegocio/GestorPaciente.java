@@ -30,6 +30,7 @@ public class GestorPaciente implements IPacienteService{
         return instancia;
     }    
     
+   
     public boolean registrarPaciente(Paciente paciente) {
         if (paciente.getNombre().isEmpty() ||
             paciente.getTelefono().isEmpty() ||
@@ -104,5 +105,15 @@ public class GestorPaciente implements IPacienteService{
             }
         }
         return null;
+    }
+
+    @Override
+    public void editarPaciente(Paciente paciente) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void eliminarPaciente(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

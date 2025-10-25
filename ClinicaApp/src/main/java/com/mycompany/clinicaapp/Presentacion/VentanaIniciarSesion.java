@@ -237,7 +237,7 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
                 "Inicio de sesión exitoso. ¡Bienvenido, " + paciente.getNombre() + "!");
             
            
-            new IPacienteService().setVisible(true);
+            new RegistroPaciente().setVisible(true);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, 
@@ -253,7 +253,7 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
                 "Inicio de sesión exitoso. Bienvenido Dr(a). " + medico.getNombre() + "!");
             
            
-            new IMedicoService().setVisible(true);
+            new VentanaMedica().setVisible(true);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, 
