@@ -1,5 +1,5 @@
 package com.mycompany.clinicaapp.Presentacion;
-import com.mycompany.clinicaapp.Interfaces.IHistorialService;
+import com.mycompany.clinicaapp.LogicaDelNegocio.IHistorialService;
 import com.mycompany.clinicaapp.Modelos.Cita;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

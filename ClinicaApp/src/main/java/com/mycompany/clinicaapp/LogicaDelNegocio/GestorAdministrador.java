@@ -31,12 +31,12 @@ public class GestorAdministrador {
 
     /** Registra un nuevo médico */
     public void registrarMedico(Medico medico) {
-        gestorMedico.crearMedico(medico);
+        gestorMedico.registrarMedico(medico);
     }
 
     /** Modifica datos de un médico */
     public void editarMedico(Medico medico) {
-        gestorMedico.modificarMedico(medico);
+        gestorMedico.editarMedico(medico);
     }
 
     /** Elimina un médico */
