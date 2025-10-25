@@ -2,12 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.mycompany.clinicaapp.Presentacion;
+package com.mycompany.clinicaapp.Presentacion.AdminMedicos;
 
-import com.mycompany.clinicaapp.Utilidades.ActivadorJtableMedicoBotones;
-import com.mycompany.clinicaapp.Utilidades.EventosParaBotones;
-import com.mycompany.clinicaapp.Utilidades.RenderizadoTablaMedico;
+import com.mycompany.clinicaapp.Utilidades.AdminMedica.ActivadorJtableMedicoBotones;
+import com.mycompany.clinicaapp.Utilidades.AdminMedica.EventosParaBotones;
+import com.mycompany.clinicaapp.Utilidades.AdminMedica.RenderizadoTablaMedico;
 import java.awt.Color;
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,27 +25,55 @@ public class VentanaMedica extends javax.swing.JPanel {
      * Creates new form VentanaMedica
      */
     public VentanaMedica() {
+
         initComponents();
+        setBorder(BorderFactory.createTitledBorder(
+            BorderFactory.createEtchedBorder(), "Administrar médicos",
+            TitledBorder.LEFT, TitledBorder.TOP
+        ));
         EventosParaBotones evento = new EventosParaBotones() {
+
             @Override
             public void clickHistorial(int row) {
-                System.out.println("Historial" + row);
+                {
+                    if (tablaMedica.isEditing()) tablaMedica.getCellEditor().stopCellEditing();
+                    tablaMedica.setRowSelectionInterval(row, row);
+                    String nombre = tablaMedica.getValueAt(row, 0).toString();
+
+                    VentanaHistorialAdmin panel = new VentanaHistorialAdmin();
+                    panel.setSize(VentanaMedica.this.getSize());
+                    panel.setLocation(0, 0);
+                    java.awt.Window window = SwingUtilities.getWindowAncestor(VentanaMedica.this);
+                    if (window instanceof JFrame frame) {
+                        frame.setTitle("Historial del médico " + nombre);
+                        frame.setContentPane(panel);
+                        frame.revalidate();
+                        frame.repaint();
+                    }
+                }
+            }
+
+            @Override
+            public void clickEditar(int row) {
+                System.out.println("Editar");
+
             }
 
             @Override
             public void clickEliminar(int row) {
-                System.out.println("Eliminar" + row);
+                if (tablaMedica.isEditing()) tablaMedica.getCellEditor().stopCellEditing();
+                DefaultTableModel model = (DefaultTableModel) tablaMedica.getModel();
+                model.removeRow(row);
+                //acá debe ir lo de eliminar el médico en la lista, porque sino queda creado
             }
         };
-                
+
         tablaMedica.getColumnModel().getColumn(3).setCellRenderer(new RenderizadoTablaMedico());
         tablaMedica.getTableHeader().setReorderingAllowed(false);
         tablaMedica.setShowGrid(true);
         tablaMedica.setGridColor(Color.LIGHT_GRAY);
         tablaMedica.getColumnModel().getColumn(3).setCellEditor(new ActivadorJtableMedicoBotones(evento));
-        
-        
-        
+
     }
 
     /**
@@ -58,10 +92,9 @@ public class VentanaMedica extends javax.swing.JPanel {
 
         tablaMedica.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {"asdads", null, null, null},
+                {"asdas", null, null, null},
+                {"fasfas", null, null, null}
             },
             new String [] {
                 "Nombre", "Cédula", "Especialidad", "Acción"
@@ -82,8 +115,11 @@ public class VentanaMedica extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tablaMedica.setRowHeight(40);
+        tablaMedica.setRowHeight(35);
         jScrollPane1.setViewportView(tablaMedica);
+        if (tablaMedica.getColumnModel().getColumnCount() > 0) {
+            tablaMedica.getColumnModel().getColumn(3).setPreferredWidth(80);
+        }
 
         jButton1.setText("Agregar");
 
@@ -94,24 +130,24 @@ public class VentanaMedica extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(45, Short.MAX_VALUE))
+                        .addComponent(jButton2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

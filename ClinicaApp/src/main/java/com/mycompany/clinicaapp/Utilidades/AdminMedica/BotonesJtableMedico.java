@@ -2,13 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.mycompany.clinicaapp.Utilidades;
+package com.mycompany.clinicaapp.Utilidades.AdminMedica;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
-import com.mycompany.clinicaapp.Utilidades.EventosParaBotones;
 
 /**
  *
@@ -25,6 +24,9 @@ public class BotonesJtableMedico extends javax.swing.JPanel {
 
     }
 
+    
+    
+    
     public void iniciarEvento(EventosParaBotones event, int row) {
         botonJtableMedico1.addActionListener(new ActionListener() {
             @Override
@@ -33,6 +35,12 @@ public class BotonesJtableMedico extends javax.swing.JPanel {
             }
         });
         botonJtableMedico2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                event.clickEditar(row);
+            }
+        });
+         botonJtableMedico3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 event.clickEliminar(row);
@@ -50,10 +58,13 @@ public class BotonesJtableMedico extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        botonJtableMedico2 = new com.mycompany.clinicaapp.Utilidades.BotonJtableMedico();
-        botonJtableMedico1 = new com.mycompany.clinicaapp.Utilidades.BotonJtableMedico();
+        botonJtableMedico3 = new com.mycompany.clinicaapp.Utilidades.AdminMedica.BotonJtableMedico();
+        botonJtableMedico2 = new com.mycompany.clinicaapp.Utilidades.AdminMedica.BotonJtableMedico();
+        botonJtableMedico1 = new com.mycompany.clinicaapp.Utilidades.AdminMedica.BotonJtableMedico();
 
-        botonJtableMedico2.setIcon(new javax.swing.ImageIcon("C:\\Users\\johan\\OneDrive\\Documentos\\GitHub\\ClinicaApp\\ClinicaApp\\src\\main\\java\\com\\mycompany\\clinicaapp\\Imagenes\\TrashCan 20x20.png")); // NOI18N
+        botonJtableMedico3.setIcon(new javax.swing.ImageIcon("C:\\Users\\johan\\OneDrive\\Documentos\\GitHub\\ClinicaApp\\ClinicaApp\\src\\main\\java\\com\\mycompany\\clinicaapp\\Imagenes\\TrashCan 20x20.png")); // NOI18N
+
+        botonJtableMedico2.setIcon(new javax.swing.ImageIcon("C:\\Users\\johan\\OneDrive\\Documentos\\GitHub\\ClinicaApp\\ClinicaApp\\src\\main\\java\\com\\mycompany\\clinicaapp\\Imagenes\\Editar 20x20.png")); // NOI18N
 
         botonJtableMedico1.setIcon(new javax.swing.ImageIcon("C:\\Users\\johan\\OneDrive\\Documentos\\GitHub\\ClinicaApp\\ClinicaApp\\src\\main\\java\\com\\mycompany\\clinicaapp\\Imagenes\\Historial 20x20.png")); // NOI18N
 
@@ -64,8 +75,10 @@ public class BotonesJtableMedico extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botonJtableMedico1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(botonJtableMedico2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(botonJtableMedico3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -73,15 +86,17 @@ public class BotonesJtableMedico extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(botonJtableMedico2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonJtableMedico1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botonJtableMedico1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonJtableMedico3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonJtableMedico2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.mycompany.clinicaapp.Utilidades.BotonJtableMedico botonJtableMedico1;
-    private com.mycompany.clinicaapp.Utilidades.BotonJtableMedico botonJtableMedico2;
+    private com.mycompany.clinicaapp.Utilidades.AdminMedica.BotonJtableMedico botonJtableMedico1;
+    private com.mycompany.clinicaapp.Utilidades.AdminMedica.BotonJtableMedico botonJtableMedico2;
+    private com.mycompany.clinicaapp.Utilidades.AdminMedica.BotonJtableMedico botonJtableMedico3;
     // End of variables declaration//GEN-END:variables
 }
