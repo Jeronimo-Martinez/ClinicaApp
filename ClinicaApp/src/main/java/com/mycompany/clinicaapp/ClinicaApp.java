@@ -4,6 +4,8 @@
  */
 package com.mycompany.clinicaapp;
 
+import com.mycompany.clinicaapp.Interfaces.IMedicoService;
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
 import com.mycompany.clinicaapp.Presentacion.VentanaIniciarSesion;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -14,16 +16,15 @@ import java.awt.Toolkit;
  * @author hecto
  */
 public class ClinicaApp {
-    
-    private static VentanaIniciarSesion main;
     public static void main(String[] args) {
-    main = new VentanaIniciarSesion();
-    main.setVisible(true);
+    IMedicoService gestorMedico = new GestorMedico();
+    VentanaIniciarSesion ventanaPrincipal = new VentanaIniciarSesion(gestorMedico);    
+    ventanaPrincipal.setVisible(true);
     Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
-    int x = (pantalla.width - main.getWidth()) / 2;
-    int y = (pantalla.height - main.getHeight()) / 2;
+    int x = (pantalla.width - ventanaPrincipal.getWidth()) / 2;
+    int y = (pantalla.height - ventanaPrincipal.getHeight()) / 2;
 
-    main.setLocation(x, y);
+    ventanaPrincipal.setLocation(x, y);
     
 }
 }

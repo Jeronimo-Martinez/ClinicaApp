@@ -8,6 +8,7 @@ import com.mycompany.clinicaapp.Interfaces.IMedicoService;
 import com.mycompany.clinicaapp.Modelos.Especialidad;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -23,13 +24,13 @@ public class GestorMedico implements IMedicoService {
         listaMedicos.add(new Medico("222", "Laura Torres", general, "2222"));
     }
     
-    
+    @Override
     public boolean registrarMedico(Medico medico) {
         listaMedicos.add(medico);
         return true;
     }
 
-    
+    @Override
     public Medico iniciarSesion(String cedula, String contrasena) {
         for (Medico medicoingresado : listaMedicos) {
             if (medicoingresado.getCedula().equals(cedula) && medicoingresado.getContrasena().equals(contrasena)) {
@@ -39,6 +40,7 @@ public class GestorMedico implements IMedicoService {
         return null;
     }
     
+    @Override
     public boolean eliminarMedico(String cedula) {
     for (Medico m : listaMedicos) {
         if (m.getCedula().equals(cedula)) {
@@ -49,6 +51,7 @@ public class GestorMedico implements IMedicoService {
     return false; // No se encontró el médico
     }
     
+    @Override
     public boolean editarMedico(Medico medicoActualizado) {
     for (int i = 0; i < listaMedicos.size(); i++) {
         Medico medico = listaMedicos.get(i);
@@ -63,4 +66,9 @@ public class GestorMedico implements IMedicoService {
     return false; // No se encontró el médico
     }
    
+    @Override
+    public List<Medico> listarMedicos() {
+        return new ArrayList<>(listaMedicos);
+    }
+    
     }
