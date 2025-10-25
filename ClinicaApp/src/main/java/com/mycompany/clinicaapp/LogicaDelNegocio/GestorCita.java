@@ -2,10 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.clinicaapp.Modelos;
+package com.mycompany.clinicaapp.LogicaDelNegocio;
 
-import com.mycompany.clinicaapp.LogicaDelNegocio.IGestorCita;
-
+import com.mycompany.clinicaapp.Interfaces.IGestorCita;
+import com.mycompany.clinicaapp.Modelos.Paciente;
+import com.mycompany.clinicaapp.Modelos.Especialidad;
+import com.mycompany.clinicaapp.Modelos.Medico;
+import com.mycompany.clinicaapp.Modelos.Cita;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,5 +90,8 @@ public class GestorCita implements IGestorCita {
                 System.out.println("Error inesperado");
                 return false;
         }}
+         public List<Cita> getCitas() {
+            return listaCitas;
 
     }
+    }   
