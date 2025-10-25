@@ -10,7 +10,5 @@ import com.mycompany.clinicaapp.Modelos.Medico;
  * @author hecto
  */
 public interface IMedicoService {
- 
-    boolean registrarMedico(Medico medico);
-    Medico iniciarSesion(String cedula, String contrasena);
+
 }

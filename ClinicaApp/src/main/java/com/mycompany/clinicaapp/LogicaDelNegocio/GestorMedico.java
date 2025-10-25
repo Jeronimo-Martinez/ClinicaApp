@@ -23,13 +23,13 @@ public class GestorMedico implements IMedicoService {
         listaMedicos.add(new Medico("222", "Laura Torres", general, "2222"));
     }
     
-    @Override
+    
     public boolean registrarMedico(Medico medico) {
         listaMedicos.add(medico);
         return true;
     }
 
-    @Override
+    
     public Medico iniciarSesion(String cedula, String contrasena) {
         for (Medico medicoingresado : listaMedicos) {
             if (medicoingresado.getCedula().equals(cedula) && medicoingresado.getContrasena().equals(contrasena)) {
