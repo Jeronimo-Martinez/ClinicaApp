@@ -78,8 +78,8 @@ public class GestorAdministrador implements IGestorAdministrador {
     }
 
     @Override
-    public boolean eliminarMedico(String id) {
-        return medicoService.eliminarMedico(id);
+    public boolean eliminarMedico(String cedula) {
+        return medicoService.eliminarMedico(cedula);
     }
 
     // -------------------------------------------------------------------------
@@ -96,8 +96,8 @@ public class GestorAdministrador implements IGestorAdministrador {
     }
 
     @Override
-    public boolean eliminarPaciente(String id) {
-        return pacienteService.eliminarPaciente(id);
+    public boolean eliminarPaciente(String cedula) {
+        return pacienteService.eliminarPaciente(cedula);
     }
 
     // -------------------------------------------------------------------------
@@ -114,9 +114,9 @@ public class GestorAdministrador implements IGestorAdministrador {
     }
 
 
-    @Override
+@Override
 public List<Medico> listarMedicos() {
-    return medicoService.listarMedicos();
+    return medicoService.getListaMedicos();
 }
 
 @Override
