@@ -19,37 +19,36 @@ import javax.swing.table.DefaultTableModel;
  * @author johan
  */
 public class VentanaEditarMedico extends javax.swing.JPanel {
+
     private final IMedicoService medicoService;
     private final Medico medico;
     private final IInterfazAdminMedica interfazAdmin;
-    
+
     public VentanaEditarMedico(Medico medico, IMedicoService medicoService, IInterfazAdminMedica interfazAdmin) {
-        this.medico=medico;
-        this.medicoService=medicoService;
-        this.interfazAdmin=interfazAdmin;
+        this.medico = medico;
+        this.medicoService = medicoService;
+        this.interfazAdmin = interfazAdmin;
         initComponents();
         cargarDatos();
         tablaEdicion.getTableHeader().setReorderingAllowed(false);
         tablaEdicion.setShowGrid(true);
         tablaEdicion.setGridColor(Color.LIGHT_GRAY);
-        
-        
+
     }
-    private void cargarDatos(){
-        if(medico !=null){
-            
-        
-        DefaultTableModel model= (DefaultTableModel) tablaEdicion.getModel();
-        model.setRowCount(0);
-        model.addRow(new Object[]{
-            medico.getNombre(),
-            medico.getCedula(),
-            medico.getEspecialidad().getNombre()
-        });
+
+    private void cargarDatos() {
+        if (medico != null) {
+
+            DefaultTableModel model = (DefaultTableModel) tablaEdicion.getModel();
+            model.setRowCount(0);
+            model.addRow(new Object[]{
+                medico.getNombre(),
+                medico.getCedula(),
+                medico.getEspecialidad().getNombre()
+            });
         }
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -70,9 +69,16 @@ public class VentanaEditarMedico extends javax.swing.JPanel {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
+            boolean[] canEdit = new boolean [] {
+                true, false, true
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         tablaEdicion.setRowHeight(40);
@@ -120,26 +126,31 @@ public class VentanaEditarMedico extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-                    VentanaMedica panel = new VentanaMedica(medicoService, interfazAdmin);
-                    panel.setSize(this.getSize());
-                    panel.setLocation(0, 0);
-                    java.awt.Window window = SwingUtilities.getWindowAncestor(this);
-                    if (window instanceof JFrame frame) {
-                        frame.setContentPane(panel);
-                        frame.revalidate();
-                        frame.repaint();
-                    }        // TODO add your handling code here:
+        VentanaMedica panel = new VentanaMedica(medicoService, interfazAdmin);
+        panel.setSize(this.getSize());
+        panel.setLocation(0, 0);
+        java.awt.Window window = SwingUtilities.getWindowAncestor(this);
+        if (window instanceof JFrame frame) {
+            frame.setContentPane(panel);
+            frame.revalidate();
+            frame.repaint();
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void aceptarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarCambiosActionPerformed
-      String nuevoNombre = tablaEdicion.getValueAt(0, 0).toString();
-String nuevaCedula = tablaEdicion.getValueAt(0, 1).toString();
-String nombreEspecialidad = tablaEdicion.getValueAt(0, 2).toString();
-Especialidad nuevaEsp = new Especialidad(nombreEspecialidad);
-medicoService.editarMedico(medico, nuevoNombre, nuevaCedula, nuevaEsp);
-
-        JOptionPane.showMessageDialog(null,"Cambios realizados con éxito",null,JOptionPane.INFORMATION_MESSAGE);
         
+
+        String nuevoNombre = tablaEdicion.getValueAt(0, 0).toString();
+        String nombreEspecialidad = tablaEdicion.getValueAt(0, 2).toString();
+        Especialidad nuevaEsp = new Especialidad(nombreEspecialidad);
+        
+          if (nuevoNombre.trim().isEmpty() || nombreEspecialidad.trim().isEmpty()) {
+    JOptionPane.showMessageDialog(this, "Debe llenar todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+    return;
+          }
+          medicoService.editarMedico(medico, nuevoNombre, nuevaEsp);
+        JOptionPane.showMessageDialog(null, "Cambios realizados con éxito", null, JOptionPane.INFORMATION_MESSAGE);
+
     }//GEN-LAST:event_aceptarCambiosActionPerformed
 
 

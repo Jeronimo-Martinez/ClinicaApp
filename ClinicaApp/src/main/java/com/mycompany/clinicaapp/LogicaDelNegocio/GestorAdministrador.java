@@ -74,17 +74,18 @@ public class GestorAdministrador implements IGestorAdministrador {
     // -------------------------------------------------------------------------
     @Override
     public boolean registrarMedico(Medico medico) {
-        return medicoService.registrarMedico(medico);
+        return medicoService.agregarMedic(medico);
     }
 
     @Override
-    public boolean editarMedico(Medico medico) {
-        return medicoService.editarMedico(medico);
-    }
+    public boolean editarMedico(Medico medico, String nuevoNombre, Especialidad nuevaEspecialidad) {
+    medicoService.editarMedico(medico, nuevoNombre, nuevaEspecialidad);
+    return true;
+}
 
     @Override
-    public boolean eliminarMedico(String id) {
-        return medicoService.eliminarMedico(id);
+    public boolean eliminarMedico(String cedula) {
+        return medicoService.eliminarMedico(cedula);
     }
 
     // -------------------------------------------------------------------------

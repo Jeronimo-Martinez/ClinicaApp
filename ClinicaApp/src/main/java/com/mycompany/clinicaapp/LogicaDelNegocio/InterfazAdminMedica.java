@@ -75,7 +75,7 @@ public class InterfazAdminMedica implements IInterfazAdminMedica {
         }
     }
 
-    // 🔹 Este método no se usa, pero lo dejamos implementado para cumplir con la interfaz
+    //Este método no se usa xd, pero lo dejamos implementado para cumplir con la interfaz
    
     public void mostrarVentananMedica() {
         mostrarVentanaMedica();

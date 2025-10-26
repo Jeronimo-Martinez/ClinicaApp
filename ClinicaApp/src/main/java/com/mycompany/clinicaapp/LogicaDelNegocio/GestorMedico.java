@@ -27,13 +27,11 @@ public class GestorMedico implements IMedicoService {
      *
      * @param medico
      * @param nuevoNombre
-     * @param nuevaCedula
      * @param nuevaEspecialidad
      */
     @Override
-    public void editarMedico(Medico medico, String nuevoNombre, String nuevaCedula, Especialidad nuevaEspecialidad) {
+    public void editarMedico(Medico medico, String nuevoNombre,  Especialidad nuevaEspecialidad) {
     medico.setNombre(nuevoNombre);
-    medico.setCedula(nuevaCedula);
     medico.setEspecialidad(nuevaEspecialidad);
 }
 
@@ -56,9 +54,9 @@ public class GestorMedico implements IMedicoService {
     }
 
     @Override
-    public void eliminarMedico(int posicion) {
-        listaMedicos.remove(posicion);
-    }
+    public boolean eliminarMedico(String cedula) {
+    return listaMedicos.removeIf(m -> m.getCedula().equals(cedula));
+}
 
     @Override
     

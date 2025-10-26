@@ -14,10 +14,10 @@ import java.util.ArrayList;
  */
 public interface IMedicoService {
     boolean agregarMedic(Medico medico);
-    void eliminarMedico(int posicion);
+    boolean eliminarMedico(String cedula);
     Medico iniciarSesion(String cedula, String contrasena);
     ArrayList<Medico> getListaMedicos();
-    void editarMedico(Medico medico, String nuevoNombre, String nuevaCedula, Especialidad nuevaEspecialidad);
+    void editarMedico(Medico medico, String nuevoNombre, Especialidad nuevaEspecialidad);
 
     
 }
