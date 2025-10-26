@@ -5,8 +5,8 @@
 package com.mycompany.clinicaapp.Presentacion;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorPaciente;
-import com.mycompany.clinicaapp.LogicaDelNegocio.IMedicoService;
-import com.mycompany.clinicaapp.LogicaDelNegocio.IPacienteService;
+import com.mycompany.clinicaapp.Interfaces.IMedicoService;
+import com.mycompany.clinicaapp.Interfaces.IPacienteService;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import com.mycompany.clinicaapp.Modelos.Paciente;
 import java.awt.Dimension;

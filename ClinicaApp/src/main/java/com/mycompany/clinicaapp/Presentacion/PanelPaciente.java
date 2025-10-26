@@ -79,6 +79,12 @@ public class PanelPaciente extends JPanel {
         btnEditarDatos = new JButton("Editar Datos");
         btnCerrarSesion = new JButton("Cerrar Sesión");
 
+        // Se añaden los botones al panelBotones
+        panelBotones.add(btnCitas);
+        panelBotones.add(btnHistorialMedico);
+        panelBotones.add(btnEditarDatos);
+        panelBotones.add(btnCerrarSesion);
+
         return panelBotones;
     }
 
