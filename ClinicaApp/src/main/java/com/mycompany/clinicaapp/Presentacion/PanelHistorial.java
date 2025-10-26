@@ -6,7 +6,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 import java.awt.event.ActionEvent;
-
+import com.mycompany.clinicaapp.Presentacion.AdminMedicos.VentanaMedica;
+     
 /**
  * Este panel está encargado de mostrar el historial clínico de un paciente.
  */
@@ -24,6 +25,7 @@ public class PanelHistorial extends JPanel {
     /**
      * Constructor del panel de historial.
      * @param gestorHistorial 
+     * @param ventanaMedica 
      */
      public PanelHistorial(IHistorialService gestorHistorial, VentanaMedica ventanaMedica) {
         this.gestorHistorial = gestorHistorial;
