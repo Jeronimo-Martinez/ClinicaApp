@@ -5,7 +5,11 @@
 package com.mycompany.clinicaapp.Presentacion;
 
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorCita;
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
 import com.mycompany.clinicaapp.Modelos.Cita;
+import com.mycompany.clinicaapp.Modelos.Medico;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -13,11 +17,57 @@ import com.mycompany.clinicaapp.Modelos.Cita;
  */
 public class ModificarCita extends javax.swing.JFrame {
 
+    private GestorCita gestorCita;
+    private GestorMedico gestorMedico;
+    private Cita cita;
+
     /**
      * Creates new form ModificarCita
      */
     public ModificarCita() {
         initComponents();
+    }
+        public ModificarCita(GestorCita gestorCita, GestorMedico gestorMedico, Cita cita) {
+        this();
+        this.gestorCita = gestorCita;
+        this.gestorMedico = gestorMedico;
+        this.cita = cita;
+
+        // poblar combo con médicos de la misma especialidad que el médico actual
+        DefaultComboBoxModel<Medico> model = new DefaultComboBoxModel<>();
+        if (gestorMedico != null && cita != null && cita.getMedico() != null && cita.getMedico().getEspecialidad() != null) {
+            List<Medico> lista = gestorMedico.listarMedicos(); // ajusta nombre si tu gestor usa otro método
+            String especialidadActual = cita.getMedico().getEspecialidad().getNombre();
+            for (Medico m : lista) {
+                if (m != null && m.getEspecialidad() != null && especialidadActual.equals(m.getEspecialidad().getNombre())) {
+                    model.addElement(m);
+                }
+            }
+        }
+        jComboBox1.setModel(model);
+
+        // mostrar nombre del médico en el combobox
+        jComboBox1.setRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(javax.swing.JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                if (value instanceof Medico) {
+                    setText(((Medico) value).getNombre());
+                }
+                return this;
+            }
+        });
+
+        // preseleccionar el médico actual si está en la lista
+        if (cita != null && cita.getMedico() != null) {
+            for (int i = 0; i < jComboBox1.getItemCount(); i++) {
+                Medico m = jComboBox1.getItemAt(i);
+                if (m != null && m.getCedula().equals(cita.getMedico().getCedula())) {
+                    jComboBox1.setSelectedIndex(i);
+                    break;
+                }
+            }
+        }
     }
 
     
