@@ -75,10 +75,19 @@ public class VentanaMedica extends javax.swing.JPanel {
 
             @Override
             public void clickEditar(int row) {
-                System.out.println("Editar");
-
+                GestorMedico gestor= GestorMedico.getInstancia();
+                Medico medico= gestor.getListaMedicos().get(row);
+                VentanaEditarMedico panel= new VentanaEditarMedico(medico);
+                panel.setSize(VentanaMedica.this.getSize());
+                panel.setLocation(0, 0);
+                java.awt.Window window = SwingUtilities.getWindowAncestor(VentanaMedica.this);
+                if (window instanceof JFrame frame) {
+                       
+                        frame.setContentPane(panel);
+                        frame.revalidate();
+                        frame.repaint();
+             }
             }
-
             @Override
             public void clickEliminar(int row) {
                 if (tablaMedica.isEditing()) tablaMedica.getCellEditor().stopCellEditing();
@@ -124,7 +133,7 @@ public class VentanaMedica extends javax.swing.JPanel {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, true
+                false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -144,6 +153,11 @@ public class VentanaMedica extends javax.swing.JPanel {
         jButton1.setText("Agregar");
 
         jButton2.setText("Volver");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -170,6 +184,10 @@ public class VentanaMedica extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

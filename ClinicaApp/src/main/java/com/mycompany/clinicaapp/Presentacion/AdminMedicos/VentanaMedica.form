@@ -58,7 +58,7 @@
               <Table columnCount="4" rowCount="0">
                 <Column editable="false" title="Nombre" type="java.lang.String"/>
                 <Column editable="false" title="C&#xe9;dula" type="java.lang.String"/>
-                <Column editable="true" title="Especialidad" type="java.lang.String"/>
+                <Column editable="false" title="Especialidad" type="java.lang.String"/>
                 <Column editable="true" title="Acci&#xf3;n" type="java.lang.Object"/>
               </Table>
             </Property>
@@ -103,6 +103,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Volver"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
