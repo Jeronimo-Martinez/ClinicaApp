@@ -1,4 +1,5 @@
 package com.mycompany.clinicaapp.Presentacion;
+
 import com.mycompany.clinicaapp.Modelos.*;
 import com.mycompany.clinicaapp.LogicaDelNegocio.*;
 import javax.swing.*;
@@ -6,10 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 import java.awt.event.ActionEvent;
-
-
-
-
 
 /**
  * Panel para la gestión de médicos.
@@ -92,7 +89,7 @@ public class GestionAdminEnMedicos extends JPanel {
     private void editarMedico(ActionEvent e) {
         String cedula = txtCedula.getText().trim();
         String nombre = txtNombre.getText().trim();
-        String contrasena = txtContrasena.getText().trim(); 
+        String contrasena = txtContrasena.getText().trim();
         Especialidad esp = (Especialidad) comboEspecialidad.getSelectedItem();
 
         if (cedula.isEmpty()) {
@@ -140,8 +137,9 @@ public class GestionAdminEnMedicos extends JPanel {
         StringBuilder sb = new StringBuilder("Listado de Médicos:\n\n");
         for (Medico m : medicos) {
             sb.append("• ").append(m.getCedula()).append(" - ").append(m.getNombre());
-            if (m.getEspecialidad() != null)
+            if (m.getEspecialidad() != null) {
                 sb.append(" (").append(m.getEspecialidad().getNombre()).append(")");
+            }
             sb.append("\n");
         }
 

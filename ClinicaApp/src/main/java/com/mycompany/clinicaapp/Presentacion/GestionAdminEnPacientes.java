@@ -1,4 +1,5 @@
 package com.mycompany.clinicaapp.Presentacion;
+
 import com.mycompany.clinicaapp.Modelos.*;
 import com.mycompany.clinicaapp.LogicaDelNegocio.*;
 import javax.swing.*;
@@ -8,8 +9,7 @@ import java.awt.event.ActionEvent;
 import java.util.List;
 
 /**
- * Panel para la gestión de pacientes:
- * registrar, editar y eliminar.
+ * Panel para la gestión de pacientes: registrar, editar y eliminar.
  */
 public class GestionAdminEnPacientes extends JPanel {
 
@@ -78,7 +78,6 @@ public class GestionAdminEnPacientes extends JPanel {
     // ---------------------------------------------------------------------
     // MÉTODOS DE GESTIÓN
     // ---------------------------------------------------------------------
-
     private void registrarPaciente(ActionEvent e) {
         String cedula = txtCedula.getText().trim();
         String nombre = txtNombre.getText().trim();
@@ -90,7 +89,7 @@ public class GestionAdminEnPacientes extends JPanel {
             return;
         }
 
-        Paciente nuevo = new Paciente(cedula, nombre,telefono, edad);
+        Paciente nuevo = new Paciente(cedula, nombre, telefono, edad);
         boolean exito = gestor.registrarPaciente(nuevo);
 
         if (exito) {
@@ -161,24 +160,25 @@ public class GestionAdminEnPacientes extends JPanel {
             });
         }
     }
+
     private void verPacientes(ActionEvent e) {
-    List<Paciente> pacientes = gestor.listarPacientes();
-    if (pacientes.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "No hay pacientes registrados");
-        return;
-    }
+        List<Paciente> pacientes = gestor.listarPacientes();
+        if (pacientes.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay pacientes registrados");
+            return;
+        }
 
-    StringBuilder sb = new StringBuilder("Listado de Pacientes:\n\n");
-    for (Paciente p : pacientes) {
-        sb.append("• ").append(p.getCedula())
-          .append(" - ").append(p.getNombre())
-          .append(" (").append(p.getEdad()).append(", ")
-          .append(p.getTelefono()).append(")\n");
-    }
+        StringBuilder sb = new StringBuilder("Listado de Pacientes:\n\n");
+        for (Paciente p : pacientes) {
+            sb.append("• ").append(p.getCedula())
+                    .append(" - ").append(p.getNombre())
+                    .append(" (").append(p.getEdad()).append(", ")
+                    .append(p.getTelefono()).append(")\n");
+        }
 
-    JTextArea area = new JTextArea(sb.toString(), 15, 40);
-    area.setEditable(false);
-    JOptionPane.showMessageDialog(this, new JScrollPane(area), "Pacientes", JOptionPane.INFORMATION_MESSAGE);
+        JTextArea area = new JTextArea(sb.toString(), 15, 40);
+        area.setEditable(false);
+        JOptionPane.showMessageDialog(this, new JScrollPane(area), "Pacientes", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void limpiarCampos() {

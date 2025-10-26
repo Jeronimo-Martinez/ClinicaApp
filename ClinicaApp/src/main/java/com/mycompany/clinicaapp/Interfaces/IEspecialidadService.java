@@ -9,5 +9,5 @@ package com.mycompany.clinicaapp.Interfaces;
  * @author hecto
  */
 public class IEspecialidadService {
-    
+
 }

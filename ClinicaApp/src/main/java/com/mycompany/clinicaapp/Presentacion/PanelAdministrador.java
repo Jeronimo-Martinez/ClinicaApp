@@ -1,13 +1,13 @@
 package com.mycompany.clinicaapp.Presentacion;
+
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorAdministrador;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-
 /**
- * Panel principal del Administrador.
- * Desde aquí puede gestionar Médicos, Pacientes y Especialidades.
+ * Panel principal del Administrador. Desde aquí puede gestionar Médicos,
+ * Pacientes y Especialidades.
  */
 public class PanelAdministrador extends JPanel {
 
