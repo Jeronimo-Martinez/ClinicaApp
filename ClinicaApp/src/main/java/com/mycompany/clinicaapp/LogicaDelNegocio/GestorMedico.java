@@ -38,7 +38,10 @@ public class GestorMedico {
     public void eliminarMedico(int posicion) {
     listaMedicos.remove(posicion);
 }
-     
+     public boolean agregarMedico(Medico medico) {
+    listaMedicos.add(medico);
+    return true;
+}
     public Medico iniciarSesion(String cedula, String contrasena) {
         for (Medico medicoingresado : listaMedicos) {
             if (medicoingresado.getCedula().equals(cedula) && medicoingresado.getContrasena().equals(contrasena)) {

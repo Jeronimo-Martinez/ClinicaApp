@@ -13,6 +13,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
@@ -22,41 +23,38 @@ import javax.swing.table.DefaultTableModel;
  * @author johan
  */
 public class VentanaMedica extends javax.swing.JPanel {
-
-    /**
-     * Creates new form VentanaMedica
-     */
-    public VentanaMedica() {
-
-        initComponents();
+   ArrayList<Medico> medicos = GestorMedico.getInstancia().getListaMedicos();
+   private void llenarFilas (){
+       
         
-        GestorMedico gestor= GestorMedico.getInstancia();
-        ArrayList<Medico> medicos = GestorMedico.getInstancia().getListaMedicos();
 
-        DefaultTableModel model= (DefaultTableModel) tablaMedica.getModel();
+        DefaultTableModel model = (DefaultTableModel) tablaMedica.getModel();
         model.setRowCount(0);
-        for (Medico m: medicos)
-        {
+        for (Medico m : medicos) {
             model.addRow(new Object[]{
                 m.getNombre(),
                 m.getCedula(),
-                m.getEspecialidad().getNombre(),
-            });
+                m.getEspecialidad().getNombre(),});
         }
-       
+   }
+    public VentanaMedica() {
+
+        initComponents();
+        llenarFilas();
         
-        
-        
+
         setBorder(BorderFactory.createTitledBorder(
-            BorderFactory.createEtchedBorder(), "Administrar médicos",
-            TitledBorder.LEFT, TitledBorder.TOP
+                BorderFactory.createEtchedBorder(), "Administrar médicos",
+                TitledBorder.LEFT, TitledBorder.TOP
         ));
         EventosParaBotones evento = new EventosParaBotones() {
 
             @Override
             public void clickHistorial(int row) {
                 {
-                    if (tablaMedica.isEditing()) tablaMedica.getCellEditor().stopCellEditing();
+                    if (tablaMedica.isEditing()) {
+                        tablaMedica.getCellEditor().stopCellEditing();
+                    }
                     tablaMedica.setRowSelectionInterval(row, row);
                     String nombre = tablaMedica.getValueAt(row, 0).toString();
 
@@ -75,27 +73,29 @@ public class VentanaMedica extends javax.swing.JPanel {
 
             @Override
             public void clickEditar(int row) {
-                GestorMedico gestor= GestorMedico.getInstancia();
-                Medico medico= gestor.getListaMedicos().get(row);
-                VentanaEditarMedico panel= new VentanaEditarMedico(medico);
+                GestorMedico gestor = GestorMedico.getInstancia();
+                Medico medico = gestor.getListaMedicos().get(row);
+                VentanaEditarMedico panel = new VentanaEditarMedico(medico);
                 panel.setSize(VentanaMedica.this.getSize());
                 panel.setLocation(0, 0);
                 java.awt.Window window = SwingUtilities.getWindowAncestor(VentanaMedica.this);
                 if (window instanceof JFrame frame) {
-                       
-                        frame.setContentPane(panel);
-                        frame.revalidate();
-                        frame.repaint();
-             }
+
+                    frame.setContentPane(panel);
+                    frame.revalidate();
+                    frame.repaint();
+                }
             }
+
             @Override
             public void clickEliminar(int row) {
-                if (tablaMedica.isEditing()) tablaMedica.getCellEditor().stopCellEditing();
+                if (tablaMedica.isEditing()) {
+                    tablaMedica.getCellEditor().stopCellEditing();
+                }
                 DefaultTableModel model = (DefaultTableModel) tablaMedica.getModel();
                 model.removeRow(row);
                 GestorMedico.getInstancia().eliminarMedico(row);
-                
-               
+
             }
         };
 
@@ -151,6 +151,11 @@ public class VentanaMedica extends javax.swing.JPanel {
         }
 
         jButton1.setText("Agregar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Volver");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -177,17 +182,38 @@ public class VentanaMedica extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        if(medicos.isEmpty()){
+        
+        JOptionPane.showMessageDialog(this, "Por favor agregue una especialidad.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+         VentanaAgregarMedico panel = new VentanaAgregarMedico();
+        panel.setSize(VentanaMedica.this.getSize());
+        panel.setLocation(0, 0);
+        java.awt.Window window = SwingUtilities.getWindowAncestor(VentanaMedica.this);
+        if (window instanceof JFrame frame) {
+            frame.setTitle("Agregar médico");
+            frame.setContentPane(panel);
+            frame.revalidate();
+            frame.repaint();
+        }
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

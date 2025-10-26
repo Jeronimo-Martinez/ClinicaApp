@@ -4,6 +4,9 @@
  */
 package com.mycompany.clinicaapp.Modelos;
 
+import java.util.List;
+import java.util.ArrayList;
+
 /**
  *
  * @author hecto
@@ -13,12 +16,22 @@ public class Medico {
     private String nombre;
     private Especialidad especialidad;
     private String contrasena;
-   
+    private final List<Paciente> pacientes = new ArrayList<>();
+    
+    
+    
     public Medico(String cedula, String nombre, Especialidad especialidad, String contrasena) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.especialidad = especialidad;
         this.contrasena = contrasena;
+    }
+     public void agregarPaciente(Paciente p) {
+        pacientes.add(p);
+    }
+
+    public List<Paciente> getPacientes() {
+        return pacientes;
     }
 
     public String getCedula() {
