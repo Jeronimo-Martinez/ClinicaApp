@@ -74,14 +74,12 @@ public class GestorCita implements IGestorCita {
         }
         
         @Override
-        public Cita consultarCita(String id){
-        try {
-            return (Cita) this.listaCitas.stream().filter(c -> c.getId().equals(id));
-        }catch (Exception exception) {
-            System.out.println("Error inesperado");
-            return null;
-        }
-        }
+        public Cita buscarCitaPorId(String idCita) {
+            for (Cita c : listaCitas) {
+                if (c.getId().equals(idCita)) {
+                     return c;
+            }
+        }return null;}
 
         @Override
         public boolean eliminarCita(String idCita) {

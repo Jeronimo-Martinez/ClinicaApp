@@ -7,6 +7,8 @@ package com.mycompany.clinicaapp.LogicaDelNegocio;
 import com.mycompany.clinicaapp.Modelos.Especialidad;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 
 /**
@@ -81,6 +83,9 @@ public class GestorMedico {
             }
         }
         return null;
+    }
+    public List<Medico> listarMedicosEspecialidad(String nombreEspecialidad){
+        return this.listaMedicos.stream().filter(m -> (m.getEspecialidad().getNombre() == null ? nombreEspecialidad == null : m.getEspecialidad().getNombre().equals(nombreEspecialidad))).collect(Collectors.toList());
     }
     
 }

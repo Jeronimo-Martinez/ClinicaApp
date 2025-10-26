@@ -18,7 +18,7 @@ public interface IGestorCita {
     boolean registrarCita(Cita c);
     List<Cita> consultarCitasPaciente(Paciente paciente);
     List<Cita> consultarCitasMedico(Medico medico);
-    Cita consultarCita(String id);
+    Cita buscarCitaPorId(String id);
     boolean eliminarCita(String idCita);
     boolean modificarCita(String idCita, Cita nueva);
     List<Cita> getCitas();

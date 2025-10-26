@@ -9,6 +9,8 @@ package com.mycompany.clinicaapp.Utilidades;
  * @author jmart
  */
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorCita;
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
+import com.mycompany.clinicaapp.Modelos.Cita;
 import com.mycompany.clinicaapp.Presentacion.ModificarCita;
 import com.mycompany.clinicaapp.Presentacion.VentanaRegistrarse;
 import java.awt.*;
@@ -47,11 +49,10 @@ public class BotonTablaCita extends AbstractCellEditor implements TableCellRende
         btnModificar.addActionListener(e -> {
             int fila = tabla.getSelectedRow();
             if (fila >= 0) {
-                String id = tabla.getValueAt(fila, 0).toString();
-                JOptionPane.showMessageDialog(tabla, "Modificar cita ID: " + id);
-                
-                String idcita = tabla.getValueAt(fila, 0).toString();
-                ModificarCita ventanaModificar = new ModificarCita();
+                String idCita = tabla.getValueAt(fila, 0).toString();
+                GestorMedico gestorMedico = new GestorMedico();
+                Cita cita = gestor.buscarCitaPorId(idCita);
+                ModificarCita ventanaModificar = new ModificarCita(gestor,gestorMedico,cita);
                 ventanaModificar.setVisible(true);
                 Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
                 int x = (pantalla.width - ventanaModificar.getWidth()) / 2;

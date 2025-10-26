@@ -122,6 +122,12 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel2.setText("Contraseña:");
 
+        txtusuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtusuarioActionPerformed(evt);
+            }
+        });
+
         rbPaciente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         rbPaciente.setText("Paciente");
         rbPaciente.addActionListener(new java.awt.event.ActionListener() {
@@ -291,6 +297,10 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         ventanaRegistro.setLocation(x, y);
         this.dispose();
     }//GEN-LAST:event_btnregistrarseActionPerformed
+
+    private void txtusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtusuarioActionPerformed
 
     /**
      * @param args the command line arguments

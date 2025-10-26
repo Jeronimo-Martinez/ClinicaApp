@@ -55,6 +55,30 @@ public class ListaCitasPaciente extends javax.swing.JFrame {
     private ListaCitasPaciente() {
         initComponents();
     }
+    public void refrescarTabla() {
+    // Limpia el modelo de la tabla
+    DefaultTableModel modelo = (DefaultTableModel) tablaCitas.getModel();
+    modelo.setRowCount(0);
+
+    // Vuelve a obtener las citas actualizadas 
+    List<Cita> citasActualizadas = gestor.getCitas(); // o el método que uses
+    
+    // Agrega las filas nuevamente
+    for (Cita c : citasActualizadas) {
+        modelo.addRow(new Object[]{
+            c.getId(),
+            c.getFecha().toString(),
+            c.getPaciente().getNombre(),
+            c.getMedico().getNombre(),
+            "Acciones"
+        });
+    }
+        TableColumn colAcciones = tablaCitas.getColumn("Acciones");
+        colAcciones.setCellRenderer(new BotonTablaCita(gestor, tablaCitas));
+        colAcciones.setCellEditor(new BotonTablaCita(gestor, tablaCitas));
+    }
+
+  
     private void configurarTabla(){
         modelotabla = new DefaultTableModel(new Object[]{"ID", "Fecha", "Paciente", "Médico", "Acciones"},0){
             @Override

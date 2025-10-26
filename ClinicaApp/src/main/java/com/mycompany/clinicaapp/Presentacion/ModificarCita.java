@@ -8,8 +8,15 @@ import com.mycompany.clinicaapp.LogicaDelNegocio.GestorCita;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
 import com.mycompany.clinicaapp.Modelos.Cita;
 import com.mycompany.clinicaapp.Modelos.Medico;
+import java.awt.Component;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,12 +43,11 @@ public class ModificarCita extends javax.swing.JFrame {
         // poblar combo con médicos de la misma especialidad que el médico actual
         DefaultComboBoxModel<Medico> model = new DefaultComboBoxModel<>();
         if (gestorMedico != null && cita != null && cita.getMedico() != null && cita.getMedico().getEspecialidad() != null) {
-            List<Medico> lista = gestorMedico.listarMedicos(); // ajusta nombre si tu gestor usa otro método
             String especialidadActual = cita.getMedico().getEspecialidad().getNombre();
+            List<Medico> lista = gestorMedico.listarMedicosEspecialidad(especialidadActual); // ajusta nombre si tu gestor usa otro método
+            System.out.println(lista);
             for (Medico m : lista) {
-                if (m != null && m.getEspecialidad() != null && especialidadActual.equals(m.getEspecialidad().getNombre())) {
-                    model.addElement(m);
-                }
+                model.addElement(m);
             }
         }
         jComboBox1.setModel(model);
@@ -89,7 +95,9 @@ public class ModificarCita extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        BotonVolver = new javax.swing.JButton();
+        botonCancelar = new javax.swing.JButton();
+        botonAplicar = new javax.swing.JButton();
+        textoFecha = new javax.swing.JTextField();
 
         popupMenu1.setLabel("popupMenu1");
 
@@ -104,12 +112,31 @@ public class ModificarCita extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Cambiar Doctor : ");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        BotonVolver.setText("Volver ");
-        BotonVolver.addActionListener(new java.awt.event.ActionListener() {
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<Medico>());
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotonVolverActionPerformed(evt);
+                actionPerformed(evt);
+            }
+        });
+
+        botonCancelar.setText("Cancelar");
+        botonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCancelarActionPerformed(evt);
+            }
+        });
+
+        botonAplicar.setText("Aplicar");
+        botonAplicar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAplicarActionPerformed(evt);
+            }
+        });
+
+        textoFecha.setText("dd/mm/yyyy");
+        textoFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textoFechaActionPerformed(evt);
             }
         });
 
@@ -125,17 +152,19 @@ public class ModificarCita extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(69, 69, 69)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(80, 80, 80))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, 0, 222, Short.MAX_VALUE)
+                            .addComponent(textoFecha, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addContainerGap(80, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(BotonVolver)
-                .addGap(38, 38, 38))
+                .addComponent(botonAplicar)
+                .addGap(18, 18, 18)
+                .addComponent(botonCancelar)
+                .addGap(32, 32, 32))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,22 +177,88 @@ public class ModificarCita extends javax.swing.JFrame {
                         .addGap(44, 44, 44)
                         .addComponent(jLabel1)))
                 .addGap(41, 41, 41)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(textoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
-                .addComponent(BotonVolver)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonCancelar)
+                    .addComponent(botonAplicar))
                 .addGap(21, 21, 21))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BotonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonVolverActionPerformed
+    private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
         this.dispose();  
-    }//GEN-LAST:event_BotonVolverActionPerformed
+    }//GEN-LAST:event_botonCancelarActionPerformed
+
+    private void botonAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAplicarActionPerformed
+        // Guardar cambio de médico y cerrar
+        String fechastr = textoFecha.getText().trim();
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate fechaIngresada;
+    try {
+        fechaIngresada = LocalDate.parse(fechastr, formato);
+        LocalDate hoy = LocalDate.now();
+
+        // validar fecha posterior a la actual
+        if (!fechaIngresada.isAfter(hoy)) {
+            JOptionPane.showMessageDialog(null, 
+                "La fecha debe ser posterior a la actual.",
+                "Fecha no válida",
+                JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        //return fechaIngresada;
+
+    } catch (DateTimeParseException e) {
+        // el formato no es valido
+        JOptionPane.showMessageDialog(null, 
+            "Formato de fecha inválido. Usa el formato dd/MM/yyyy.\nEjemplo: 27/10/2025",
+            "Error de formato",
+            JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+        Medico seleccionado = (Medico) jComboBox1.getSelectedItem();
+        ///System.out.println(seleccionado.getEspecialidad());
+        if (cita == null || gestorCita == null) {
+            this.dispose();
+            return;
+        }
+
+        // si es el mismo médico, sólo cerrar
+        if (cita.getMedico() != null && cita.getMedico().getCedula() != null
+                && cita.getMedico().getCedula().equals(seleccionado.getCedula())) {
+            this.dispose();
+            return;
+        }
+
+        // crear nueva cita con el mismo id, fecha, diagnóstico y paciente pero con el nuevo médico
+        Cita nueva;
+        nueva = new Cita(cita.getId(),fechaIngresada, cita.getDiagnostico(), seleccionado, cita.getPaciente());
+        boolean ok = gestorCita.modificarCita(cita.getId(), nueva);
+        if (ok) {
+            JOptionPane.showMessageDialog(this, "Médico cambiado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo cambiar el médico.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (getParent() instanceof ListaCitasPaciente lista){
+            lista.refrescarTabla();
+        }
+        this.dispose();
+    
+    }//GEN-LAST:event_botonAplicarActionPerformed
+
+    private void textoFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoFechaActionPerformed
+           //nothig to do here        
+    }//GEN-LAST:event_textoFechaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,13 +296,15 @@ public class ModificarCita extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BotonVolver;
+    private javax.swing.JButton botonAplicar;
+    private javax.swing.JButton botonCancelar;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<Medico> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private java.awt.PopupMenu popupMenu1;
+    private javax.swing.JTextField textoFecha;
     // End of variables declaration//GEN-END:variables
 }
