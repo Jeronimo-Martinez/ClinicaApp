@@ -13,10 +13,15 @@ public interface IMedicoService {
 
     
     boolean registrarMedico(Medico medico);
-    
-    ArrayList<Medico> listarMedicos();
-    
+
+
     boolean editarMedico(Medico medico);
-    
+
     boolean eliminarMedico(String id);
+
+    Medico iniciarSesion(String cedula, String contraseña);
+
+    Medico buscarPorCedula(String cedula);
+
+    ArrayList<Medico> getListaMedicos();
 }

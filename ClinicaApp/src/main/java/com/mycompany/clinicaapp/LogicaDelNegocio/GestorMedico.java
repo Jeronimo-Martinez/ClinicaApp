@@ -15,6 +15,26 @@ import java.util.ArrayList;
  */
 public class GestorMedico implements IMedicoService {
     private final ArrayList<Medico> listaMedicos = new ArrayList<>();
+    private static GestorMedico instancia;
+    private Medico medicoActual;
+    public Medico buscarPorCedula(String cedula) {
+        for (Medico m : listaMedicos) {
+            if (m.getCedula().equals(cedula)) {
+                return m;
+            }
+        }
+        return null;
+    }
+     public static GestorMedico getInstanciaMedico() {
+        if (instancia == null) {
+            instancia = new GestorMedico();
+        }
+        return instancia;
+    }    
+    
+    public Medico getMedicoActual() {
+        return medicoActual;
+    }
 
     public GestorMedico() {
         Especialidad cardio = new Especialidad("Cardiología");
@@ -66,5 +86,8 @@ public class GestorMedico implements IMedicoService {
     public ArrayList<Medico> getListaMedicos() {
         return listaMedicos;
     }
-   
+    public void setMedicoActual(Medico medico) {
+        this.medicoActual = medico;
     }
+   
+}

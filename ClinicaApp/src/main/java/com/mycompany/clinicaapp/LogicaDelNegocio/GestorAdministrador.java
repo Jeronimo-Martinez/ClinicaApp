@@ -42,7 +42,7 @@ public class GestorAdministrador implements IGestorAdministrador {
     /**
      * Devuelve la única instancia de GestorAdministrador.
      */
-    public static GestorAdministrador getInstancia(
+    public static GestorAdministrador getInstanciaAdministrador(
         IMedicoService medicoService,
         IPacienteService pacienteService,
         IEspecialidadService especialidadService
@@ -51,7 +51,9 @@ public class GestorAdministrador implements IGestorAdministrador {
         instancia = new GestorAdministrador(medicoService, pacienteService, especialidadService);
     }
     return instancia;
-}
+
+    }
+
     /**
      * Permite iniciar sesión del administrador por usuario y contraseña.
      */
@@ -64,9 +66,7 @@ public class GestorAdministrador implements IGestorAdministrador {
         return null;
     }
 
-    // -------------------------------------------------------------------------
-    // MÉTODOS DE GESTIÓN DE MÉDICOS
-    // -------------------------------------------------------------------------
+    
     @Override
     public boolean registrarMedico(Medico medico) {
         return medicoService.registrarMedico(medico);

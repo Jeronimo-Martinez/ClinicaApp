@@ -5,9 +5,13 @@
 package com.mycompany.clinicaapp.Presentacion;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorPaciente;
+import com.mycompany.clinicaapp.Interfaces.IEspecialidadService;
 import com.mycompany.clinicaapp.Interfaces.IMedicoService;
 import com.mycompany.clinicaapp.Interfaces.IPacienteService;
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorAdministrador;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorCita;
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorEspecialidad;
+import com.mycompany.clinicaapp.Modelos.Administrador;
 import com.mycompany.clinicaapp.Modelos.Cita;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import com.mycompany.clinicaapp.Modelos.Paciente;
@@ -15,6 +19,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.List;
 import javax.swing.ButtonGroup;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,6 +31,15 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
     /**
      * Creates new form VentanaPrincipal
      */
+IMedicoService medicoService = new GestorMedico();
+IPacienteService pacienteService = new GestorPaciente();
+IEspecialidadService especialidadService = new GestorEspecialidad();
+
+GestorAdministrador gestorAdministrador = GestorAdministrador.getInstanciaAdministrador(
+    medicoService,
+    pacienteService,
+    especialidadService
+);
     GestorPaciente gestorPaciente = GestorPaciente.getInstanciaPaciente();
     GestorMedico gestorMedico = GestorMedico.getInstanciaMedico();
     
@@ -239,7 +253,29 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         return;
         }
         
-        
+        else if (rbAdministrador.isSelected()) {
+            Administrador admin = gestorAdministrador.iniciarSesion(usuarioingresado, contrasenaingresada);
+
+            if (admin != null) {
+                JOptionPane.showMessageDialog(this, 
+                "Inicio de sesión exitoso. Bienvenido " + admin.getCedula() + "!");
+
+                JFrame ventanaAdmin = new JFrame("Panel del Administrador");
+                ventanaAdmin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                ventanaAdmin.setSize(800, 600);
+                ventanaAdmin.setLocationRelativeTo(null);
+
+                ventanaAdmin.setContentPane(new PanelAdministrador(gestorAdministrador));
+                ventanaAdmin.setVisible(true);
+
+                this.dispose();
+    } else {
+        JOptionPane.showMessageDialog(this, 
+            "Credenciales incorrectas para administrador.", 
+            "Error", 
+            JOptionPane.ERROR_MESSAGE);
+    }
+}
         if (rbPaciente.isSelected()) {
         Paciente paciente = gestorPaciente.iniciarSesion(usuarioingresado, contrasenaingresada);
         if (paciente != null) {
