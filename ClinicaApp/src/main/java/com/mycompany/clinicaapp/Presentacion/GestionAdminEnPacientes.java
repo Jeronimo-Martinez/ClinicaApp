@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.util.List;
 
 /**
+ * 
  * Panel para la gestión de pacientes:
  * registrar, editar y eliminar.
  */

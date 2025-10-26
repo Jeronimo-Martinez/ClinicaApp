@@ -6,6 +6,7 @@ package com.mycompany.clinicaapp.Presentacion.AdminEspecialidad;
 
 /**
  *
+ * 
  * @author johan
  */
 public class EliminarEspecialidad extends javax.swing.JPanel {

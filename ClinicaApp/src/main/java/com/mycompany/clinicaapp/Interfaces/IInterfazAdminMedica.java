@@ -7,6 +7,7 @@ package com.mycompany.clinicaapp.Interfaces;
 import com.mycompany.clinicaapp.Modelos.Medico;
 
 /**
+ * 
  *
  * @author johan
  */

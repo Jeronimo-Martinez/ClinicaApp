@@ -11,6 +11,7 @@ public class Administrador {
 	private String contrasena;
 	private String correo;
 
+        
 	/**
 	 * Constructor vacío.
 	 */

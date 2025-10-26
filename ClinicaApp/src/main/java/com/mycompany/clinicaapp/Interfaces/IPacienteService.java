@@ -6,6 +6,7 @@ import com.mycompany.clinicaapp.Modelos.Paciente;
  * @author Valentina
  */
 
+
 public interface IPacienteService {
 
     boolean registrarPaciente (Paciente paciente);

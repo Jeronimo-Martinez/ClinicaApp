@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 
 
 /**
+ * 
  * Panel para la gestión de médicos.
  */
 public class GestionAdminEnMedicos extends JPanel {

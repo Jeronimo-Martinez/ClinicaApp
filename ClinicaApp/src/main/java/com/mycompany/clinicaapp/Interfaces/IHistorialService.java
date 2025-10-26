@@ -10,6 +10,7 @@ import com.mycompany.clinicaapp.Modelos.Cita;
  * @author Silvana
  */
 
+
 public interface IHistorialService {
 
     /**

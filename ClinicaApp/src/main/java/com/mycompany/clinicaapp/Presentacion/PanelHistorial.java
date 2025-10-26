@@ -8,6 +8,7 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 
 /**
+ * 
  * Este panel está encargado de mostrar el historial clínico de un paciente.
  */
 

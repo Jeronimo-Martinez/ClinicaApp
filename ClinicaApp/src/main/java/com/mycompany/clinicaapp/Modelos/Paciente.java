@@ -1,6 +1,7 @@
 package com.mycompany.clinicaapp.Modelos;
 
 /**
+ * 
  * Esta clase representa a un paciente de la clínica
  * @author Valentina 
  */ 

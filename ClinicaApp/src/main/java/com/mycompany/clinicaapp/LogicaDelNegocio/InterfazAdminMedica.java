@@ -9,6 +9,7 @@ import com.mycompany.clinicaapp.Presentacion.AdminMedicos.VentanaMedica;
 import javax.swing.JFrame;
 
 /**
+ * 
  * Maneja la lógica de navegación entre las ventanas de administración médica.
  */
 public class InterfazAdminMedica implements IInterfazAdminMedica {
