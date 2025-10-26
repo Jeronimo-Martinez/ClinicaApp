@@ -45,7 +45,6 @@ public class GestorAdminEnEspecialidad extends JPanel {
         btnEliminar.addActionListener(this::eliminarEspecialidad);
         btnVer.addActionListener(this::verEspecialidades);
 
-
     }
 
     private void registrarEspecialidad(ActionEvent e) {
@@ -89,20 +88,21 @@ public class GestorAdminEnEspecialidad extends JPanel {
             }
         }
     }
+
     private void verEspecialidades(ActionEvent e) {
-    List<Especialidad> especialidades = gestor.listarEspecialidades();
-    if (especialidades.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "No hay especialidades registradas");
-        return;
-    }
+        List<Especialidad> especialidades = gestor.listarEspecialidades();
+        if (especialidades.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay especialidades registradas");
+            return;
+        }
 
-    StringBuilder sb = new StringBuilder("Listado de Especialidades:\n\n");
-    for (Especialidad esp : especialidades) {
-        sb.append("• ").append(esp.getNombre()).append("\n");
-    }
+        StringBuilder sb = new StringBuilder("Listado de Especialidades:\n\n");
+        for (Especialidad esp : especialidades) {
+            sb.append("• ").append(esp.getNombre()).append("\n");
+        }
 
-    JTextArea area = new JTextArea(sb.toString(), 10, 30);
-    area.setEditable(false);
-    JOptionPane.showMessageDialog(this, new JScrollPane(area), "Especialidades", JOptionPane.INFORMATION_MESSAGE);
-}
+        JTextArea area = new JTextArea(sb.toString(), 10, 30);
+        area.setEditable(false);
+        JOptionPane.showMessageDialog(this, new JScrollPane(area), "Especialidades", JOptionPane.INFORMATION_MESSAGE);
+    }
 }
