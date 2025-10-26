@@ -12,8 +12,6 @@ public interface EventosParaBotones {
     
     public void clickEditar(int row);
 
-    public void clickHistorial(int row);
-
     public void clickEliminar(int row);
 
 }

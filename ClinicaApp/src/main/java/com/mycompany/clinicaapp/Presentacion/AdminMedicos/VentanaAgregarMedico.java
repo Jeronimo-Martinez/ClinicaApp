@@ -4,7 +4,8 @@
  */
 package com.mycompany.clinicaapp.Presentacion.AdminMedicos;
 
-import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
+import com.mycompany.clinicaapp.LogicaDelNegocio.IInterfazAdminMedica;
+import com.mycompany.clinicaapp.LogicaDelNegocio.IMedicoService;
 import com.mycompany.clinicaapp.Modelos.Especialidad;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import java.util.ArrayList;
@@ -23,33 +24,34 @@ import javax.swing.SwingUtilities;
  */
 public class VentanaAgregarMedico extends javax.swing.JPanel {
     
-   
-    
-    private void cargarEspecialidades(){
+    private final IMedicoService medicoService;
+    private final IInterfazAdminMedica interfazAdmin;
+     private void cargarEspecialidades() {
         especialidades.removeAllItems();
-         ArrayList<Medico> medicos = GestorMedico.getInstancia().getListaMedicos();
-         Set<String> nombresEspecialidades = new HashSet<>();
-
-    for (Medico m : medicos) {
-        if (m.getEspecialidad() != null) {
-            nombresEspecialidades.add(m.getEspecialidad().getNombre());
+        Set<String> nombresEspecialidades = new HashSet<>();
+        ArrayList<Medico> medicos = medicoService.getListaMedicos();
+        for (Medico m : medicos) {
+            if (m.getEspecialidad() != null) {
+                nombresEspecialidades.add(m.getEspecialidad().getNombre());
+            }
         }
-    }
-    for (String nombreEsp : nombresEspecialidades) {
-        especialidades.addItem(nombreEsp);
-    }
 
+        for (String nombreEsp : nombresEspecialidades) {
+            especialidades.addItem(nombreEsp);
+        }
     }
     
     
     /**
      * Creates new form VentanaAgregarMedico
+     * @param medicoService
+     * @param interfazAdmin
      */
-    public VentanaAgregarMedico() {
+     public VentanaAgregarMedico(IMedicoService medicoService, IInterfazAdminMedica interfazAdmin) {
+        this.medicoService = medicoService;
+        this.interfazAdmin= interfazAdmin;
         initComponents();
         cargarEspecialidades();
-        
-        
     }
 
     /**
@@ -106,6 +108,7 @@ public class VentanaAgregarMedico extends javax.swing.JPanel {
 
         jScrollPane3.setViewportView(contrasena);
 
+        jTextField6.setEditable(false);
         jTextField6.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField6.setText("Diligencie los datos del médico que desea agregar");
@@ -115,45 +118,28 @@ public class VentanaAgregarMedico extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(115, 115, 115))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(especialidades, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE))
+                    .addComponent(especialidades, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,7 +159,7 @@ public class VentanaAgregarMedico extends javax.swing.JPanel {
                 .addComponent(especialidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -189,10 +175,9 @@ public class VentanaAgregarMedico extends javax.swing.JPanel {
     Especialidad esp= new Especialidad(nombreEspecialidad);
     Medico medico= new Medico(cedulaMedico,nombreMedico , esp, contrasenaMedico);
     
-    
-        GestorMedico.getInstancia().agregarMedico(medico);
+        medicoService.agregarMedico(medico);    
         JOptionPane.showMessageDialog(this, "Se ha agregado un nuevo médico",null,JOptionPane.INFORMATION_MESSAGE);
-        VentanaMedica panel = new VentanaMedica();
+        VentanaMedica panel = new VentanaMedica(medicoService, interfazAdmin);
                     panel.setSize(this.getSize());
                     panel.setLocation(0, 0);
                     java.awt.Window window = SwingUtilities.getWindowAncestor(this);

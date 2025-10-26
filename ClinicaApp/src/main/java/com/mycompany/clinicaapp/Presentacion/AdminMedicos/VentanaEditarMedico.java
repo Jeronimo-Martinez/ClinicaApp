@@ -4,6 +4,8 @@
  */
 package com.mycompany.clinicaapp.Presentacion.AdminMedicos;
 
+import com.mycompany.clinicaapp.LogicaDelNegocio.IInterfazAdminMedica;
+import com.mycompany.clinicaapp.LogicaDelNegocio.IMedicoService;
 import com.mycompany.clinicaapp.Modelos.Especialidad;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import java.awt.Color;
@@ -17,12 +19,14 @@ import javax.swing.table.DefaultTableModel;
  * @author johan
  */
 public class VentanaEditarMedico extends javax.swing.JPanel {
-
-    private Medico medico;
+    private final IMedicoService medicoService;
+    private final Medico medico;
+    private final IInterfazAdminMedica interfazAdmin;
     
-    
-    public VentanaEditarMedico(Medico medico) {
+    public VentanaEditarMedico(Medico medico, IMedicoService medicoService, IInterfazAdminMedica interfazAdmin) {
         this.medico=medico;
+        this.medicoService=medicoService;
+        this.interfazAdmin=interfazAdmin;
         initComponents();
         cargarDatos();
         tablaEdicion.getTableHeader().setReorderingAllowed(false);
@@ -97,17 +101,17 @@ public class VentanaEditarMedico extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(aceptarCambios)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(aceptarCambios, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -116,7 +120,7 @@ public class VentanaEditarMedico extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-                    VentanaMedica panel = new VentanaMedica();
+                    VentanaMedica panel = new VentanaMedica(medicoService, interfazAdmin);
                     panel.setSize(this.getSize());
                     panel.setLocation(0, 0);
                     java.awt.Window window = SwingUtilities.getWindowAncestor(this);
@@ -128,10 +132,12 @@ public class VentanaEditarMedico extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void aceptarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarCambiosActionPerformed
-      medico.setNombre(tablaEdicion.getValueAt(0, 0).toString());
-      medico.setCedula(tablaEdicion.getValueAt(0, 1).toString());
-      Especialidad especialidad= new Especialidad(tablaEdicion.getValueAt(0, 2).toString());
-      medico.setEspecialidad(especialidad);
+      String nuevoNombre = tablaEdicion.getValueAt(0, 0).toString();
+String nuevaCedula = tablaEdicion.getValueAt(0, 1).toString();
+String nombreEspecialidad = tablaEdicion.getValueAt(0, 2).toString();
+Especialidad nuevaEsp = new Especialidad(nombreEspecialidad);
+medicoService.actualizarMedico(medico, nuevoNombre, nuevaCedula, nuevaEsp);
+
         JOptionPane.showMessageDialog(null,"Cambios realizados con éxito",null,JOptionPane.INFORMATION_MESSAGE);
         
     }//GEN-LAST:event_aceptarCambiosActionPerformed

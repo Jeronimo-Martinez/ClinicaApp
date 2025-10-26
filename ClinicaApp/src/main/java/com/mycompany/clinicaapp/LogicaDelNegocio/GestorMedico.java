@@ -12,43 +12,64 @@ import java.util.ArrayList;
  *
  * @author hecto
  */
-public class GestorMedico {
+public class GestorMedico implements IMedicoService {
     private static final GestorMedico instancia = new GestorMedico();
     private final ArrayList<Medico> listaMedicos = new ArrayList<>();
 
-    public GestorMedico() {
+    private GestorMedico() {
         Especialidad cardio = new Especialidad("Cardiología");
         Especialidad general = new Especialidad("Medicina General");
-        listaMedicos.add(new Medico("1111", "Andrés Gómez", cardio, "" + "1111"));
+        listaMedicos.add(new Medico("1111", "Andrés Gómez", cardio, "1111"));
         listaMedicos.add(new Medico("222", "Laura Torres", general, "2222"));
     }
+
+    /**
+     *
+     * @param medico
+     * @param nuevoNombre
+     * @param nuevaCedula
+     * @param nuevaEspecialidad
+     */
+    @Override
+    public void actualizarMedico(Medico medico, String nuevoNombre, String nuevaCedula, Especialidad nuevaEspecialidad) {
+    medico.setNombre(nuevoNombre);
+    medico.setCedula(nuevaCedula);
+    medico.setEspecialidad(nuevaEspecialidad);
+}
+
     public static GestorMedico getInstancia() {
         return instancia;
     }
 
+    @Override
     public ArrayList<Medico> getListaMedicos() {
         return listaMedicos;
     }
 
+    @Override
     public boolean registrarPaciente(Medico medico) {
         listaMedicos.add(medico);
         return true;
     }
 
+    @Override
+    public boolean agregarMedico(Medico medico) {
+        listaMedicos.add(medico);
+        return true;
+    }
+
+    @Override
     public void eliminarMedico(int posicion) {
-    listaMedicos.remove(posicion);
-}
-     public boolean agregarMedico(Medico medico) {
-    listaMedicos.add(medico);
-    return true;
-}
+        listaMedicos.remove(posicion);
+    }
+
+    @Override
     public Medico iniciarSesion(String cedula, String contrasena) {
-        for (Medico medicoingresado : listaMedicos) {
-            if (medicoingresado.getCedula().equals(cedula) && medicoingresado.getContrasena().equals(contrasena)) {
-                return medicoingresado;
+        for (Medico medico : listaMedicos) {
+            if (medico.getCedula().equals(cedula) && medico.getContrasena().equals(contrasena)) {
+                return medico;
             }
         }
         return null;
     }
-
 }

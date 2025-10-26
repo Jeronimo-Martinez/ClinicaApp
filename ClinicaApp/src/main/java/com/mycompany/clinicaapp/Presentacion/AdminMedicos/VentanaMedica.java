@@ -4,7 +4,8 @@
  */
 package com.mycompany.clinicaapp.Presentacion.AdminMedicos;
 
-import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
+import com.mycompany.clinicaapp.LogicaDelNegocio.IInterfazAdminMedica;
+import com.mycompany.clinicaapp.LogicaDelNegocio.IMedicoService;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import com.mycompany.clinicaapp.Utilidades.AdminMedica.ActivadorJtableMedicoBotones;
 import com.mycompany.clinicaapp.Utilidades.AdminMedica.EventosParaBotones;
@@ -23,8 +24,10 @@ import javax.swing.table.DefaultTableModel;
  * @author johan
  */
 public class VentanaMedica extends javax.swing.JPanel {
-   ArrayList<Medico> medicos = GestorMedico.getInstancia().getListaMedicos();
-   private void llenarFilas (){
+   private final IMedicoService medicoService;
+   private final IInterfazAdminMedica interfazAdmin;
+   ArrayList<Medico> medicos;
+   public void llenarFilas (){
        
         
 
@@ -37,8 +40,11 @@ public class VentanaMedica extends javax.swing.JPanel {
                 m.getEspecialidad().getNombre(),});
         }
    }
-    public VentanaMedica() {
-
+   
+    public VentanaMedica(IMedicoService medicoService, IInterfazAdminMedica interfazAdmin) {
+        this.interfazAdmin=interfazAdmin;
+        this.medicoService=medicoService;
+        this.medicos=medicoService.getListaMedicos();
         initComponents();
         llenarFilas();
         
@@ -47,57 +53,38 @@ public class VentanaMedica extends javax.swing.JPanel {
                 BorderFactory.createEtchedBorder(), "Administrar médicos",
                 TitledBorder.LEFT, TitledBorder.TOP
         ));
-        EventosParaBotones evento = new EventosParaBotones() {
-
-            @Override
-            public void clickHistorial(int row) {
-                {
-                    if (tablaMedica.isEditing()) {
-                        tablaMedica.getCellEditor().stopCellEditing();
-                    }
-                    tablaMedica.setRowSelectionInterval(row, row);
-                    String nombre = tablaMedica.getValueAt(row, 0).toString();
-
-                    VentanaHistorialAdmin panel = new VentanaHistorialAdmin();
-                    panel.setSize(VentanaMedica.this.getSize());
-                    panel.setLocation(0, 0);
-                    java.awt.Window window = SwingUtilities.getWindowAncestor(VentanaMedica.this);
-                    if (window instanceof JFrame frame) {
-                        frame.setTitle("Historial del médico " + nombre);
-                        frame.setContentPane(panel);
-                        frame.revalidate();
-                        frame.repaint();
-                    }
-                }
-            }
-
-            @Override
-            public void clickEditar(int row) {
-                GestorMedico gestor = GestorMedico.getInstancia();
-                Medico medico = gestor.getListaMedicos().get(row);
-                VentanaEditarMedico panel = new VentanaEditarMedico(medico);
-                panel.setSize(VentanaMedica.this.getSize());
-                panel.setLocation(0, 0);
-                java.awt.Window window = SwingUtilities.getWindowAncestor(VentanaMedica.this);
-                if (window instanceof JFrame frame) {
-
-                    frame.setContentPane(panel);
-                    frame.revalidate();
-                    frame.repaint();
-                }
-            }
-
-            @Override
-            public void clickEliminar(int row) {
-                if (tablaMedica.isEditing()) {
-                    tablaMedica.getCellEditor().stopCellEditing();
-                }
-                DefaultTableModel model = (DefaultTableModel) tablaMedica.getModel();
-                model.removeRow(row);
-                GestorMedico.getInstancia().eliminarMedico(row);
-
-            }
-        };
+        EventosParaBotones evento;
+       evento = new EventosParaBotones() {
+           
+           
+           
+           @Override
+           public void clickEditar(int row) {
+               
+               Medico medico = medicoService.getListaMedicos().get(row);
+               VentanaEditarMedico panel = new VentanaEditarMedico(medico, medicoService, interfazAdmin);
+               panel.setSize(VentanaMedica.this.getSize());
+               panel.setLocation(0, 0);
+               java.awt.Window window = SwingUtilities.getWindowAncestor(VentanaMedica.this);
+               if (window instanceof JFrame frame) {
+                   
+                   frame.setContentPane(panel);
+                   frame.revalidate();
+                   frame.repaint();
+               }
+           }
+           
+           @Override
+           public void clickEliminar(int row) {
+               if (tablaMedica.isEditing()) {
+                   tablaMedica.getCellEditor().stopCellEditing();
+               }
+               DefaultTableModel model = (DefaultTableModel) tablaMedica.getModel();
+               model.removeRow(row);
+               medicoService.eliminarMedico(row);
+               
+           }
+       };
 
         tablaMedica.getColumnModel().getColumn(3).setCellRenderer(new RenderizadoTablaMedico());
         tablaMedica.getTableHeader().setReorderingAllowed(false);
@@ -144,10 +131,11 @@ public class VentanaMedica extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tablaMedica.setRowHeight(35);
+        tablaMedica.setRowHeight(40);
+        tablaMedica.setSurrendersFocusOnKeystroke(true);
         jScrollPane1.setViewportView(tablaMedica);
         if (tablaMedica.getColumnModel().getColumnCount() > 0) {
-            tablaMedica.getColumnModel().getColumn(3).setPreferredWidth(80);
+            tablaMedica.getColumnModel().getColumn(3).setPreferredWidth(40);
         }
 
         jButton1.setText("Agregar");
@@ -201,7 +189,7 @@ public class VentanaMedica extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, "Por favor agregue una especialidad.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         else{
-         VentanaAgregarMedico panel = new VentanaAgregarMedico();
+         VentanaAgregarMedico panel = new VentanaAgregarMedico(medicoService, interfazAdmin);
         panel.setSize(VentanaMedica.this.getSize());
         panel.setLocation(0, 0);
         java.awt.Window window = SwingUtilities.getWindowAncestor(VentanaMedica.this);
@@ -222,4 +210,8 @@ public class VentanaMedica extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaMedica;
     // End of variables declaration//GEN-END:variables
+
+    public void setContentPane(VentanaAgregarMedico panel) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

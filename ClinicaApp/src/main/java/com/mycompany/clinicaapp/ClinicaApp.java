@@ -4,9 +4,11 @@
  */
 package com.mycompany.clinicaapp;
 
-import com.mycompany.clinicaapp.Presentacion.VentanaIniciarSesion;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
+import com.mycompany.clinicaapp.LogicaDelNegocio.IInterfazAdminMedica;
+import com.mycompany.clinicaapp.LogicaDelNegocio.IMedicoService;
+import com.mycompany.clinicaapp.LogicaDelNegocio.InterfazAdminMedica;
+import javax.swing.SwingUtilities;
 
 
 /**
@@ -14,16 +16,16 @@ import java.awt.Toolkit;
  * @author hecto
  */
 public class ClinicaApp {
-    
-    private static VentanaIniciarSesion main;
-    public static void main(String[] args) {
-    main = new VentanaIniciarSesion();
-    main.setVisible(true);
-    Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
-    int x = (pantalla.width - main.getWidth()) / 2;
-    int y = (pantalla.height - main.getHeight()) / 2;
+    public static void main(String[] args){
+     SwingUtilities.invokeLater(() -> {
+            // Instancia del servicio de médicos (puede ser tu GestorMedico singleton o una implementación)
+            IMedicoService medicoService = GestorMedico.getInstancia();
 
-    main.setLocation(x, y);
+            // Crea la interfaz de administración y la muestra
+            IInterfazAdminMedica interfazAdmin = new InterfazAdminMedica(medicoService);
+            interfazAdmin.mostrarVentanaMedica();
+        });
     
-}
+    
+    }
 }
