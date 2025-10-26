@@ -11,6 +11,7 @@ public class Paciente {
     private String nombre;
     private String telefono;
     private int edad;
+    private String contrasena;
 
     /**
      * Constructor vacío por defecto
@@ -25,13 +26,15 @@ public class Paciente {
      * @param nombre Nombre del paciente que se va a instanciar
      * @param telefono Número de telefóno del paciente que se va a instanciar
      * @param edad Edad del paciente que se va a instanciar
+     * @param contrasena Contraseña del paciente que se va a instanciar
      */
     
-    public Paciente(String cedula, String nombre, String telefono, int edad) {
+    public Paciente(String cedula, String nombre, String telefono, int edad, String contrasena) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.telefono = telefono;
         this.edad = edad;
+        this.contrasena = contrasena;
     }
 
     /**
@@ -74,6 +77,14 @@ public class Paciente {
 
     public void setEdad(int edad) {
         this.edad = edad;
+    }
+
+    public String getContrasena(){
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena){ 
+        this.contrasena = contrasena;
     }
 
     /**
