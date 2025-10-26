@@ -116,4 +116,23 @@ public class GestorCita implements IGestorCita {
         return instancia;
     }
 
+    public Cita buscarCitaPorId(String idCita) {
+        for (Cita c : listaCitas) {
+            if (c.getId().equals(idCita)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public boolean actualizarCita(Cita citaActualizada) {
+        for (int i = 0; i < listaCitas.size(); i++) {
+            Cita c = listaCitas.get(i);
+            if (c.getId().equals(citaActualizada.getId())) {
+                listaCitas.set(i, citaActualizada);
+                return true; // cita actualizada correctamente
+            }
+        }
+        return false; // no se encontró la cita
+    }
     }   

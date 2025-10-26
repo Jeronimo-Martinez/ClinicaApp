@@ -10,8 +10,11 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
 import com.mycompany.clinicaapp.Modelos.Cita;
+import com.mycompany.clinicaapp.Utilidades.BotonDiagnosticoCita;
+import com.mycompany.clinicaapp.Utilidades.BotonTablaCita;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.table.TableColumn;
 /**
  *
  * @author hecto
@@ -24,6 +27,7 @@ public class PanelMedico extends javax.swing.JFrame {
     public PanelMedico() {
         initComponents();
         cargarCitasMedico();
+
         
     }
     
@@ -41,19 +45,30 @@ public class PanelMedico extends javax.swing.JFrame {
     List<Cita> citasMedico = gestorCita.consultarCitasMedico(medicoActual);
 
     DefaultTableModel modelo = new DefaultTableModel(
-        new Object[]{"ID", "Fecha", "Paciente", "Motivo"}, 0
-    );
+        new Object[]{"ID", "Fecha", "Paciente", "Motivo", "Acciones"}, 0
+    ) {
+        @Override
+        public boolean isCellEditable(int fila, int columna) {
+            return columna == 4; // solo la columna "Acciones" será editable
+        }
+    };
 
     for (Cita c : citasMedico) {
         modelo.addRow(new Object[]{
             c.getId(),
             c.getFecha(),
             c.getPaciente().getNombre(),
-            c.getDiagnostico()
+            c.getDiagnostico(), // aquí se muestra el motivo de la cita
+            "Agregar diagnóstico" // botón
         });
-    }
+}
 
-    Table1.setModel(modelo); // 👈 usa el JTable que tienes en tu JFrame
+Table1.setModel(modelo);
+Table1.setRowHeight(32); //  usa el JTable que tienes en tu JFrame
+
+TableColumn colAcciones = Table1.getColumn("Acciones");
+colAcciones.setCellRenderer(new BotonDiagnosticoCita(gestorCita, Table1));
+colAcciones.setCellEditor(new BotonDiagnosticoCita(gestorCita, Table1));
 }
 
     /**
