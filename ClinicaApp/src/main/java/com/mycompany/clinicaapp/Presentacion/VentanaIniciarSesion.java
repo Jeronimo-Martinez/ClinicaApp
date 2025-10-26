@@ -241,7 +241,7 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
             
             GestorCita gestor = new GestorCita();
             List<Cita> citas = gestor.getCitas();
-            ListaCitasPaciente form = new ListaCitasPaciente(citas);
+            ListaCitasPaciente form = new ListaCitasPaciente(citas,gestor);
             form.setVisible(true);
             this.dispose();
         } else {

@@ -4,9 +4,12 @@
  */
 package com.mycompany.clinicaapp.Presentacion;
 
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorCita;
 import com.mycompany.clinicaapp.Modelos.Cita;
+import com.mycompany.clinicaapp.Utilidades.BotonTablaCita;
 import java.util.List;
-import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -18,16 +21,16 @@ public class ListaCitasPaciente extends javax.swing.JFrame {
      * Creates new form ListaCitasPaciente
      * @param citas
      */
-    public ListaCitasPaciente(List<Cita> citas) {
+    private DefaultTableModel modelotabla;
+    private GestorCita gestor;
+    public ListaCitasPaciente(List<Cita> citas, GestorCita gestor ) {
         initComponents();
-        mostrarCitas(citas);
-        
         // Obtener dimensiones de la pantalla
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         
         // Calcular la mitad del ancho y alto
-        int width = screenSize.width / 2;
-        int height = screenSize.height / 2;
+        int width = screenSize.width* 2/3;
+        int height = screenSize.height* 2/3;
         
         // Centrar la ventana
         int x = (screenSize.width - width) / 2;
@@ -35,19 +38,47 @@ public class ListaCitasPaciente extends javax.swing.JFrame {
         
         // Establecer tamaño y posición
         this.setBounds(x, y, width, height);
+        this.gestor = gestor;
+        configurarTabla();
+        cargarCitas(citas);
+        tablaCitas.setRowHeight(32);
+        
+        
+        TableColumn colAcciones = tablaCitas.getColumn("Acciones");
+        colAcciones.setCellRenderer(new BotonTablaCita(gestor, tablaCitas));
+        colAcciones.setCellEditor(new BotonTablaCita(gestor, tablaCitas));
+
+        
+        
     }
 
     private ListaCitasPaciente() {
         initComponents();
     }
-    
-    public void mostrarCitas(List<Cita> citas){
-        DefaultListModel<String> modelo = new DefaultListModel<>();
-        for (Cita c : citas){
-            modelo.addElement(c.toString());
+    private void configurarTabla(){
+        modelotabla = new DefaultTableModel(new Object[]{"ID", "Fecha", "Paciente", "Médico", "Acciones"},0){
+            @Override
+        public boolean isCellEditable(int fila, int columna) {
+            // Evita que el usuario edite las celdas 
+            return columna == 4; // solo la columna de botones debe permitir interaccion
         }
-        listaCitas.setModel(modelo);
+        };
+        tablaCitas.setModel(modelotabla);
+
     }
+    private void cargarCitas(List<Cita> citas) {
+    modelotabla.setRowCount(0); // limpia tabla
+    for (Cita c : citas) {
+        modelotabla.addRow(new Object[]{
+            c.getId(),
+            c.getFecha(),
+            c.getPaciente().getNombre(),
+            c.getMedico().getNombre(),
+            "Acciones"
+        });
+    }
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,17 +89,23 @@ public class ListaCitasPaciente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        listaCitas = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaCitas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        listaCitas.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(listaCitas);
+        tablaCitas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tablaCitas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,15 +113,15 @@ public class ListaCitasPaciente extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -126,7 +163,7 @@ public class ListaCitasPaciente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<String> listaCitas;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tablaCitas;
     // End of variables declaration//GEN-END:variables
 }
