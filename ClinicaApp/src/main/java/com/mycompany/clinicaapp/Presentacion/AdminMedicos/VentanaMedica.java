@@ -81,7 +81,7 @@ public class VentanaMedica extends javax.swing.JPanel {
                }
                DefaultTableModel model = (DefaultTableModel) tablaMedica.getModel();
                model.removeRow(row);
-               medicoService.eliminarMedicoAdmin(row);
+               medicoService.eliminarMedico(row);
                
            }
        };

@@ -31,7 +31,7 @@ public class GestorMedico implements IMedicoService {
      * @param nuevaEspecialidad
      */
     @Override
-    public void actualizarMedico(Medico medico, String nuevoNombre, String nuevaCedula, Especialidad nuevaEspecialidad) {
+    public void editarMedico(Medico medico, String nuevoNombre, String nuevaCedula, Especialidad nuevaEspecialidad) {
     medico.setNombre(nuevoNombre);
     medico.setCedula(nuevaCedula);
     medico.setEspecialidad(nuevaEspecialidad);
@@ -44,25 +44,19 @@ public class GestorMedico implements IMedicoService {
         return listaMedicos;
     }
 
+    /**
+     *
+     * @param medico
+     * @return
+     */
     @Override
-    public boolean registrarPacienteAdmin(Medico medico) {
-    
-        return false;
-    
-    }
-    public boolean registrarMedico(Medico medico) {
+    public boolean agregarMedic(Medico medico) {
         listaMedicos.add(medico);
         return true;
     }
 
     @Override
-    public boolean agregarMedicoAdmin(Medico medico) {
-        listaMedicos.add(medico);
-        return true;
-    }
-
-    @Override
-    public void eliminarMedicoAdmin(int posicion) {
+    public void eliminarMedico(int posicion) {
         listaMedicos.remove(posicion);
     }
 
@@ -78,29 +72,7 @@ public class GestorMedico implements IMedicoService {
     }
 
     
-    public boolean eliminarMedico(String cedula) {
-    for (Medico m : listaMedicos) {
-        if (m.getCedula().equals(cedula)) {
-            listaMedicos.remove(m);
-            return true;
-        }
-    }
-    return false; // No se encontró el médico
-    }
-    
-    public boolean editarMedico(Medico medicoActualizado) {
-    for (int i = 0; i < listaMedicos.size(); i++) {
-        Medico medico = listaMedicos.get(i);
-        if (medico.getCedula().equals(medicoActualizado.getCedula())) {
-            // Actualizar campos
-            medico.setNombre(medicoActualizado.getNombre());
-            medico.setEspecialidad(medicoActualizado.getEspecialidad());
-            medico.setContrasena(medicoActualizado.getContrasena());
-            return true;
-        }
-    }
-    return false; // No se encontró el médico
-    }
+
 
  
    

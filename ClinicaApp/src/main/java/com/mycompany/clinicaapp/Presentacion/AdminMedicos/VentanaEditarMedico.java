@@ -136,7 +136,7 @@ public class VentanaEditarMedico extends javax.swing.JPanel {
 String nuevaCedula = tablaEdicion.getValueAt(0, 1).toString();
 String nombreEspecialidad = tablaEdicion.getValueAt(0, 2).toString();
 Especialidad nuevaEsp = new Especialidad(nombreEspecialidad);
-medicoService.actualizarMedico(medico, nuevoNombre, nuevaCedula, nuevaEsp);
+medicoService.editarMedico(medico, nuevoNombre, nuevaCedula, nuevaEsp);
 
         JOptionPane.showMessageDialog(null,"Cambios realizados con éxito",null,JOptionPane.INFORMATION_MESSAGE);
         

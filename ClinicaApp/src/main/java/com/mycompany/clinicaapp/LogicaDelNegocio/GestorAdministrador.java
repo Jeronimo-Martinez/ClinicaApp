@@ -1,9 +1,7 @@
 package com.mycompany.clinicaapp.LogicaDelNegocio;
 import com.mycompany.clinicaapp.Interfaces.IMedicoService;
 import com.mycompany.clinicaapp.Interfaces.IEspecialidadService;
-import com.mycompany.clinicaapp.Interfaces.IGestorCita;
 import com.mycompany.clinicaapp.Interfaces.IPacienteService;
-import com.mycompany.clinicaapp.Interfaces.IHistorialService;
 import com.mycompany.clinicaapp.Interfaces.IGestorAdministrador;
 import com.mycompany.clinicaapp.Modelos.*;
 
@@ -41,6 +39,10 @@ public class GestorAdministrador implements IGestorAdministrador {
 
     /**
      * Devuelve la única instancia de GestorAdministrador.
+     * @param medicoService
+     * @param pacienteService
+     * @param especialidadService
+     * @return 
      */
     public static GestorAdministrador getInstancia(
         IMedicoService medicoService,
@@ -54,6 +56,9 @@ public class GestorAdministrador implements IGestorAdministrador {
 }
     /**
      * Permite iniciar sesión del administrador por usuario y contraseña.
+     * @param cedula
+     * @param contrasena
+     * @return 
      */
     public Administrador iniciarSesion(String cedula, String contrasena) {
         for (Administrador admin : listaAdministradores) {
