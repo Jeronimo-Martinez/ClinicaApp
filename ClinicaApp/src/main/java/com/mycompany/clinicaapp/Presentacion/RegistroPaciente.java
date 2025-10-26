@@ -157,10 +157,10 @@ public class RegistroPaciente extends javax.swing.JFrame {
         String nombre = txtNombre.getText();
         String telefono = txtTelefono.getText();
         String cedula = txtCedula.getText();
-        String contrasena = new String(txtContrasena.getPassword());
+        //String contrasena = new String(txtContrasena.getPassword());
         Integer edad = Integer.parseInt(txtEdad.getText());
         
-        Paciente pacienteNuevo = new Paciente(cedula, nombre, telefono, edad, contrasena);
+        Paciente pacienteNuevo = new Paciente(cedula, nombre, telefono, edad);
                 
         boolean registrado = gestor.registrarPaciente(pacienteNuevo);
         

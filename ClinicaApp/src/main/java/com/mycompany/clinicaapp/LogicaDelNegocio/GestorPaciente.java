@@ -7,6 +7,7 @@ package com.mycompany.clinicaapp.LogicaDelNegocio;
 import com.mycompany.clinicaapp.Interfaces.IPacienteService;
 import com.mycompany.clinicaapp.Modelos.Paciente;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,9 +19,9 @@ public class GestorPaciente implements IPacienteService{
     private final ArrayList<Paciente> listaPacientes = new ArrayList<>();
 
     public GestorPaciente() {
-        listaPacientes.add(new Paciente("0000", "Juan Pérez", "3001234567", 28, "0000"));
-        listaPacientes.add(new Paciente("2020", "María López", "3107654321", 35, "abcd"));
-        listaPacientes.add(new Paciente("3030", "Carlos Ruiz", "3209876543", 42, "clave"));
+        listaPacientes.add(new Paciente("0000", "Juan Pérez", "3001234567", 28));
+        listaPacientes.add(new Paciente("2020", "María López", "3107654321", 35));
+        listaPacientes.add(new Paciente("3030", "Carlos Ruiz", "3209876543", 42));
     }
     
     public static GestorPaciente getInstanciaPaciente() {
@@ -34,8 +35,8 @@ public class GestorPaciente implements IPacienteService{
     public boolean registrarPaciente(Paciente paciente) {
         if (paciente.getNombre().isEmpty() ||
             paciente.getTelefono().isEmpty() ||
-            paciente.getCedula().isEmpty() ||
-            paciente.getContrasena().isEmpty()) {
+            paciente.getCedula().isEmpty()){
+            //paciente.getContrasena().isEmpty()) {
 
             JOptionPane.showMessageDialog(null,
                 "Por favor complete todos los campos.",
@@ -108,12 +109,18 @@ public class GestorPaciente implements IPacienteService{
     }
 
     @Override
-    public void editarPaciente(Paciente paciente) {
+    public boolean editarPaciente(Paciente paciente) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void eliminarPaciente(String id) {
+    public boolean eliminarPaciente(Paciente paciente) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public List<Paciente> listarPacientes() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

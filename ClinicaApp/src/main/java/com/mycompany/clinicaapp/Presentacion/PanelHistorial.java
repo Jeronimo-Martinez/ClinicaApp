@@ -17,15 +17,17 @@ public class PanelHistorial extends JPanel {
     private DefaultTableModel modeloTabla;
     private JTextField txtDocumentoPaciente;
     private JButton btnBuscarHistorial;
+    private JButton btnVolver;
     private JTable tablaHistorial;
-    
+    private final VentanaMedica ventanaMedica; // referencia para volver
 
     /**
      * Constructor del panel de historial.
      * @param gestorHistorial 
      */
-    public PanelHistorial(IHistorialService gestorHistorial) {
+     public PanelHistorial(IHistorialService gestorHistorial, VentanaMedica ventanaMedica) {
         this.gestorHistorial = gestorHistorial;
+        this.ventanaMedica = ventanaMedica;
         inicializarComponentes();
         configurarEstilosDelHistorial();
         configurarEventosHistorial();
@@ -55,11 +57,15 @@ public class PanelHistorial extends JPanel {
         JLabel etiquetaDocumento = new JLabel("Documento del paciente:");
         txtDocumentoPaciente = new JTextField(15);
         btnBuscarHistorial = new JButton("Buscar historial");
+        btnVolver = new JButton("Volver al menú");
 
         panel.add(etiquetaDocumento);
         panel.add(txtDocumentoPaciente);
         panel.add(btnBuscarHistorial);
+        panel.add(btnVolver);
         return panel;
+      
+
     }
     /**
      * Este método crea el panel central que contiene la tabla del historial de citas.
@@ -84,10 +90,13 @@ public class PanelHistorial extends JPanel {
         Font fuente = new Font("Segoe UI", Font.PLAIN, 14);
         txtDocumentoPaciente.setFont(fuente);
         btnBuscarHistorial.setFont(fuente);
+        btnVolver.setFont(fuente);
         tablaHistorial.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         tablaHistorial.setRowHeight(22);
         btnBuscarHistorial.setBackground(new Color(66, 133, 244));
         btnBuscarHistorial.setForeground(Color.WHITE);
+        btnVolver.setBackground(new Color(219, 68, 55));
+        btnVolver.setForeground(Color.WHITE);
     }
 
 
@@ -96,6 +105,7 @@ public class PanelHistorial extends JPanel {
      */
     private void configurarEventosHistorial() {
         btnBuscarHistorial.addActionListener((ActionEvent click) -> buscarHistorial());
+        btnVolver.addActionListener((ActionEvent e) -> volverAlMenuMedico());
     }
 
 
@@ -128,6 +138,29 @@ public class PanelHistorial extends JPanel {
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error al consultar el historial: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    /**
+     * Permite volver al menú principal del médico.
+     * Reemplaza el panel actual por la VentanaMedica.
+     */
+    private void volverAlMenuMedico() {
+        // Intentar reemplazar el contenido del JFrame contenedor si existe
+        java.awt.Window win = javax.swing.SwingUtilities.getWindowAncestor(this);
+        if (win instanceof javax.swing.JFrame) {
+            javax.swing.JFrame frame = (javax.swing.JFrame) win;
+            frame.setContentPane(ventanaMedica);
+            frame.revalidate();
+            frame.repaint();
+            return;
+        }
+        // Fallback: si no hay JFrame, intentar con el padre inmediato
+        Container contenedor = getParent();
+        if (contenedor != null) {
+            contenedor.removeAll();
+            contenedor.add(ventanaMedica);
+            contenedor.revalidate();
+            contenedor.repaint();
         }
     }
 }

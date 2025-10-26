@@ -5,6 +5,7 @@
 package com.mycompany.clinicaapp.Interfaces;
 
 import com.mycompany.clinicaapp.Modelos.Medico;
+import java.util.List;
 
 /**
  *
@@ -12,11 +13,13 @@ import com.mycompany.clinicaapp.Modelos.Medico;
  */
 public interface IMedicoService {
 
-    public void editarMedico(Medico medico);
+    boolean editarMedico(Medico medico);
 
-    public void registrarMedico(Medico medico);
+    boolean registrarMedico(Medico medico);
 
-    public void eliminarMedico(String id);
+    boolean eliminarMedico(String id);
+
+    public List<Medico> getListaMedicos();
 
     
 } 

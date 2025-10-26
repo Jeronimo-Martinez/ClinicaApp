@@ -21,13 +21,15 @@ import java.util.stream.Collectors;
  * @version 1.0.0
  */
 public class GestorCita implements IGestorCita {
+
+    private static GestorCita instancia;
     private final ArrayList<Cita> listaCitas = new ArrayList<>(); 
     
     public GestorCita(){
         // citas de ejemplo
-        Paciente p1 = new Paciente("1001","Juan Perez","3001112222",30,"pass1");
-        Paciente p2 = new Paciente("1002","María Gómez","3003334444",25,"pass2");
-        Paciente p3 = new Paciente("1003","Carlos Ruiz","3005556666",40,"pass3");
+        Paciente p1 = new Paciente("1001","Juan Perez","3001112222",30);
+        Paciente p2 = new Paciente("1002","María Gómez","3003334444",25);
+        Paciente p3 = new Paciente("1003","Carlos Ruiz","3005556666",40);
         
         Especialidad e1 = new Especialidad("Medicina General");
         Especialidad e2 = new Especialidad("Pediatría");
@@ -109,5 +111,18 @@ public class GestorCita implements IGestorCita {
          public List<Cita> getCitas() {
             return listaCitas;
 
+    }
+ 
+    public static GestorCita getInstanciaCita() {
+        if (instancia == null) {
+            instancia = new GestorCita();
+        }
+        return instancia;
+    }
+
+    public void modificarDiagnostico(Cita cita, String nuevoDiagnostico) {
+        if (cita != null && nuevoDiagnostico != null && !nuevoDiagnostico.trim().isEmpty()) {
+            cita.setDiagnostico(nuevoDiagnostico);
+        }
     }
     }   
