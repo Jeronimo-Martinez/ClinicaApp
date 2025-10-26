@@ -1,10 +1,10 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.clinicaapp.Interfaces;
+
 import com.mycompany.clinicaapp.Modelos.Medico;
-import java.util.List;
 
 /**
  *
@@ -12,20 +12,11 @@ import java.util.List;
  */
 public interface IMedicoService {
 
-    // Registra un nuevo médico 
-    boolean registrarMedico(Medico medico);
+    public void editarMedico(Medico medico);
 
-    // Permite iniciar sesión 
-    Medico iniciarSesion(String cedula, String contrasena);
+    public void registrarMedico(Medico medico);
 
-    // Elimina un médico por cédula 
-    boolean eliminarMedico(String cedula);
+    public void eliminarMedico(String id);
 
-    // Edita los datos de un médico 
-    boolean editarMedico(Medico medicoActualizado);
-
-    // Devuelve la lista de médicos registrados 
-    List<Medico> listarMedicos();
-}    
     
-    
+} 
