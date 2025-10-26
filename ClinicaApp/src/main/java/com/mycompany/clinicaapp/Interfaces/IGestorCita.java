@@ -7,6 +7,7 @@ package com.mycompany.clinicaapp.Interfaces;
 import java.util.List;
 import com.mycompany.clinicaapp.Modelos.Paciente;
 import com.mycompany.clinicaapp.Modelos.Cita;
+import com.mycompany.clinicaapp.Modelos.Medico;
 
 /**
  *
@@ -16,6 +17,8 @@ public interface IGestorCita {
     
     boolean registrarCita(Cita c);
     List<Cita> consultarCitasPaciente(Paciente paciente);
+    List<Cita> consultarCitasMedico(Medico medico);
+    Cita consultarCita(String id);
     boolean eliminarCita(String idCita);
     boolean modificarCita(String idCita, Cita nueva);
     List<Cita> getCitas();

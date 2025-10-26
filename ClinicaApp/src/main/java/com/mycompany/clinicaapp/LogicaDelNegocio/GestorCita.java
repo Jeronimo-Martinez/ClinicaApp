@@ -62,6 +62,26 @@ public class GestorCita implements IGestorCita {
         }
 
         }
+        
+        @Override
+        public List<Cita> consultarCitasMedico(Medico medico){
+        try {
+            return this.listaCitas.stream().filter(c -> c.getMedico() == medico).collect(Collectors.toList()); // haskell me traumo con los maps y filter ;-;
+        }catch (Exception exception) {
+            System.out.println("Error inesperado");
+            return null;
+        }
+        }
+        
+        @Override
+        public Cita consultarCita(String id){
+        try {
+            return (Cita) this.listaCitas.stream().filter(c -> c.getId().equals(id));
+        }catch (Exception exception) {
+            System.out.println("Error inesperado");
+            return null;
+        }
+        }
 
         @Override
         public boolean eliminarCita(String idCita) {
