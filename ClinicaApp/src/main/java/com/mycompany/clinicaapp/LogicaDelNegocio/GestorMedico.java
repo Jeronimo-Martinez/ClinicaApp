@@ -14,7 +14,6 @@ import java.util.ArrayList;
  * @author hecto
  */
 public class GestorMedico implements IMedicoService {
-    private static final GestorMedico instancia = new GestorMedico();
     private final ArrayList<Medico> listaMedicos = new ArrayList<>();
 
     private GestorMedico() {
@@ -38,9 +37,7 @@ public class GestorMedico implements IMedicoService {
     medico.setEspecialidad(nuevaEspecialidad);
 }
 
-    public static GestorMedico getInstancia() {
-        return instancia;
-    }
+    
 
     @Override
     public ArrayList<Medico> getListaMedicos() {
@@ -50,7 +47,9 @@ public class GestorMedico implements IMedicoService {
     @Override
     public boolean registrarPacienteAdmin(Medico medico) {
     
+        return false;
     
+    }
     public boolean registrarMedico(Medico medico) {
         listaMedicos.add(medico);
         return true;
@@ -77,7 +76,7 @@ public class GestorMedico implements IMedicoService {
         }
         return null;
     }
-}
+
     
     public boolean eliminarMedico(String cedula) {
     for (Medico m : listaMedicos) {
@@ -103,8 +102,6 @@ public class GestorMedico implements IMedicoService {
     return false; // No se encontró el médico
     }
 
-    public ArrayList<Medico> getListaMedicos() {
-        return listaMedicos;
-    }
+ 
    
     }
