@@ -1,5 +1,4 @@
 package com.mycompany.clinicaapp.Presentacion;
-import com.mycompany.clinicaapp.Interfaces.*;
 import com.mycompany.clinicaapp.Modelos.*;
 import com.mycompany.clinicaapp.LogicaDelNegocio.*;
 import javax.swing.*;
@@ -16,10 +15,7 @@ public class GestionAdminEnPacientes extends JPanel {
 
     private final GestorAdministrador gestor;
 
-    private JTextField txtCedula;
-    private JTextField txtNombre;
-    private JTextField txtDireccion;
-    private JTextField txtTelefono;
+    private JTextField txtCedula, txtNombre, txtEdad, txtTelefono;
     private JTable tablaPacientes;
     private DefaultTableModel modeloTabla;
 
@@ -43,9 +39,9 @@ public class GestionAdminEnPacientes extends JPanel {
         txtNombre = new JTextField();
         panelForm.add(txtNombre);
 
-        panelForm.add(new JLabel("Dirección:"));
-        txtDireccion = new JTextField();
-        panelForm.add(txtDireccion);
+        panelForm.add(new JLabel("Edad:"));
+        txtEdad = new JTextField();
+        panelForm.add(txtEdad);
 
         panelForm.add(new JLabel("Teléfono:"));
         txtTelefono = new JTextField();
@@ -86,7 +82,7 @@ public class GestionAdminEnPacientes extends JPanel {
     private void registrarPaciente(ActionEvent e) {
         String cedula = txtCedula.getText().trim();
         String nombre = txtNombre.getText().trim();
-        String direccion = txtDireccion.getText().trim();
+        int edad = Integer.parseInt(txtEdad.getText().trim());
         String telefono = txtTelefono.getText().trim();
 
         if (cedula.isEmpty() || nombre.isEmpty()) {
@@ -94,7 +90,7 @@ public class GestionAdminEnPacientes extends JPanel {
             return;
         }
 
-        Paciente nuevo = new Paciente(cedula, nombre, direccion, telefono);
+        Paciente nuevo = new Paciente(cedula, nombre,telefono, edad);
         boolean exito = gestor.registrarPaciente(nuevo);
 
         if (exito) {
@@ -109,7 +105,7 @@ public class GestionAdminEnPacientes extends JPanel {
     private void editarPaciente(ActionEvent e) {
         String cedula = txtCedula.getText().trim();
         String nombre = txtNombre.getText().trim();
-        String direccion = txtDireccion.getText().trim();
+        int edad = Integer.parseInt(txtEdad.getText().trim());
         String telefono = txtTelefono.getText().trim();
 
         if (cedula.isEmpty()) {
@@ -117,7 +113,7 @@ public class GestionAdminEnPacientes extends JPanel {
             return;
         }
 
-        Paciente actualizado = new Paciente(cedula, nombre, direccion, telefono);
+        Paciente actualizado = new Paciente(cedula, nombre, telefono, edad);
         boolean exito = gestor.editarPaciente(actualizado);
 
         if (exito) {
@@ -160,7 +156,7 @@ public class GestionAdminEnPacientes extends JPanel {
             modeloTabla.addRow(new Object[]{
                 p.getCedula(),
                 p.getNombre(),
-                p.getDireccion(),
+                p.getEdad(),
                 p.getTelefono()
             });
         }
@@ -176,7 +172,7 @@ public class GestionAdminEnPacientes extends JPanel {
     for (Paciente p : pacientes) {
         sb.append("• ").append(p.getCedula())
           .append(" - ").append(p.getNombre())
-          .append(" (").append(p.getDireccion()).append(", ")
+          .append(" (").append(p.getEdad()).append(", ")
           .append(p.getTelefono()).append(")\n");
     }
 
@@ -188,7 +184,7 @@ public class GestionAdminEnPacientes extends JPanel {
     private void limpiarCampos() {
         txtCedula.setText("");
         txtNombre.setText("");
-        txtDireccion.setText("");
+        txtEdad.setText("");
         txtTelefono.setText("");
     }
 }

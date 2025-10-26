@@ -1,13 +1,12 @@
 package com.mycompany.clinicaapp.Presentacion;
-import com.mycompany.clinicaapp.Interfaces.*;
 import com.mycompany.clinicaapp.Modelos.*;
 import com.mycompany.clinicaapp.LogicaDelNegocio.*;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
 import java.util.List;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
+
 
 
 
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 public class GestionAdminEnMedicos extends JPanel {
 
     private final GestorAdministrador gestor;
-    private JTextField txtCedula, txtNombre;
+    private JTextField txtCedula, txtNombre, txtContrasena;
     private JComboBox<Especialidad> comboEspecialidad;
 
     public GestionAdminEnMedicos(GestorAdministrador gestor) {
@@ -38,6 +37,10 @@ public class GestionAdminEnMedicos extends JPanel {
         panelForm.add(new JLabel("Nombre:"));
         txtNombre = new JTextField();
         panelForm.add(txtNombre);
+
+        add(new JLabel("Contraseña:"));
+        txtContrasena = new JTextField();
+        add(txtContrasena);
 
         panelForm.add(new JLabel("Especialidad:"));
         comboEspecialidad = new JComboBox<>();
@@ -68,14 +71,15 @@ public class GestionAdminEnMedicos extends JPanel {
     private void registrarMedico(ActionEvent e) {
         String cedula = txtCedula.getText().trim();
         String nombre = txtNombre.getText().trim();
+        String contrasena = txtContrasena.getText().trim();
         Especialidad esp = (Especialidad) comboEspecialidad.getSelectedItem();
 
-        if (cedula.isEmpty() || nombre.isEmpty() || esp == null) {
+        if (cedula.isEmpty() || nombre.isEmpty() || esp == null || contrasena == null) {
             JOptionPane.showMessageDialog(this, "Complete todos los campos");
             return;
         }
 
-        Medico nuevo = new Medico(cedula, nombre, esp);
+        Medico nuevo = new Medico(cedula, nombre, esp, contrasena);
         boolean exito = gestor.registrarMedico(nuevo);
         if (exito) {
             JOptionPane.showMessageDialog(this, "Médico registrado correctamente");
@@ -88,6 +92,7 @@ public class GestionAdminEnMedicos extends JPanel {
     private void editarMedico(ActionEvent e) {
         String cedula = txtCedula.getText().trim();
         String nombre = txtNombre.getText().trim();
+        String contrasena = txtContrasena.getText().trim(); 
         Especialidad esp = (Especialidad) comboEspecialidad.getSelectedItem();
 
         if (cedula.isEmpty()) {
@@ -95,13 +100,13 @@ public class GestionAdminEnMedicos extends JPanel {
             return;
         }
 
-        Medico actualizado = new Medico(cedula, nombre, esp);
+        Medico actualizado = new Medico(cedula, nombre, esp, contrasena);
         boolean exito = gestor.editarMedico(actualizado);
         if (exito) {
             JOptionPane.showMessageDialog(this, "Médico actualizado correctamente");
             limpiarCampos();
         } else {
-            JOptionPane.showMessageDialog(this, "Error al actualizar médico");
+            JOptionPane.showMessageDialog(this, "Error: no se encontró un médico con esa cédula");
         }
     }
 
