@@ -17,7 +17,7 @@ public class GestorMedico implements IMedicoService {
 
     private final ArrayList<Medico> listaMedicos = new ArrayList<>();
 
-    private GestorMedico() {
+    public GestorMedico() {
         Especialidad cardio = new Especialidad("Cardiología");
         Especialidad general = new Especialidad("Medicina General");
         listaMedicos.add(new Medico("1111", "Andrés Gómez", cardio, "1111"));
@@ -60,9 +60,9 @@ public class GestorMedico implements IMedicoService {
     @Override
 
     public Medico iniciarSesion(String cedula, String contrasena) {
-        for (Medico medico : listaMedicos) {
-            if (medico.getCedula().equals(cedula) && medico.getContrasena().equals(contrasena)) {
-                return medico;
+        for (Medico medicoingresado : listaMedicos) {
+            if (medicoingresado.getCedula().equals(cedula) && medicoingresado.getContrasena().equals(contrasena)) {
+                return medicoingresado;
             }
         }
         return null;

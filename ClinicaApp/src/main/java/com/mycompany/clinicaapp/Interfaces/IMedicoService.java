@@ -3,14 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package com.mycompany.clinicaapp.Interfaces;
-
-import com.mycompany.clinicaapp.Modelos.Especialidad;
 import com.mycompany.clinicaapp.Modelos.Medico;
-import java.util.ArrayList;
 
 /**
  *
- * @author johan
+ * @author hecto
  */
 public interface IMedicoService {
 

@@ -2,7 +2,9 @@ package com.mycompany.clinicaapp.LogicaDelNegocio;
 
 import com.mycompany.clinicaapp.Interfaces.IMedicoService;
 import com.mycompany.clinicaapp.Interfaces.IEspecialidadService;
+import com.mycompany.clinicaapp.Interfaces.IGestorCita;
 import com.mycompany.clinicaapp.Interfaces.IPacienteService;
+import com.mycompany.clinicaapp.Interfaces.IHistorialService;
 import com.mycompany.clinicaapp.Interfaces.IGestorAdministrador;
 import com.mycompany.clinicaapp.Modelos.*;
 
@@ -75,7 +77,7 @@ public class GestorAdministrador implements IGestorAdministrador {
     // -------------------------------------------------------------------------
     @Override
     public boolean registrarMedico(Medico medico) {
-        return medicoService.agregarMedic(medico);
+        return medicoService.registrarMedico(medico);
     }
 
     @Override
@@ -85,8 +87,8 @@ public class GestorAdministrador implements IGestorAdministrador {
     }
 
     @Override
-    public boolean eliminarMedico(String cedula) {
-        return medicoService.eliminarMedico(cedula);
+    public boolean eliminarMedico(String id) {
+        return medicoService.eliminarMedico(id);
     }
 
     // -------------------------------------------------------------------------
