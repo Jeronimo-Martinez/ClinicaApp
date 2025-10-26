@@ -6,6 +6,7 @@ package com.mycompany.clinicaapp.Presentacion;
 
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorPaciente;
 import com.mycompany.clinicaapp.Modelos.Paciente;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -164,8 +165,26 @@ public class VentanaRegistrarse extends javax.swing.JFrame {
         String telefono = txtTelefono.getText();
         String cedula = txtCedula.getText();
         String contrasena = new String(txtContrasena.getPassword());
-        Integer edad = Integer.parseInt(txtEdad.getText());
+        String edadTexto = txtEdad.getText();
+        if (nombre.isEmpty() || telefono.isEmpty() || cedula.isEmpty() || contrasena.isEmpty() || edadTexto.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                "Por favor, complete todos los campos antes de continuar.",
+                "Campos vacíos",
+                JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         
+        
+        int edad;
+        try {
+            edad = Integer.parseInt(edadTexto);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this,
+                "Por favor, ingrese un número válido en el campo de edad.",
+                "Edad inválida",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         Paciente pacienteNuevo = new Paciente(cedula, nombre, telefono, edad, contrasena);
                 
         boolean registrado = gestor.registrarPaciente(pacienteNuevo);
