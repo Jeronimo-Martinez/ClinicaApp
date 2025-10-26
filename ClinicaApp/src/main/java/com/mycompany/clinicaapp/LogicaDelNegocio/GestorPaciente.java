@@ -1,4 +1,5 @@
 package com.mycompany.clinicaapp.LogicaDelNegocio;
+import com.mycompany.clinicaapp.Modelos.Administrador;
 import com.mycompany.clinicaapp.Modelos.Paciente;
 import com.mycompany.clinicaapp.Interfaces.IPacienteService;
 import java.util.ArrayList;
@@ -95,5 +96,20 @@ public class GestorPaciente implements IPacienteService{
         return pacientes;
     }
 
-    
+    /**
+     * Este método permite que el paciente inicie sesión
+     *
+     * @param cedula
+     * @param contrasena
+     * @return Paciente
+     */
+    public Paciente iniciarSesion(String cedula, String contrasena) {
+        for (Paciente paciente : pacientes) {
+            if (paciente.getCedula().equals(cedula) && paciente.getContrasena().equals(contrasena)) {
+                return paciente;
+            }
+        }
+        return null;
+    }
+
 }
