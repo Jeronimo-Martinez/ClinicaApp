@@ -125,17 +125,6 @@ public class GestorCita implements IGestorCita {
         return null;
     }
 
-    public boolean actualizarCita(Cita citaActualizada) {
-        for (int i = 0; i < listaCitas.size(); i++) {
-            Cita c = listaCitas.get(i);
-            if (c.getId().equals(citaActualizada.getId())) {
-                listaCitas.set(i, citaActualizada);
-                return true; // cita actualizada correctamente
-            }
-        }
-        return false; // no se encontró la cita
-    }
-
     public void modificarDiagnostico(Cita cita, String nuevoDiagnostico) {
         if (cita != null && nuevoDiagnostico != null && !nuevoDiagnostico.trim().isEmpty()) {
             cita.setDiagnostico(nuevoDiagnostico);

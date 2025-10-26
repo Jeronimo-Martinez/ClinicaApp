@@ -8,6 +8,7 @@ import com.mycompany.clinicaapp.Interfaces.IMedicoService;
 import com.mycompany.clinicaapp.Modelos.Especialidad;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,10 +31,53 @@ public class GestorMedico implements IMedicoService {
         listaMedicos.add(new Medico("222", "Laura Torres", general, "2222"));
     }
     
+    private boolean validarInformacion(Medico medico) {
+        // Validar campos vacíos
+        if (medico.getNombre().isEmpty() ||
+            medico.getCedula().isEmpty() ||
+            medico.getContrasena().isEmpty() ||
+            medico.getEspecialidad() == null ||
+            medico.getEspecialidad().getNombre().isEmpty()) {
+
+            JOptionPane.showMessageDialog(null,
+                "Por favor complete todos los campos.",
+                "Campos vacíos",
+                JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+
+        // Validar duplicados
+        for (Medico existente : listaMedicos) {
+            if (existente.getCedula().equals(medico.getCedula())) {
+                JOptionPane.showMessageDialog(null,
+                    "Ya existe un médico con esta cédula.",
+                    "Cédula duplicada",
+                    JOptionPane.WARNING_MESSAGE);
+                return false;
+            }
+            if (existente.getNombre().equalsIgnoreCase(medico.getNombre())) {
+                JOptionPane.showMessageDialog(null,
+                    "Ya existe un médico con este nombre.",
+                    "Nombre duplicado",
+                    JOptionPane.WARNING_MESSAGE);
+                return false;
+            }
+        }
+
+    return true; // Todo correcto
+}
     
     @Override
     public boolean registrarMedico(Medico medico) {
+        if (!validarInformacion(medico)) {
+            return false; // Si falla la validación, no continúa
+        }
+
         listaMedicos.add(medico);
+        JOptionPane.showMessageDialog(null,
+            "Médico registrado correctamente.",
+            "Registro exitoso",
+            JOptionPane.INFORMATION_MESSAGE);
         return true;
     }
 
