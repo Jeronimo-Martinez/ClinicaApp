@@ -27,6 +27,7 @@ public class GestionAdminEnMedicos extends JPanel {
     public GestionAdminEnMedicos(GestorAdministrador gestor) {
         this.gestor = gestor;
         initComponents();
+        cargarEspecialidades();
     }
 
     /**

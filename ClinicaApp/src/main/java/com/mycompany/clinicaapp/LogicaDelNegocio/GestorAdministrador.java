@@ -36,7 +36,7 @@ public class GestorAdministrador implements IGestorAdministrador {
         this.listaAdministradores = new ArrayList<>();
 
         // Admin por defecto
-        listaAdministradores.add(new Administrador("12345", "1234"));
+        listaAdministradores.add(new Administrador("1234567890", "admin1234"));
     }
 
     /**
@@ -82,9 +82,9 @@ public class GestorAdministrador implements IGestorAdministrador {
         return medicoService.eliminarMedico(cedula);
     }
 
-    // -------------------------------------------------------------------------
-    // MÉTODOS DE GESTIÓN DE PACIENTES
-    // -------------------------------------------------------------------------
+
+
+
     @Override
     public boolean registrarPaciente(Paciente paciente) {
         return pacienteService.registrarPaciente(paciente);
@@ -96,13 +96,13 @@ public class GestorAdministrador implements IGestorAdministrador {
     }
 
     @Override
-    public boolean eliminarPaciente(String cedula) {
-        return pacienteService.eliminarPaciente(cedula);
+    public boolean eliminarPaciente(Paciente paciente) {
+        return pacienteService.eliminarPaciente(paciente);
     }
 
-    // -------------------------------------------------------------------------
-    // MÉTODOS DE GESTIÓN DE ESPECIALIDADES
-    // -------------------------------------------------------------------------
+
+
+
     @Override
     public void registrarEspecialidad(Especialidad especialidad) {
         especialidadService.ingresarEspecialidad(especialidad);

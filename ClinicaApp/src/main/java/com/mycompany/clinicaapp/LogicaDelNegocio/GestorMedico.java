@@ -17,6 +17,13 @@ public class GestorMedico implements IMedicoService {
     private final ArrayList<Medico> listaMedicos = new ArrayList<>();
     private static GestorMedico instancia;
     private Medico medicoActual;
+
+    public GestorMedico() {
+    Especialidad cardio = new Especialidad("Cardiología");
+    Especialidad general = new Especialidad("Medicina General");
+    listaMedicos.add(new Medico("1111", "Andrés Gómez", cardio, "1111"));
+    listaMedicos.add(new Medico("222", "Laura Torres", general, "2222"));
+    }
     public Medico buscarPorCedula(String cedula) {
         for (Medico m : listaMedicos) {
             if (m.getCedula().equals(cedula)) {
@@ -36,12 +43,6 @@ public class GestorMedico implements IMedicoService {
         return medicoActual;
     }
 
-    public GestorMedico() {
-        Especialidad cardio = new Especialidad("Cardiología");
-        Especialidad general = new Especialidad("Medicina General");
-        listaMedicos.add(new Medico("1111", "Andrés Gómez", cardio, "1111"));
-        listaMedicos.add(new Medico("222", "Laura Torres", general, "2222"));
-    }
     
     
     public boolean registrarMedico(Medico medico) {

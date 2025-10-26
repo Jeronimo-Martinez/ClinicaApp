@@ -14,7 +14,7 @@ public interface IGestorAdministrador {
     boolean eliminarMedico(String id);
     boolean registrarPaciente(Paciente paciente);
     boolean editarPaciente(Paciente paciente);
-    boolean eliminarPaciente(String id);
+    boolean eliminarPaciente(Paciente paciente);
     void registrarEspecialidad(Especialidad especialidad);
     void eliminarEspecialidad(Especialidad especialidad);
     List<Paciente> listarPacientes();
