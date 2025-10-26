@@ -10,8 +10,8 @@ import com.mycompany.clinicaapp.Modelos.Medico;
 
 public interface IGestorAdministrador {
     boolean registrarMedico(Medico medico);
-    boolean editarMedico(Medico medico);
-    boolean eliminarMedico(String id);
+    boolean editarMedico(Medico medico, String nuevoNombre, Especialidad especialidad);
+    boolean eliminarMedico(String cedula);
     boolean registrarPaciente(Paciente paciente);
     boolean editarPaciente(Paciente paciente);
     boolean eliminarPaciente(String id);

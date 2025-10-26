@@ -16,55 +16,62 @@ import java.util.ArrayList;
 public class GestorMedico implements IMedicoService {
     private final ArrayList<Medico> listaMedicos = new ArrayList<>();
 
-    public GestorMedico() {
+    private GestorMedico() {
         Especialidad cardio = new Especialidad("Cardiología");
         Especialidad general = new Especialidad("Medicina General");
         listaMedicos.add(new Medico("1111", "Andrés Gómez", cardio, "1111"));
         listaMedicos.add(new Medico("222", "Laura Torres", general, "2222"));
     }
+
+    /**
+     *
+     * @param medico
+     * @param nuevoNombre
+     * @param nuevaEspecialidad
+     */
+    @Override
+    public void editarMedico(Medico medico, String nuevoNombre,  Especialidad nuevaEspecialidad) {
+    medico.setNombre(nuevoNombre);
+    medico.setEspecialidad(nuevaEspecialidad);
+}
+
     
-    
-    public boolean registrarMedico(Medico medico) {
+
+    @Override
+    public ArrayList<Medico> getListaMedicos() {
+        return listaMedicos;
+    }
+
+    /**
+     *
+     * @param medico
+     * @return
+     */
+    @Override
+    public boolean agregarMedic(Medico medico) {
         listaMedicos.add(medico);
         return true;
     }
 
+    @Override
+    public boolean eliminarMedico(String cedula) {
+    return listaMedicos.removeIf(m -> m.getCedula().equals(cedula));
+}
+
+    @Override
     
     public Medico iniciarSesion(String cedula, String contrasena) {
-        for (Medico medicoingresado : listaMedicos) {
-            if (medicoingresado.getCedula().equals(cedula) && medicoingresado.getContrasena().equals(contrasena)) {
-                return medicoingresado;
+        for (Medico medico : listaMedicos) {
+            if (medico.getCedula().equals(cedula) && medico.getContrasena().equals(contrasena)) {
+                return medico;
             }
         }
         return null;
     }
-    
-    public boolean eliminarMedico(String cedula) {
-    for (Medico m : listaMedicos) {
-        if (m.getCedula().equals(cedula)) {
-            listaMedicos.remove(m);
-            return true;
-        }
-    }
-    return false; // No se encontró el médico
-    }
-    
-    public boolean editarMedico(Medico medicoActualizado) {
-    for (int i = 0; i < listaMedicos.size(); i++) {
-        Medico medico = listaMedicos.get(i);
-        if (medico.getCedula().equals(medicoActualizado.getCedula())) {
-            // Actualizar campos
-            medico.setNombre(medicoActualizado.getNombre());
-            medico.setEspecialidad(medicoActualizado.getEspecialidad());
-            medico.setContrasena(medicoActualizado.getContrasena());
-            return true;
-        }
-    }
-    return false; // No se encontró el médico
-    }
 
-    public ArrayList<Medico> getListaMedicos() {
-        return listaMedicos;
-    }
+    
+
+
+ 
    
     }

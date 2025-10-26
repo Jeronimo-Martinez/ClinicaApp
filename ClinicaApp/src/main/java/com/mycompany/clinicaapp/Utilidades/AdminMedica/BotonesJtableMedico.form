@@ -17,21 +17,21 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="botonJtableMedico1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="botonJtableMedico2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="botonJtableMedico3" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="botonJtableMedico3" min="-2" max="-2" attributes="0"/>
                   <Component id="botonJtableMedico2" min="-2" max="-2" attributes="0"/>
-                  <Component id="botonJtableMedico1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -39,17 +39,17 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="com.mycompany.clinicaapp.Utilidades.BotonJtableMedico" name="botonJtableMedico2">
+    <Component class="com.mycompany.clinicaapp.Utilidades.AdminMedica.BotonJtableMedico" name="botonJtableMedico3">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="2" name="C:\Users\johan\OneDrive\Documentos\GitHub\ClinicaApp\ClinicaApp\src\main\java\com\mycompany\clinicaapp\Imagenes\TrashCan 20x20.png"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="com.mycompany.clinicaapp.Utilidades.BotonJtableMedico" name="botonJtableMedico1">
+    <Component class="com.mycompany.clinicaapp.Utilidades.AdminMedica.BotonJtableMedico" name="botonJtableMedico2">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\johan\OneDrive\Documentos\GitHub\ClinicaApp\ClinicaApp\src\main\java\com\mycompany\clinicaapp\Imagenes\Historial 20x20.png"/>
+          <Image iconType="2" name="C:\Users\johan\OneDrive\Documentos\GitHub\ClinicaApp\ClinicaApp\src\main\java\com\mycompany\clinicaapp\Imagenes\Editar 20x20.png"/>
         </Property>
       </Properties>
     </Component>
