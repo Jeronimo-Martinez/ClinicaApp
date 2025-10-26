@@ -62,5 +62,9 @@ public class GestorMedico implements IMedicoService {
     }
     return false; // No se encontró el médico
     }
+
+    public ArrayList<Medico> getListaMedicos() {
+        return listaMedicos;
+    }
    
     }
