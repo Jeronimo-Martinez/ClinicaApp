@@ -21,6 +21,20 @@ public class ListaCitasPaciente extends javax.swing.JFrame {
     public ListaCitasPaciente(List<Cita> citas) {
         initComponents();
         mostrarCitas(citas);
+        
+        // Obtener dimensiones de la pantalla
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        
+        // Calcular la mitad del ancho y alto
+        int width = screenSize.width / 2;
+        int height = screenSize.height / 2;
+        
+        // Centrar la ventana
+        int x = (screenSize.width - width) / 2;
+        int y = (screenSize.height - height) / 2;
+        
+        // Establecer tamaño y posición
+        this.setBounds(x, y, width, height);
     }
 
     private ListaCitasPaciente() {
@@ -62,8 +76,8 @@ public class ListaCitasPaciente extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

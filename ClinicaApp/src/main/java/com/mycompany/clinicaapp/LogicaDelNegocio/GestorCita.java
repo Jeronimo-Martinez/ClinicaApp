@@ -90,6 +90,7 @@ public class GestorCita implements IGestorCita {
                 System.out.println("Error inesperado");
                 return false;
         }}
+        @Override
          public List<Cita> getCitas() {
             return listaCitas;
 

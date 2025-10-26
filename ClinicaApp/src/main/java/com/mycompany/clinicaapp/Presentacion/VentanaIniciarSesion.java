@@ -7,10 +7,13 @@ import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorPaciente;
 import com.mycompany.clinicaapp.Interfaces.IMedicoService;
 import com.mycompany.clinicaapp.Interfaces.IPacienteService;
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorCita;
+import com.mycompany.clinicaapp.Modelos.Cita;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import com.mycompany.clinicaapp.Modelos.Paciente;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 
@@ -236,8 +239,10 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, 
                 "Inicio de sesión exitoso. ¡Bienvenido, " + paciente.getNombre() + "!");
             
-           
-            new RegistroPaciente().setVisible(true);
+            GestorCita gestor = new GestorCita();
+            List<Cita> citas = gestor.getCitas();
+            ListaCitasPaciente form = new ListaCitasPaciente(citas);
+            form.setVisible(true);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, 
