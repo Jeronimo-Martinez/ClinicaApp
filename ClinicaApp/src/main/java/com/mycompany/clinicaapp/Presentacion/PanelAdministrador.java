@@ -4,19 +4,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
+
 /**
  * Panel principal del Administrador.
- * Desde aquí puede gestionar Médicos, Pacientes y Especialidades,
+ * Desde aquí puede gestionar Médicos, Pacientes y Especialidades.
  */
 public class PanelAdministrador extends JPanel {
 
     private final GestorAdministrador gestor;
-    private final JFrame ventanaPrincipal;
- 
-    
-    public PanelAdministrador(GestorAdministrador gestor, JFrame ventanaPrincipal) {
+
+    public PanelAdministrador(GestorAdministrador gestor) {
         this.gestor = gestor;
-        this.ventanaPrincipal = ventanaPrincipal;
         initComponents();
     }
 
@@ -28,7 +26,6 @@ public class PanelAdministrador extends JPanel {
         lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 18));
         add(lblTitulo, BorderLayout.NORTH);
 
-        // Panel central con botones de gestión
         JPanel panelBotones = new JPanel(new GridLayout(4, 1, 10, 10));
 
         JButton btnMedicos = new JButton("Gestionar Médicos");
@@ -63,7 +60,8 @@ public class PanelAdministrador extends JPanel {
     }
 
     private void cambiarContenido(JPanel nuevoPanel) {
-        // Se permite volver al panel administrador desde los subpaneles
+        JFrame ventana = (JFrame) SwingUtilities.getWindowAncestor(this);
+
         JPanel panelContenedor = new JPanel(new BorderLayout());
         panelContenedor.add(nuevoPanel, BorderLayout.CENTER);
 
@@ -71,32 +69,37 @@ public class PanelAdministrador extends JPanel {
         btnVolver.addActionListener(a -> volverAlPanelAdministrador());
         panelContenedor.add(btnVolver, BorderLayout.SOUTH);
 
-        ventanaPrincipal.setContentPane(panelContenedor);
-        ventanaPrincipal.revalidate();
-        ventanaPrincipal.repaint();
+        ventana.setContentPane(panelContenedor);
+        ventana.revalidate();
+        ventana.repaint();
     }
 
     private void volverAlPanelAdministrador() {
-        ventanaPrincipal.setContentPane(new PanelAdministrador(gestor, ventanaPrincipal));
-        ventanaPrincipal.revalidate();
-        ventanaPrincipal.repaint();
+        JFrame ventana = (JFrame) SwingUtilities.getWindowAncestor(this);
+        ventana.setContentPane(new PanelAdministrador(gestor));
+        ventana.revalidate();
+        ventana.repaint();
     }
 
     private void cerrarSesion(ActionEvent e) {
-    int opcion = JOptionPane.showConfirmDialog(
-            this,
-            "¿Desea cerrar sesión y volver al inicio?",
-            "Cerrar sesión",
-            JOptionPane.YES_NO_OPTION
-    );
+        int opcion = JOptionPane.showConfirmDialog(
+                this,
+                "¿Desea cerrar sesión y volver al inicio?",
+                "Cerrar sesión",
+                JOptionPane.YES_NO_OPTION
+        );
 
-    if (opcion == JOptionPane.YES_OPTION) {
-        // Cierra la ventana actual (del admin)
-        ventanaPrincipal.dispose();
+        if (opcion == JOptionPane.YES_OPTION) {
+            JFrame ventana = (JFrame) SwingUtilities.getWindowAncestor(this);
+            ventana.dispose();
 
-        // Regresa a la ventana de inicio de sesión
-        VentanaIniciarSesion ventanaLogin = new VentanaIniciarSesion();
-        ventanaLogin.setVisible(true);
+            // Volver al login
+            VentanaIniciarSesion ventanaLogin = new VentanaIniciarSesion(
+                    gestor.getMedicoService(),
+                    gestor.getPacienteService(),
+                    gestor.getEspecialidadService()
+            );
+            ventanaLogin.setVisible(true);
+        }
     }
-}
 }

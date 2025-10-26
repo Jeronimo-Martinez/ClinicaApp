@@ -36,7 +36,7 @@ public class GestorAdministrador implements IGestorAdministrador {
         this.listaAdministradores = new ArrayList<>();
 
         // Admin por defecto
-        listaAdministradores.add(new Administrador("admin", "1234"));
+        listaAdministradores.add(new Administrador("12345", "1234"));
     }
 
     /**
