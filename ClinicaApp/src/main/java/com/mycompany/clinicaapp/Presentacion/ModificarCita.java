@@ -27,6 +27,7 @@ public class ModificarCita extends javax.swing.JFrame {
     private GestorCita gestorCita;
     private GestorMedico gestorMedico;
     private Cita cita;
+    private ListaCitasPaciente ownerLista; // ventana que debe refrescarse tras el cambio
 
     /**
      * Creates new form ModificarCita
@@ -34,23 +35,25 @@ public class ModificarCita extends javax.swing.JFrame {
     public ModificarCita() {
         initComponents();
     }
-        public ModificarCita(GestorCita gestorCita, GestorMedico gestorMedico, Cita cita) {
-        this();
-        this.gestorCita = gestorCita;
-        this.gestorMedico = gestorMedico;
-        this.cita = cita;
-
-        // poblar combo con médicos de la misma especialidad que el médico actual
-        DefaultComboBoxModel<Medico> model = new DefaultComboBoxModel<>();
-        if (gestorMedico != null && cita != null && cita.getMedico() != null && cita.getMedico().getEspecialidad() != null) {
-            String especialidadActual = cita.getMedico().getEspecialidad().getNombre();
-            List<Medico> lista = gestorMedico.listarMedicosEspecialidad(especialidadActual); // ajusta nombre si tu gestor usa otro método
-            System.out.println(lista);
-            for (Medico m : lista) {
-                model.addElement(m);
-            }
-        }
-        jComboBox1.setModel(model);
+        // nuevo constructor que recibe optional owner para refrescar la lista tras modificar
+        public ModificarCita(GestorCita gestorCita, GestorMedico gestorMedico, Cita cita, ListaCitasPaciente owner) {
+         this();
+         this.gestorCita = gestorCita;
+         this.gestorMedico = gestorMedico;
+         this.cita = cita;
+         this.ownerLista = owner;
+ 
+         // poblar combo con médicos de la misma especialidad que el médico actual
+         DefaultComboBoxModel<Medico> model = new DefaultComboBoxModel<>();
+         if (gestorMedico != null && cita != null && cita.getMedico() != null && cita.getMedico().getEspecialidad() != null) {
+             String especialidadActual = cita.getMedico().getEspecialidad().getNombre();
+             List<Medico> lista = gestorMedico.listarMedicosEspecialidad(especialidadActual); // ajusta nombre si tu gestor usa otro método
+             System.out.println(lista);
+             for (Medico m : lista) {
+                 model.addElement(m);
+             }
+         }
+         jComboBox1.setModel(model);
 
         // mostrar nombre del médico en el combobox
         jComboBox1.setRenderer(new DefaultListCellRenderer() {
@@ -246,13 +249,13 @@ public class ModificarCita extends javax.swing.JFrame {
         boolean ok = gestorCita.modificarCita(cita.getId(), nueva);
         if (ok) {
             JOptionPane.showMessageDialog(this, "Médico cambiado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            if (ownerLista != null) {
+                ownerLista.refrescarTabla();
+            }
         } else {
             JOptionPane.showMessageDialog(this, "No se pudo cambiar el médico.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        if (getParent() instanceof ListaCitasPaciente lista){
-            lista.refrescarTabla();
-        }
-        this.dispose();
+         this.dispose();
     
     }//GEN-LAST:event_botonAplicarActionPerformed
 

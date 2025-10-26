@@ -11,6 +11,7 @@ package com.mycompany.clinicaapp.Utilidades;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorCita;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
 import com.mycompany.clinicaapp.Modelos.Cita;
+import com.mycompany.clinicaapp.Presentacion.ListaCitasPaciente;
 import com.mycompany.clinicaapp.Presentacion.ModificarCita;
 import com.mycompany.clinicaapp.Presentacion.VentanaRegistrarse;
 import java.awt.*;
@@ -52,16 +53,22 @@ public class BotonTablaCita extends AbstractCellEditor implements TableCellRende
                 String idCita = tabla.getValueAt(fila, 0).toString();
                 GestorMedico gestorMedico = new GestorMedico();
                 Cita cita = gestor.buscarCitaPorId(idCita);
-                ModificarCita ventanaModificar = new ModificarCita(gestor,gestorMedico,cita);
-                ventanaModificar.setVisible(true);
-                Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
-                int x = (pantalla.width - ventanaModificar.getWidth()) / 2;
-                int y = (pantalla.height - ventanaModificar.getHeight()) / 2;
-                ventanaModificar.setLocation(x, y);
-                
-            }
-            fireEditingStopped();
-        });
+                // obtener la ventana ListaCitasPaciente que contiene la tabla (si existe)
+                ListaCitasPaciente ventanaLista = null;
+                java.awt.Window win = javax.swing.SwingUtilities.getWindowAncestor(tabla);
+                if (win instanceof ListaCitasPaciente) {
+                    ventanaLista = (ListaCitasPaciente) win;
+                }
+                ModificarCita ventanaModificar = new ModificarCita(gestor, gestorMedico, cita, ventanaLista);
+                 ventanaModificar.setVisible(true);
+                 Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+                 int x = (pantalla.width - ventanaModificar.getWidth()) / 2;
+                 int y = (pantalla.height - ventanaModificar.getHeight()) / 2;
+                 ventanaModificar.setLocation(x, y);
+                 
+             }
+             fireEditingStopped();
+         });
 
         btnEliminar.addActionListener(e -> {
             int fila = tabla.getSelectedRow();
