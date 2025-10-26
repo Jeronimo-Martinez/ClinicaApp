@@ -238,8 +238,11 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         if (medico != null) {
             JOptionPane.showMessageDialog(this, 
                 "Inicio de sesión exitoso. ¡Bienvenido Dr(a). " + medico.getNombre() + "!");
+            GestorMedico.getInstancia().setMedicoActual(medico);
+            PanelMedico panel = new PanelMedico();
             
-            new PanelMedico().setVisible(true);
+            panel.setVisible(true);
+              // centrar
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, 

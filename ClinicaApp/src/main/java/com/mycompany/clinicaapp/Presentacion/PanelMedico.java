@@ -4,6 +4,13 @@
  */
 package com.mycompany.clinicaapp.Presentacion;
 
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorCita;
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
+import com.mycompany.clinicaapp.Modelos.Cita;
+import com.mycompany.clinicaapp.Modelos.Medico;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author hecto
@@ -13,8 +20,39 @@ public class PanelMedico extends javax.swing.JPanel {
     /**
      * Creates new form PanelMedico
      */
+    private GestorCita gestorCita = GestorCita.getInstancia();
+    private GestorMedico gestorMedico = GestorMedico.getInstancia();
     public PanelMedico() {
         initComponents();
+        cargarCitasDelMedico();
+    }
+    private void cargarCitasDelMedico() {
+        Medico medicoActual = gestorMedico.getMedicoActual();
+        if (medicoActual == null) {
+            System.out.println("⚠ No hay médico logueado");
+            return;
+        }
+
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("ID Cita");
+        modelo.addColumn("Fecha");
+        modelo.addColumn("Motivo");
+        modelo.addColumn("Paciente");
+
+        List<Cita> citas = gestorCita.getCitas();
+        for (Cita c : citas) {
+            if (c.getMedico().getCedula().equals(medicoActual.getCedula())) {
+                modelo.addRow(new Object[]{
+                    c.getId(),
+                    c.getFecha(),
+                    c.getDiagnostico(),
+                    c.getPaciente().getNombre()
+                });
+            }
+        }
+
+        // Asignamos el modelo directamente al JTable (llamado "Table")
+        Table.setModel(modelo);
     }
 
     /**
@@ -27,9 +65,9 @@ public class PanelMedico extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Table = new javax.swing.JTable();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -40,7 +78,7 @@ public class PanelMedico extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(Table);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -62,7 +100,7 @@ public class PanelMedico extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Table;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

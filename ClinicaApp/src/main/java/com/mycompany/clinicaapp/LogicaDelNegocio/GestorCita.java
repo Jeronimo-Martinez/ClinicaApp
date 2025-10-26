@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
  */
 public class GestorCita implements IGestorCita {
     private final ArrayList<Cita> listaCitas = new ArrayList<>(); 
+    private static GestorCita instanciaCita;
     
     public GestorCita(){
         // citas de ejemplo
@@ -39,6 +40,7 @@ public class GestorCita implements IGestorCita {
         listaCitas.add(new Cita("002",LocalDate.of(2025, 11, 5),  "Control pediátrico", m2, p2));
         listaCitas.add(new Cita("003",LocalDate.of(2025, 12, 1),  "Revisión anual", m1, p3));
     
+
     }
     @Override
     public boolean registrarCita(Cita c) {
@@ -93,5 +95,11 @@ public class GestorCita implements IGestorCita {
          public List<Cita> getCitas() {
             return listaCitas;
 
+    }
+    public static GestorCita getInstancia() {
+        if (instanciaCita == null) {
+            instanciaCita = new GestorCita();
+        }
+        return instanciaCita;
     }
     }   

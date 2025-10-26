@@ -17,6 +17,7 @@ import java.util.List;
 public class GestorMedico implements IMedicoService {
     private final ArrayList<Medico> listaMedicos = new ArrayList<>();
     private static GestorMedico instancia;
+    private Medico medicoActual;
 
     public GestorMedico() {
         Especialidad cardio = new Especialidad("Cardiología");
@@ -79,5 +80,12 @@ public class GestorMedico implements IMedicoService {
     public List<Medico> listarMedicos() {
         return new ArrayList<>(listaMedicos);
     }
-    
+   
+    public Medico getMedicoActual() {
+        return medicoActual;
+    }
+
+    public void setMedicoActual(Medico medico) {
+        this.medicoActual = medico;
+    }
     }
