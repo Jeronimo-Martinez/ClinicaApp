@@ -20,4 +20,5 @@ public interface IGestorAdministrador {
     List<Paciente> listarPacientes();
     List<Medico> listarMedicos();
     List<Especialidad> listarEspecialidades();
+    
 }
