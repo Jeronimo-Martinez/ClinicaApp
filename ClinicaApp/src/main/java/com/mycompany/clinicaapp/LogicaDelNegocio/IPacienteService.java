@@ -7,6 +7,7 @@ package com.mycompany.clinicaapp.LogicaDelNegocio;
 /**
  *
  * @author hecto
+ * 
  */
 public class IPacienteService extends javax.swing.JFrame {
 
