@@ -14,6 +14,7 @@ public class GestorPaciente implements IPacienteService{
     private List<Paciente> pacientes;
 
     /**
+     * 
      * Constructor por defecto 
      */
 

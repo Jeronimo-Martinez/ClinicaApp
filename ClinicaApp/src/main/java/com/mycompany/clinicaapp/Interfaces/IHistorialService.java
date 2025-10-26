@@ -20,4 +20,5 @@ public interface IHistorialService {
      */
     List<Cita> consultarHistorialPaciente(String idPaciente);
 
+    
 }

@@ -12,6 +12,7 @@ public class Administrador {
 	private String correo;
 
 	/**
+         * 
 	 * Constructor vacío.
 	 */
 	public Administrador() {

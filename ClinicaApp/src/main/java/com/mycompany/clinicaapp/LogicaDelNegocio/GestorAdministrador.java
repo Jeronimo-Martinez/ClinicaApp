@@ -15,6 +15,7 @@ import java.util.List;
  * que el administrador puede realizar sobre médicos, pacientes
  * y especialidades.
  */
+
 public class GestorAdministrador implements IGestorAdministrador {
 
     private static GestorAdministrador instancia;

@@ -4,6 +4,7 @@ import com.mycompany.clinicaapp.Modelos.Paciente;
 /**
  * Esta interfaz se encarga de definir las operaciones CRUD que deben realizarse sobre los pacientes
  * @author Valentina
+ * 
  */
 
 public interface IPacienteService {

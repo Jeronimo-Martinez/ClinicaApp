@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.List;
 
+
 /**
  * Panel simple para registrar y eliminar especialidades.
  */

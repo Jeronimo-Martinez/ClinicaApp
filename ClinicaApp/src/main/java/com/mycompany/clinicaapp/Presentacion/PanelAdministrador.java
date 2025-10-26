@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 
 
 /**
+ * 
  * Panel principal del Administrador.
  * Desde aquí puede gestionar Médicos, Pacientes y Especialidades.
  */

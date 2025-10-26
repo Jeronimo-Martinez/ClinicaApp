@@ -10,4 +10,5 @@ package com.mycompany.clinicaapp.Interfaces;
  */
 public class IEspecialidadService {
     
+    
 }

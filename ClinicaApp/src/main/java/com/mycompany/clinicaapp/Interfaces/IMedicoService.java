@@ -20,4 +20,5 @@ public interface IMedicoService {
     void editarMedico(Medico medico, String nuevoNombre, Especialidad nuevaEspecialidad);
 
     
+    
 }

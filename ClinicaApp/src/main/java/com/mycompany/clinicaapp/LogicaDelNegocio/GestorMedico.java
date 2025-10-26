@@ -12,6 +12,7 @@ import java.util.ArrayList;
 /**
  *
  * @author hecto
+ * 
  */
 public class GestorMedico implements IMedicoService {
     private final ArrayList<Medico> listaMedicos = new ArrayList<>();

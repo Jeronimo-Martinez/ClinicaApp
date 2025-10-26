@@ -14,6 +14,7 @@ public class GestorHistorial implements IHistorialService {
     private IGestorCita gestorCita;
 
     /**
+     * 
      * Constructor: Recibe una referencia al gestor de citas.
      */
     public GestorHistorial(IGestorCita gestorCita) {
