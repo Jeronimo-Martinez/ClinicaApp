@@ -17,8 +17,8 @@ public class Administrador {
 	public Administrador() {
 	}
     // Constructor con parámetros
-    public Administrador(String nombre, String contrasena){
-        this.nombre = nombre;
+    public Administrador(String cedula, String contrasena){
+        this.nombre = cedula;
         this.contrasena= contrasena;
     }
 
