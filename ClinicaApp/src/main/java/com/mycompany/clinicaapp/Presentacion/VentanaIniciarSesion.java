@@ -231,9 +231,9 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         return;
         }
         
-        if (!rbPaciente.isSelected() && !rbMedico.isSelected()) {
+        if (!rbPaciente.isSelected() && !rbMedico.isSelected() && !rbAdministrador.isSelected()) {
         JOptionPane.showMessageDialog(this, 
-            "Seleccione si es Paciente o Médico antes de iniciar sesión.", 
+            "Seleccione si es Paciente, Médico o Administrador antes de iniciar sesión.", 
             "Selección requerida", 
             JOptionPane.WARNING_MESSAGE);
         return;
@@ -264,8 +264,8 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, 
                 "Inicio de sesión exitoso. Bienvenido Dr(a). " + medico.getNombre() + "!");
             
-           
-            new VentanaMedica().setVisible(true);
+            PanelMedico panel = new PanelMedico();
+            panel.setVisible(true);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, 
