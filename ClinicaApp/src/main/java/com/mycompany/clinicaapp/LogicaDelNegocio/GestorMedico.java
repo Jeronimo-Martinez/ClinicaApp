@@ -30,6 +30,7 @@ public class GestorMedico implements IMedicoService {
      * @param nuevoNombre
      * @param nuevaEspecialidad
      */
+    
     @Override
     public void editarMedico(Medico medico, String nuevoNombre, Especialidad nuevaEspecialidad) {
         medico.setNombre(nuevoNombre);
@@ -69,3 +70,4 @@ public class GestorMedico implements IMedicoService {
     }
 
 }
+
