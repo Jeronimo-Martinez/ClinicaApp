@@ -58,7 +58,7 @@ public class PanelMedico extends javax.swing.JFrame {
             c.getId(),
             c.getFecha(),
             c.getPaciente().getNombre(),
-            c.getDiagnostico(), // aquí se muestra el motivo de la cita
+            c.getDiagnostico() == null ? "(sin diagnóstico)" : c.getDiagnostico(),
             "Agregar diagnóstico" // botón
         });
 }

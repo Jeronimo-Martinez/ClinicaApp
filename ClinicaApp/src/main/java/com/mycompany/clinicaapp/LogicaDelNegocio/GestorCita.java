@@ -67,7 +67,7 @@ public class GestorCita implements IGestorCita {
         @Override
         public boolean eliminarCita(String idCita) {
         try {
-            return this.listaCitas.removeIf(c -> c.getId() == idCita); // la funcion remove if retorna un valor booleano dependiendo de si se elimino o no un elemento de la lista 
+            return this.listaCitas.removeIf(c -> c.getId().equals(idCita)); // la funcion remove if retorna un valor booleano dependiendo de si se elimino o no un elemento de la lista 
         }catch (Exception exception) {                                  
             System.out.println("Error inesperado");
             return false;
@@ -79,7 +79,7 @@ public class GestorCita implements IGestorCita {
                 AtomicBoolean flag = new AtomicBoolean(false); // se usa AtomicBoolean para permitir usar el valor booleano dentro de la funcion 
 
                 this.listaCitas.replaceAll(c -> {
-                    if (c.getId() == idCita) {
+                    if (c.getId().equals(idCita)) {
                         flag.set(true);
                         return nueva; // le retorna la nueva cita a replaceAll
                     }
@@ -135,4 +135,6 @@ public class GestorCita implements IGestorCita {
         }
         return false; // no se encontró la cita
     }
+
+
     }   
