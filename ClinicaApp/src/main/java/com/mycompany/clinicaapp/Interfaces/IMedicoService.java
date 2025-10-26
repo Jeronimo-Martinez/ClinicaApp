@@ -12,11 +12,11 @@ import com.mycompany.clinicaapp.Modelos.Medico;
  */
 public interface IMedicoService {
 
-    public void editarMedico(Medico medico);
+    boolean editarMedico(Medico medico);
 
-    public void registrarMedico(Medico medico);
+    boolean registrarMedico(Medico medico);
 
-    public void eliminarMedico(String id);
+    boolean eliminarMedico(String id);
 
     
 } 
