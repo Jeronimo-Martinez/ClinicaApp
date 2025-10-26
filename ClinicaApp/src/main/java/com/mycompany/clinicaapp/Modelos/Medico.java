@@ -13,17 +13,13 @@ public class Medico {
     private String nombre;
     private Especialidad especialidad;
     private String contrasena;
-
-    
-    
-    
+   
     public Medico(String cedula, String nombre, Especialidad especialidad, String contrasena) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.especialidad = especialidad;
         this.contrasena = contrasena;
     }
-    
 
     public String getCedula() {
         return cedula;

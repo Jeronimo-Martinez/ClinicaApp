@@ -3,21 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package com.mycompany.clinicaapp.Interfaces;
-
-import com.mycompany.clinicaapp.Modelos.Especialidad;
 import com.mycompany.clinicaapp.Modelos.Medico;
-import java.util.ArrayList;
 
 /**
  *
- * @author johan
+ * @author hecto
  */
 public interface IMedicoService {
-    boolean agregarMedic(Medico medico);
-    boolean eliminarMedico(String cedula);
-    Medico iniciarSesion(String cedula, String contrasena);
-    ArrayList<Medico> getListaMedicos();
-    void editarMedico(Medico medico, String nuevoNombre, Especialidad nuevaEspecialidad);
 
-    
 }
