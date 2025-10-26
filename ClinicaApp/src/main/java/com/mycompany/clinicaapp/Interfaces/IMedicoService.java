@@ -4,11 +4,19 @@
  */
 package com.mycompany.clinicaapp.Interfaces;
 import com.mycompany.clinicaapp.Modelos.Medico;
-
+import java.util.ArrayList;
 /**
  *
  * @author hecto
  */
 public interface IMedicoService {
 
+    
+    boolean registrarMedico(Medico medico);
+    
+    ArrayList<Medico> listarMedicos();
+    
+    boolean editarMedico(Medico medico);
+    
+    boolean eliminarMedico(String id);
 }
