@@ -94,12 +94,8 @@ public class PanelAdministrador extends JPanel {
             ventana.dispose();
 
             // Volver al login
-            VentanaIniciarSesion ventanaLogin = new VentanaIniciarSesion(
-                    gestor.getMedicoService(),
-                    gestor.getPacienteService(),
-                    gestor.getEspecialidadService()
-            );
+            VentanaIniciarSesion ventanaLogin = new VentanaIniciarSesion();
             ventanaLogin.setVisible(true);
-        }
+                }
     }
 }
