@@ -93,17 +93,14 @@ public class GestorCita implements IGestorCita {
         @Override
         public boolean modificarCita(String idCita, Cita nueva) {
             try{
-                AtomicBoolean flag = new AtomicBoolean(false); // se usa AtomicBoolean para permitir usar el valor booleano dentro de la funcion 
-
-                this.listaCitas.replaceAll(c -> {
-                    if (c.getId() == idCita) {
-                        flag.set(true);
-                        return nueva; // le retorna la nueva cita a replaceAll
-                    }
-                    return c; // le retorna la misma cita a replaceAll(el id no coicide , no hay cambios)
-                });
-
-                return flag.get();
+                for(int i = 0 ; i < listaCitas.size(); i++){
+                    Cita c = listaCitas.get(i);
+                    if (c.getId().equals(idCita)){
+                        listaCitas.set(i, nueva);
+                        return true;
+                    
+                }  
+            }return false;
             }catch (Exception exception) {                                  
                 System.out.println("Error inesperado");
                 return false;
