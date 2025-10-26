@@ -1,4 +1,4 @@
-package com.mycompany.clinicaapp.Utilidades.AdminMedica;
+package com.mycompany.clinicaapp.Utilidades;
 
 import java.awt.Color;
 import java.awt.Graphics;
