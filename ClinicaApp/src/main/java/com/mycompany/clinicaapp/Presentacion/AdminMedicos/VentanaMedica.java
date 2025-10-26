@@ -4,8 +4,8 @@
  */
 package com.mycompany.clinicaapp.Presentacion.AdminMedicos;
 
-import com.mycompany.clinicaapp.LogicaDelNegocio.IInterfazAdminMedica;
-import com.mycompany.clinicaapp.LogicaDelNegocio.IMedicoService;
+import com.mycompany.clinicaapp.Interfaces.IInterfazAdminMedica;
+import com.mycompany.clinicaapp.Interfaces.IMedicoService;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import com.mycompany.clinicaapp.Utilidades.AdminMedica.ActivadorJtableMedicoBotones;
 import com.mycompany.clinicaapp.Utilidades.AdminMedica.EventosParaBotones;
@@ -81,7 +81,7 @@ public class VentanaMedica extends javax.swing.JPanel {
                }
                DefaultTableModel model = (DefaultTableModel) tablaMedica.getModel();
                model.removeRow(row);
-               medicoService.eliminarMedico(row);
+               medicoService.eliminarMedicoAdmin(row);
                
            }
        };

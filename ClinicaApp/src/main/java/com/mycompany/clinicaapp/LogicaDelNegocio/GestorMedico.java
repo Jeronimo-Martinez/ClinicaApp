@@ -4,6 +4,7 @@
  */
 package com.mycompany.clinicaapp.LogicaDelNegocio;
 
+import com.mycompany.clinicaapp.Interfaces.IMedicoService;
 import com.mycompany.clinicaapp.Modelos.Especialidad;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import java.util.ArrayList;
@@ -47,19 +48,19 @@ public class GestorMedico implements IMedicoService {
     }
 
     @Override
-    public boolean registrarPaciente(Medico medico) {
+    public boolean registrarPacienteAdmin(Medico medico) {
         listaMedicos.add(medico);
         return true;
     }
 
     @Override
-    public boolean agregarMedico(Medico medico) {
+    public boolean agregarMedicoAdmin(Medico medico) {
         listaMedicos.add(medico);
         return true;
     }
 
     @Override
-    public void eliminarMedico(int posicion) {
+    public void eliminarMedicoAdmin(int posicion) {
         listaMedicos.remove(posicion);
     }
 

@@ -1,5 +1,7 @@
 package com.mycompany.clinicaapp.LogicaDelNegocio;
 
+import com.mycompany.clinicaapp.Interfaces.IInterfazAdminMedica;
+import com.mycompany.clinicaapp.Interfaces.IMedicoService;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import com.mycompany.clinicaapp.Presentacion.AdminMedicos.VentanaAgregarMedico;
 import com.mycompany.clinicaapp.Presentacion.AdminMedicos.VentanaEditarMedico;

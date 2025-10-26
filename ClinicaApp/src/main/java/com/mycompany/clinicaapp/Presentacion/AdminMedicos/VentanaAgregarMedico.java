@@ -4,8 +4,8 @@
  */
 package com.mycompany.clinicaapp.Presentacion.AdminMedicos;
 
-import com.mycompany.clinicaapp.LogicaDelNegocio.IInterfazAdminMedica;
-import com.mycompany.clinicaapp.LogicaDelNegocio.IMedicoService;
+import com.mycompany.clinicaapp.Interfaces.IInterfazAdminMedica;
+import com.mycompany.clinicaapp.Interfaces.IMedicoService;
 import com.mycompany.clinicaapp.Modelos.Especialidad;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import java.util.ArrayList;
@@ -175,7 +175,7 @@ public class VentanaAgregarMedico extends javax.swing.JPanel {
     Especialidad esp= new Especialidad(nombreEspecialidad);
     Medico medico= new Medico(cedulaMedico,nombreMedico , esp, contrasenaMedico);
     
-        medicoService.agregarMedico(medico);    
+        medicoService.agregarMedicoAdmin(medico);    
         JOptionPane.showMessageDialog(this, "Se ha agregado un nuevo médico",null,JOptionPane.INFORMATION_MESSAGE);
         VentanaMedica panel = new VentanaMedica(medicoService, interfazAdmin);
                     panel.setSize(this.getSize());

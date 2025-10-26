@@ -5,8 +5,8 @@
 package com.mycompany.clinicaapp;
 
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
-import com.mycompany.clinicaapp.LogicaDelNegocio.IInterfazAdminMedica;
-import com.mycompany.clinicaapp.LogicaDelNegocio.IMedicoService;
+import com.mycompany.clinicaapp.Interfaces.IInterfazAdminMedica;
+import com.mycompany.clinicaapp.Interfaces.IMedicoService;
 import com.mycompany.clinicaapp.LogicaDelNegocio.InterfazAdminMedica;
 import javax.swing.SwingUtilities;
 
