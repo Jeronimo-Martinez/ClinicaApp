@@ -259,13 +259,16 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         }
 
     } else if (rbMedico.isSelected()) {
-        Medico medico = gestorMedico.iniciarSesion(usuarioingresado, contrasenaingresada);
+            GestorMedico gestorMedico = GestorMedico.getInstanciaMedico();
+            Medico medico = gestorMedico.iniciarSesion(usuarioingresado, contrasenaingresada);
         if (medico != null) {
+            gestorMedico.setMedicoActual(medico);
             JOptionPane.showMessageDialog(this, 
                 "Inicio de sesión exitoso. Bienvenido Dr(a). " + medico.getNombre() + "!");
             
             PanelMedico panel = new PanelMedico();
             panel.setVisible(true);
+            panel.setLocationRelativeTo(null);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, 

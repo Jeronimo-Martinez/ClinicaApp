@@ -4,6 +4,14 @@
  */
 package com.mycompany.clinicaapp.Presentacion;
 
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorCita;
+import com.mycompany.clinicaapp.Modelos.Medico;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
+import com.mycompany.clinicaapp.Modelos.Cita;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author hecto
@@ -15,8 +23,38 @@ public class PanelMedico extends javax.swing.JFrame {
      */
     public PanelMedico() {
         initComponents();
+        cargarCitasMedico();
         
     }
+    
+    private void cargarCitasMedico() {
+    GestorMedico gestorMedico = GestorMedico.getInstanciaMedico();
+    GestorCita gestorCita = GestorCita.getInstanciaCita();
+
+    Medico medicoActual = gestorMedico.getMedicoActual();
+
+    if (medicoActual == null) {
+        JOptionPane.showMessageDialog(this, "Error: No hay un médico logueado actualmente.");
+        return;
+    }
+
+    List<Cita> citasMedico = gestorCita.consultarCitasMedico(medicoActual);
+
+    DefaultTableModel modelo = new DefaultTableModel(
+        new Object[]{"ID", "Fecha", "Paciente", "Motivo"}, 0
+    );
+
+    for (Cita c : citasMedico) {
+        modelo.addRow(new Object[]{
+            c.getId(),
+            c.getFecha(),
+            c.getPaciente().getNombre(),
+            c.getDiagnostico()
+        });
+    }
+
+    Table1.setModel(modelo); // 👈 usa el JTable que tienes en tu JFrame
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,11 +66,11 @@ public class PanelMedico extends javax.swing.JFrame {
     private void initComponents() {
 
         tablaPacientes = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Table1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -43,7 +81,7 @@ public class PanelMedico extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tablaPacientes.setViewportView(jTable1);
+        tablaPacientes.setViewportView(Table1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,7 +139,7 @@ public class PanelMedico extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable Table1;
     private javax.swing.JScrollPane tablaPacientes;
     // End of variables declaration//GEN-END:variables
 }

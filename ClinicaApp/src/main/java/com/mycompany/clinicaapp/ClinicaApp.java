@@ -14,7 +14,7 @@ import java.awt.Toolkit;
  * @author hecto
  */
 public class ClinicaApp {
-    
+
     private static VentanaIniciarSesion main;
     public static void main(String[] args) {
     main = new VentanaIniciarSesion();

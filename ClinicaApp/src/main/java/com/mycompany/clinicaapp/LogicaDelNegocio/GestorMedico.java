@@ -8,7 +8,6 @@ import com.mycompany.clinicaapp.Interfaces.IMedicoService;
 import com.mycompany.clinicaapp.Modelos.Especialidad;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,8 +16,14 @@ import javax.swing.JOptionPane;
 public class GestorMedico implements IMedicoService {
     private final ArrayList<Medico> listaMedicos = new ArrayList<>();
     private static GestorMedico instancia;
+    private Medico medicoActual;
 
     public GestorMedico() {
+        Especialidad e1 = new Especialidad("Medicina General");
+        Especialidad e2 = new Especialidad("Pediatría");
+
+        listaMedicos.add(new Medico("2001", "Dr. Suárez", e1, "m1pass"));
+        listaMedicos.add(new Medico("2002", "Dra. López", e2, "m2pass"));
         Especialidad cardio = new Especialidad("Cardiología");
         Especialidad general = new Especialidad("Medicina General");
         listaMedicos.add(new Medico("1111", "Andrés Gómez", cardio, "1111"));
@@ -74,5 +79,22 @@ public class GestorMedico implements IMedicoService {
         }
         return instancia;
     }    
-   
+    
+    public Medico getMedicoActual() {
+        return medicoActual;
+    }
+    
+
+    public Medico buscarPorCedula(String cedula) {
+        for (Medico m : listaMedicos) {
+            if (m.getCedula().equals(cedula)) {
+                return m;
+            }
+        }
+        return null;
+    }
+    
+    public void setMedicoActual(Medico medico) {
+        this.medicoActual = medico;
+    }
     }
