@@ -16,12 +16,21 @@ import java.util.List;
  */
 public class GestorMedico implements IMedicoService {
     private final ArrayList<Medico> listaMedicos = new ArrayList<>();
+    private static GestorMedico instancia;
 
     public GestorMedico() {
         Especialidad cardio = new Especialidad("Cardiología");
         Especialidad general = new Especialidad("Medicina General");
         listaMedicos.add(new Medico("1111", "Andrés Gómez", cardio, "1111"));
         listaMedicos.add(new Medico("222", "Laura Torres", general, "2222"));
+    }
+    
+    // Devuelve la instancia única
+    public static GestorMedico getInstancia() {
+        if (instancia == null) {
+            instancia = new GestorMedico();
+        }
+        return instancia;
     }
     
     @Override

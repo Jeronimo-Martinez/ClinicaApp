@@ -16,9 +16,8 @@ import com.mycompany.clinicaapp.Presentacion.VentanaIniciarSesion;
  * @author hecto
  */
 public class ClinicaApp {
-    public static void main(String[] args) {
-        IMedicoService gestorMedico = new GestorMedico(); 
-        VentanaIniciarSesion ventana = new VentanaIniciarSesion(gestorMedico);
+    public static void main(String[] args) { 
+        VentanaIniciarSesion ventana = new VentanaIniciarSesion();
         ventana.setLocationRelativeTo(null); // Esto centra la ventana en la pantalla
         ventana.setVisible(true);
     

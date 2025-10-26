@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 public class GestorPaciente{
     private final ArrayList<Paciente> listaPacientes = new ArrayList<>();
+    private static GestorPaciente instancia;
 
     public GestorPaciente() {
         listaPacientes.add(new Paciente("0000", "Juan Pérez", "3001234567", 28, "0000"));
@@ -32,5 +33,12 @@ public class GestorPaciente{
             }
         }
         return null;
+    }
+    
+    public static GestorPaciente getInstancia() {
+        if (instancia == null) {
+            instancia = new GestorPaciente();
+        }
+        return instancia;
     }
 }

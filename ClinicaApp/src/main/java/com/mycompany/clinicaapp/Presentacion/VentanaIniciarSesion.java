@@ -4,9 +4,10 @@
  */
 package com.mycompany.clinicaapp.Presentacion;
 import com.mycompany.clinicaapp.Interfaces.IMedicoService;
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorPaciente;
 import com.mycompany.clinicaapp.Modelos.Medico;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import com.mycompany.clinicaapp.Modelos.Paciente;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 
@@ -19,13 +20,14 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
     /**
      * Creates new form VentanaPrincipal
      */
-    private final IMedicoService gestorMedico;
+
     
+    GestorMedico gestorMedico = GestorMedico.getInstancia();
+    GestorPaciente gestorPaciente = GestorPaciente.getInstancia();
     
-    
-    public VentanaIniciarSesion(IMedicoService gestorMedico) {
+    public VentanaIniciarSesion( ) {
         initComponents();
-        this.gestorMedico = gestorMedico;
+        
         ButtonGroup grupoUsuarios = new ButtonGroup();
         grupoUsuarios.add(rbPaciente);
         grupoUsuarios.add(rbMedico);
@@ -205,10 +207,10 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btningresarActionPerformed
-        String usuarioingresado = txtusuario.getText();
-        String contrasenaingresada = new String(txtpassword.getPassword());
+        String usuarioIngresado = txtusuario.getText();
+        String contrasenaIngresada = new String(txtpassword.getPassword());
 
-        if (usuarioingresado.isEmpty() || contrasenaingresada.isEmpty()) {
+        if (usuarioIngresado.isEmpty() || contrasenaIngresada.isEmpty()) {
         JOptionPane.showMessageDialog(this, 
             "Por favor, complete todos los campos.", 
             "Campos vacíos", 
@@ -216,40 +218,28 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         return;
         }
         
-        if (!rbPaciente.isSelected() && !rbMedico.isSelected()&& !rbAdministrador.isSelected()) {
-        JOptionPane.showMessageDialog(this, 
-            "Seleccione si es Paciente, Médico o Administrador antes de iniciar sesión.", 
-            "Selección requerida", 
-            JOptionPane.WARNING_MESSAGE);
-        return;
-        }
-        
-        
-        /**if (rbPaciente.isSelected()) {
-        Paciente paciente = gestorPaciente.iniciarSesion(usuarioingresado, contrasenaingresada);
+    if (rbPaciente.isSelected()) {
+        Paciente paciente = gestorPaciente.iniciarSesion(usuarioIngresado, contrasenaIngresada);
         if (paciente != null) {
             JOptionPane.showMessageDialog(this, 
                 "Inicio de sesión exitoso. ¡Bienvenido, " + paciente.getNombre() + "!");
             
-           
-            new IPacienteService().setVisible(true);
+            new PanelPaciente().setVisible(true);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, 
                 "Credenciales incorrectas para paciente.", 
                 "Error", 
                 JOptionPane.ERROR_MESSAGE);
-        }*/
-
-    if (rbMedico.isSelected()) {
-        Medico medico = gestorMedico.iniciarSesion(usuarioingresado, contrasenaingresada);
+        }
+    } 
+    else if (rbMedico.isSelected()) {
+        Medico medico = gestorMedico.iniciarSesion(usuarioIngresado, contrasenaIngresada);
         if (medico != null) {
             JOptionPane.showMessageDialog(this, 
-                "Inicio de sesión exitoso. Bienvenido Dr(a). " + medico.getNombre() + "!");
+                "Inicio de sesión exitoso. ¡Bienvenido Dr(a). " + medico.getNombre() + "!");
             
-           
-            PanelMedico panel = new PanelMedico();
-            panel.setVisible(true);
+            new PanelMedico().setVisible(true);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, 
@@ -257,8 +247,23 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
                 "Error", 
                 JOptionPane.ERROR_MESSAGE);
         }
-        }
-    
+    }
+//    else if (rbAdministrador.isSelected()) {
+//        Administrador admin = gestorAdministrador.iniciarSesion(usuarioIngresado, contrasenaIngresada);
+//        if (admin != null) {
+//            JOptionPane.showMessageDialog(this, 
+//                "Inicio de sesión exitoso. ¡Bienvenido Administrador " + admin.getNombre() + "!");
+//            
+//            new PanelAdministrador(admin).setVisible(true);
+//            this.dispose();
+//        } else {
+//            JOptionPane.showMessageDialog(this, 
+//                "Credenciales incorrectas para administrador.", 
+//                "Error", 
+//                JOptionPane.ERROR_MESSAGE);
+//        }
+//    }
+
     }//GEN-LAST:event_btningresarActionPerformed
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
