@@ -27,7 +27,7 @@ public class ModificarCita extends javax.swing.JFrame {
     private GestorCita gestorCita;
     private GestorMedico gestorMedico;
     private Cita cita;
-    private ListaCitasPaciente ownerLista; // ventana que debe refrescarse tras el cambio
+    private PanelCitasPaciente ownerLista; // ventana que debe refrescarse tras el cambio
 
     /**
      * Creates new form ModificarCita
@@ -36,7 +36,7 @@ public class ModificarCita extends javax.swing.JFrame {
         initComponents();
     }
         // nuevo constructor que recibe optional owner para refrescar la lista tras modificar
-        public ModificarCita(GestorCita gestorCita, GestorMedico gestorMedico, Cita cita, ListaCitasPaciente owner) {
+        public ModificarCita(GestorCita gestorCita, GestorMedico gestorMedico, Cita cita, PanelCitasPaciente owner) {
          this();
          this.gestorCita = gestorCita;
          this.gestorMedico = gestorMedico;

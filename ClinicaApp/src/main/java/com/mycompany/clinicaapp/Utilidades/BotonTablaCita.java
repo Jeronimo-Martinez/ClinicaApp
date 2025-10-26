@@ -11,7 +11,7 @@ package com.mycompany.clinicaapp.Utilidades;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorCita;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
 import com.mycompany.clinicaapp.Modelos.Cita;
-import com.mycompany.clinicaapp.Presentacion.ListaCitasPaciente;
+import com.mycompany.clinicaapp.Presentacion.PanelCitasPaciente;
 import com.mycompany.clinicaapp.Presentacion.ModificarCita;
 import com.mycompany.clinicaapp.Presentacion.VentanaRegistrarse;
 import java.awt.*;
@@ -53,11 +53,11 @@ public class BotonTablaCita extends AbstractCellEditor implements TableCellRende
                 String idCita = tabla.getValueAt(fila, 0).toString();
                 GestorMedico gestorMedico = new GestorMedico();
                 Cita cita = gestor.buscarCitaPorId(idCita);
-                // obtener la ventana ListaCitasPaciente que contiene la tabla (si existe)
-                ListaCitasPaciente ventanaLista = null;
+                // obtener la ventana PanelCitasPaciente que contiene la tabla (si existe)
+                PanelCitasPaciente ventanaLista = null;
                 java.awt.Window win = javax.swing.SwingUtilities.getWindowAncestor(tabla);
-                if (win instanceof ListaCitasPaciente) {
-                    ventanaLista = (ListaCitasPaciente) win;
+                if (win instanceof PanelCitasPaciente) {
+                    ventanaLista = (PanelCitasPaciente) win;
                 }
                 ModificarCita ventanaModificar = new ModificarCita(gestor, gestorMedico, cita, ventanaLista);
                  ventanaModificar.setVisible(true);
