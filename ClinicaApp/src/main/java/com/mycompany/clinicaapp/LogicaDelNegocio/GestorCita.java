@@ -136,5 +136,9 @@ public class GestorCita implements IGestorCita {
         return false; // no se encontró la cita
     }
 
-
+    public void modificarDiagnostico(Cita cita, String nuevoDiagnostico) {
+        if (cita != null && nuevoDiagnostico != null && !nuevoDiagnostico.trim().isEmpty()) {
+            cita.setDiagnostico(nuevoDiagnostico);
+        }
+    }
     }   

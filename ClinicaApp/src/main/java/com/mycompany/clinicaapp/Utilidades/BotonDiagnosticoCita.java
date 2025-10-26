@@ -48,7 +48,7 @@ public class BotonDiagnosticoCita extends AbstractCellEditor implements TableCel
                             "Ingrese diagnóstico para la cita " + id + ":");
 
                     if (diagnostico != null && !diagnostico.trim().isEmpty()) {
-                        cita.setDiagnostico(diagnostico);
+                        gestor.modificarDiagnostico(cita, diagnostico);
                         JOptionPane.showMessageDialog(tabla, "Diagnóstico agregado correctamente.");
                         tabla.setValueAt(diagnostico, fila, 3); // Actualiza la tabla visualmente
                     }
