@@ -13,11 +13,15 @@ import java.util.ArrayList;
  * @author johan
  */
 public interface IMedicoService {
+
     boolean agregarMedic(Medico medico);
+
     boolean eliminarMedico(String cedula);
+
     Medico iniciarSesion(String cedula, String contrasena);
+
     ArrayList<Medico> getListaMedicos();
+
     void editarMedico(Medico medico, String nuevoNombre, Especialidad nuevaEspecialidad);
 
-    
 }

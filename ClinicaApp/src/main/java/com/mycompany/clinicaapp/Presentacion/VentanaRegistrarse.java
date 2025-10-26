@@ -4,8 +4,6 @@
  */
 package com.mycompany.clinicaapp.Presentacion;
 
-
-
 /**
  *
  * @author hecto
@@ -15,14 +13,9 @@ public class VentanaRegistrarse extends javax.swing.JFrame {
     /**
      * Creates new form VentanaRegistrarse
      */
-    
-
-    
     public VentanaRegistrarse() {
         initComponents();
 
-  
-          
     }
 
     /**
