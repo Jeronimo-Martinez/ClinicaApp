@@ -2,7 +2,6 @@ package com.mycompany.clinicaapp.Presentacion;
 import com.mycompany.clinicaapp.Modelos.*;
 import com.mycompany.clinicaapp.LogicaDelNegocio.*;
 import javax.swing.*;
-
 import java.awt.*;
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -12,19 +11,27 @@ import java.awt.event.ActionEvent;
 
 
 /**
- * Panel para la gestión de médicos.
+ * Este panel es para las operaciones que puede hacer el administrador en la página en cuanto a los médicos, es decir, 
+ * la creación, edición y eliminación de estos.
  */
 public class GestionAdminEnMedicos extends JPanel {
-
+    //Declaración de variables
     private final GestorAdministrador gestor;
     private JTextField txtCedula, txtNombre, txtContrasena;
     private JComboBox<Especialidad> comboEspecialidad;
 
+    /**
+     * Constructor
+     * @param gestor, se recibe el gestor que viene del panel principal del administrador 
+     */
     public GestionAdminEnMedicos(GestorAdministrador gestor) {
         this.gestor = gestor;
         initComponents();
     }
 
+    /**
+     * Este método se encarga de inicializar los componentes gráficos del panel, como los botones, campos de texto, etc...
+     */
     private void initComponents() {
         setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createTitledBorder("Gestión de Médicos"));
@@ -68,6 +75,12 @@ public class GestionAdminEnMedicos extends JPanel {
         btnVer.addActionListener(this::verMedicos);
     }
 
+    /**
+     * Este método permite al administrador completar los campos para crear un médico,
+     * Luego verifica que estén completos y crea un objeto tipo médico para que luego el gestor llame al método de
+     * la interfaz IMedicoService y cree el médico
+     * @param e, es la acción del usuario al presionar el botón para registrar médicos
+     */
     private void registrarMedico(ActionEvent e) {
         String cedula = txtCedula.getText().trim();
         String nombre = txtNombre.getText().trim();
