@@ -1,5 +1,6 @@
 package com.mycompany.clinicaapp.Presentacion;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorAdministrador;
+import com.mycompany.clinicaapp.Interfaces.IGestorAdministrador;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,9 +12,9 @@ import java.awt.event.ActionEvent;
  */
 public class PanelAdministrador extends JPanel {
 
-    private final GestorAdministrador gestor;
+    private final IGestorAdministrador gestor;
 
-    public PanelAdministrador(GestorAdministrador gestor) {
+    public PanelAdministrador(IGestorAdministrador gestor) {
         this.gestor = gestor;
         initComponents();
     }

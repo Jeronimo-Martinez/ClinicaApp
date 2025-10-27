@@ -1,7 +1,6 @@
 package com.mycompany.clinicaapp.Presentacion;
-
+import com.mycompany.clinicaapp.Interfaces.IGestorAdministrador;
 import com.mycompany.clinicaapp.Modelos.*;
-import com.mycompany.clinicaapp.LogicaDelNegocio.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,13 +11,13 @@ import java.util.List;
  */
 public class GestorAdminEnEspecialidad extends JPanel {
     //Declaración de variables
-    private final GestorAdministrador gestor;
+    private final IGestorAdministrador gestor;
     private JTextField txtNombre;
     /**
      * Constructor
      * @param gestor
      */
-    public GestorAdminEnEspecialidad(GestorAdministrador gestor) {
+    public GestorAdminEnEspecialidad(IGestorAdministrador gestor) {
         this.gestor = gestor;
         initComponents();
     }

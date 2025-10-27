@@ -1,6 +1,7 @@
 package com.mycompany.clinicaapp.Presentacion;
 import com.mycompany.clinicaapp.Modelos.*;
 import com.mycompany.clinicaapp.LogicaDelNegocio.*;
+import com.mycompany.clinicaapp.Interfaces.IGestorAdministrador;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.awt.event.ActionEvent;
  */
 public class GestionAdminEnMedicos extends JPanel {
     //Declaración de variables
-    private final GestorAdministrador gestor;
+    private final IGestorAdministrador gestor;
     private JTextField txtCedula, txtNombre, txtContrasena;
     private JComboBox<Especialidad> comboEspecialidad;
 
@@ -24,7 +25,7 @@ public class GestionAdminEnMedicos extends JPanel {
      * Constructor
      * @param gestor, se recibe el gestor que viene del panel principal del administrador 
      */
-    public GestionAdminEnMedicos(GestorAdministrador gestor) {
+    public GestionAdminEnMedicos(IGestorAdministrador gestor) {
         this.gestor = gestor;
         initComponents();
         cargarEspecialidades();
