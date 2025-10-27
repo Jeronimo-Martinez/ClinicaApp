@@ -6,6 +6,7 @@ package com.mycompany.clinicaapp.Presentacion;
 import com.mycompany.clinicaapp.Interfaces.IEspecialidadService;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorPaciente;
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorEspecialidad;
 import com.mycompany.clinicaapp.Interfaces.IMedicoService;
 import com.mycompany.clinicaapp.Interfaces.IPacienteService;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorCita;
@@ -27,6 +28,7 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
     private final IMedicoService medicoService;
     private final IPacienteService pacienteService;
     private final IEspecialidadService especialidadService;
+    // Usar solo las interfaces (inyección). El constructor por defecto seguirá creando implementaciones concretas.
 
     /**
      * Constructor que recibe los servicios desde el GestorAdministrador
@@ -34,6 +36,12 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
      * @param pacienteService
      * @param especialidadService
      */
+    // Constructor por defecto que crea gestores concretos (para compatibilidad con llamadas sin inyección)
+    public VentanaIniciarSesion() {
+        // Constructor por defecto: crear implementaciones concretas y delegar
+        this(new GestorMedico(), new GestorPaciente(), new GestorEspecialidad());
+    }
+
    public VentanaIniciarSesion(IMedicoService medicoService,
                             IPacienteService pacienteService,
                             IEspecialidadService especialidadService) {
@@ -241,8 +249,8 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         }
         
         
-        if (rbPaciente.isSelected()) {
-        Paciente paciente = gestorPaciente.iniciarSesion(usuarioingresado, contrasenaingresada);
+    if (rbPaciente.isSelected()) {
+    Paciente paciente = pacienteService.iniciarSesion(usuarioingresado, contrasenaingresada);
         if (paciente != null) {
             JOptionPane.showMessageDialog(this, 
                 "Inicio de sesión exitoso. ¡Bienvenido, " + paciente.getNombre() + "!");
@@ -260,7 +268,7 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         }
 
     } else if (rbMedico.isSelected()) {
-        Medico medico = gestorMedico.iniciarSesion(usuarioingresado, contrasenaingresada);
+        Medico medico = medicoService.iniciarSesion(usuarioingresado, contrasenaingresada);
         if (medico != null) {
             JOptionPane.showMessageDialog(this, 
                 "Inicio de sesión exitoso. Bienvenido Dr(a). " + medico.getNombre() + "!");

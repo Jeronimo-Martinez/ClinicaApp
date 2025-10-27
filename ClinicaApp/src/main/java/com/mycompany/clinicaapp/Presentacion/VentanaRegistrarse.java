@@ -73,6 +73,11 @@ public class VentanaRegistrarse extends javax.swing.JFrame {
 
         btnregistrarse.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnregistrarse.setText("Registrarse");
+        btnregistrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnregistrarseActionPerformed(evt);
+            }
+        });
 
         btnsalir.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnsalir.setText("Salir");
@@ -171,6 +176,10 @@ public class VentanaRegistrarse extends javax.swing.JFrame {
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnsalirActionPerformed
+
+    private void btnregistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrarseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnregistrarseActionPerformed
 
     /**
      * @param args the command line arguments

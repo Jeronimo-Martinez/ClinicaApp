@@ -1,6 +1,5 @@
 package com.mycompany.clinicaapp.Presentacion;
 
-import com.mycompany.clinicaapp.Interfaces.IGestorAdministrador;
 import com.mycompany.clinicaapp.Modelos.*;
 import com.mycompany.clinicaapp.Interfaces.IGestorAdministrador;
 import javax.swing.*;
