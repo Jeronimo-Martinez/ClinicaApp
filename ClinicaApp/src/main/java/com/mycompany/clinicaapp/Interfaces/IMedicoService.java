@@ -3,23 +3,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package com.mycompany.clinicaapp.Interfaces;
+
+import com.mycompany.clinicaapp.Modelos.Especialidad;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import java.util.List;
 
 /**
- * Encargada de definir todas las operaciones CRUD(Create, Read, Update and Delete)
- * que deben realizarse sobre los Medicos
- * @author hecto
+ *
+ * @author johan
  */
 public interface IMedicoService {
 
-    boolean editarMedico(Medico medico);
+    boolean agregarMedic(Medico medico);
 
-    boolean registrarMedico(Medico medico);
+    boolean eliminarMedico(String cedula);
+
+    Medico iniciarSesion(String cedula, String contrasena);
 
     List<Medico> listaMedicos();
 
+    boolean editarMedico(Medico medico, String nuevoNombre, Especialidad nuevaEspecialidad);
 
-    
-} 
+}
 

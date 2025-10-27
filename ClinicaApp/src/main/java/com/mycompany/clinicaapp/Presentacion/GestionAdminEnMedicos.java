@@ -149,7 +149,7 @@ public class GestionAdminEnMedicos extends JPanel {
             // Crear objeto actualizado
             Medico actualizado = new Medico(cedula, nombre, esp, contrasena);
 
-        Medico actualizado = new Medico(cedula, nombre, esp, contrasena);
+        
         boolean exito = gestor.editarMedico(actualizado, nombre, esp);
         if (exito) {
             JOptionPane.showMessageDialog(this, "Médico actualizado correctamente");

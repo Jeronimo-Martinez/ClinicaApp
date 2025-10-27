@@ -16,13 +16,15 @@ public class GestorEspecialidad implements IEspecialidadService {
     }
 
     @Override
-    public void ingresarEspecialidad(Especialidad especialidad) {
+    public boolean ingresarEspecialidad(Especialidad especialidad) {
         listaEspecialidades.add(especialidad);
+        return true;
     }
 
     @Override
-    public void eliminarEspecialidad(Especialidad especialidad) {
+    public boolean eliminarEspecialidad(Especialidad especialidad) {
         listaEspecialidades.removeIf(e -> e.getNombre().equalsIgnoreCase(especialidad.getNombre()));
+        return true;
     }
 
     @Override

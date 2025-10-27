@@ -11,11 +11,6 @@ import java.util.List;
  *
  * @author hecto
  */
-public interface IEspecialidadService {
-    
-    void ingresarEspecialidad (Especialidad especialidad);
-    void eliminarEspecialidad(Especialidad especialidad);
-    List<Especialidad> listarEspecialidades();    
 
 
 public interface IEspecialidadService {

@@ -30,11 +30,13 @@ public class GestorMedico implements IMedicoService {
      * @param medico
      * @param nuevoNombre
      * @param nuevaEspecialidad
+     * @return 
      */
     @Override
-    public void editarMedico(Medico medico, String nuevoNombre, Especialidad nuevaEspecialidad) {
+    public boolean editarMedico(Medico medico, String nuevoNombre, Especialidad nuevaEspecialidad) {
         medico.setNombre(nuevoNombre);
         medico.setEspecialidad(nuevaEspecialidad);
+        return true;
     }
 
     @Override
