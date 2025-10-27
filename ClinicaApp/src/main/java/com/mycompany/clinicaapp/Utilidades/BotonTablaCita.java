@@ -8,25 +8,36 @@ package com.mycompany.clinicaapp.Utilidades;
  *
  * @author jmart
  */
-import com.mycompany.clinicaapp.LogicaDelNegocio.GestorCita;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Insets;
+import java.awt.Toolkit;
+
+import javax.swing.AbstractCellEditor;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
+
+import com.mycompany.clinicaapp.Interfaces.IGestorCita;
+import com.mycompany.clinicaapp.Interfaces.IMedicoService;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
 import com.mycompany.clinicaapp.Modelos.Cita;
-import com.mycompany.clinicaapp.Presentacion.PanelCitasPaciente;
 import com.mycompany.clinicaapp.Presentacion.ModificarCita;
-import com.mycompany.clinicaapp.Presentacion.VentanaRegistrarse;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.table.*;
+import com.mycompany.clinicaapp.Presentacion.PanelCitasPaciente;
 
 public class BotonTablaCita extends AbstractCellEditor implements TableCellRenderer, TableCellEditor {
     private JPanel panel;
     private JButton btnModificar;
     private JButton btnEliminar;
     private JTable tabla;
-    private GestorCita gestor;
+    private IGestorCita gestor;
 
-    public BotonTablaCita(GestorCita gestor, JTable tabla) {
+    public BotonTablaCita(IGestorCita gestor, JTable tabla) {
         this.gestor = gestor;
         this.tabla = tabla;
         crearPanelBotones();
@@ -51,7 +62,7 @@ public class BotonTablaCita extends AbstractCellEditor implements TableCellRende
             int fila = tabla.getSelectedRow();
             if (fila >= 0) {
                 String idCita = tabla.getValueAt(fila, 0).toString();
-                GestorMedico gestorMedico = new GestorMedico();
+                IMedicoService gestorMedico = new GestorMedico();
                 Cita cita = gestor.buscarCitaPorId(idCita);
                 // obtener la ventana PanelCitasPaciente que contiene la tabla (si existe)
                 PanelCitasPaciente ventanaLista = null;

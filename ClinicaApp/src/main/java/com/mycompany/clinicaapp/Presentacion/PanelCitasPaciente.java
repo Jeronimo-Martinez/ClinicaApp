@@ -4,8 +4,9 @@
  */
 package com.mycompany.clinicaapp.Presentacion;
 
-import com.mycompany.clinicaapp.LogicaDelNegocio.GestorCita;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
+import com.mycompany.clinicaapp.Interfaces.IGestorCita;
+import com.mycompany.clinicaapp.Interfaces.IMedicoService;
 import com.mycompany.clinicaapp.Modelos.Cita;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import com.mycompany.clinicaapp.Modelos.Paciente;
@@ -28,15 +29,14 @@ import javax.swing.table.TableColumn;
  */
 public class PanelCitasPaciente extends javax.swing.JFrame {
     private DefaultTableModel modelotabla;
-    private GestorCita gestor;
-    public GestorMedico gestorMedico;
+    private IGestorCita gestor;
+    private IMedicoService medicoService;
     private Paciente pacienteActual;
     public List<Cita> citas;
-
-    public PanelCitasPaciente(List<Cita> citas, GestorCita gestor, Paciente paciente) {
+    public PanelCitasPaciente(List<Cita> citas, IGestorCita gestor, Paciente paciente) {
         initComponents();
         this.gestor = gestor;
-        this.gestorMedico = new GestorMedico();
+        this.medicoService = new GestorMedico();
         this.pacienteActual = paciente;
         // Obtener dimensiones de la pantalla
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -57,7 +57,7 @@ public class PanelCitasPaciente extends javax.swing.JFrame {
         // Configurar ComboBox Especialidad
         DefaultComboBoxModel<String> modeloEsp = new DefaultComboBoxModel<>();
         modeloEsp.addElement("Seleccione especialidad");
-        for(Medico m : gestorMedico.listarMedicos()) {
+        for(Medico m : medicoService.listaMedicos()) {
             if(m.getEspecialidad() != null && modeloEsp.getIndexOf(m.getEspecialidad().getNombre()) == -1) {
                 modeloEsp.addElement(m.getEspecialidad().getNombre());
             }
@@ -94,9 +94,9 @@ public class PanelCitasPaciente extends javax.swing.JFrame {
         tablaCitas.setRowHeight(32);
         
         
-        TableColumn colAcciones = tablaCitas.getColumn("Acciones");
-        colAcciones.setCellRenderer(new BotonTablaCita(gestor, tablaCitas));
-        colAcciones.setCellEditor(new BotonTablaCita(gestor, tablaCitas));
+    TableColumn colAcciones = tablaCitas.getColumn("Acciones");
+    colAcciones.setCellRenderer(new BotonTablaCita(gestor, tablaCitas));
+    colAcciones.setCellEditor(new BotonTablaCita(gestor, tablaCitas));
 
         
         
@@ -325,7 +325,7 @@ public class PanelCitasPaciente extends javax.swing.JFrame {
         modeloMed.addElement(null);
         
         if(especialidad != null && !especialidad.equals("Seleccione especialidad")) {
-            for(Medico m : gestorMedico.listarMedicos()) {
+            for(Medico m : medicoService.listaMedicos()) {
                 if(m.getEspecialidad() != null && 
                    m.getEspecialidad().getNombre().equals(especialidad)) {
                     modeloMed.addElement(m);

@@ -4,8 +4,8 @@
  */
 package com.mycompany.clinicaapp.Presentacion;
 
-import com.mycompany.clinicaapp.LogicaDelNegocio.GestorCita;
-import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
+import com.mycompany.clinicaapp.Interfaces.IGestorCita;
+import com.mycompany.clinicaapp.Interfaces.IMedicoService;
 import com.mycompany.clinicaapp.Modelos.Cita;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import java.awt.Component;
@@ -24,8 +24,8 @@ import javax.swing.JOptionPane;
  */
 public class ModificarCita extends javax.swing.JFrame {
 
-    private GestorCita gestorCita;
-    private GestorMedico gestorMedico;
+    private IGestorCita gestorCita;
+    private IMedicoService gestorMedico;
     private Cita cita;
     private PanelCitasPaciente ownerLista; // ventana que debe refrescarse tras el cambio
 
@@ -35,8 +35,8 @@ public class ModificarCita extends javax.swing.JFrame {
     public ModificarCita() {
         initComponents();
     }
-        // nuevo constructor que recibe optional owner para refrescar la lista tras modificar
-        public ModificarCita(GestorCita gestorCita, GestorMedico gestorMedico, Cita cita, PanelCitasPaciente owner) {
+    // nuevo constructor que recibe optional owner para refrescar la lista tras modificar
+    public ModificarCita(IGestorCita gestorCita, IMedicoService gestorMedico, Cita cita, PanelCitasPaciente owner) {
          this();
          this.gestorCita = gestorCita;
          this.gestorMedico = gestorMedico;
@@ -47,7 +47,7 @@ public class ModificarCita extends javax.swing.JFrame {
          DefaultComboBoxModel<Medico> model = new DefaultComboBoxModel<>();
          if (gestorMedico != null && cita != null && cita.getMedico() != null && cita.getMedico().getEspecialidad() != null) {
              String especialidadActual = cita.getMedico().getEspecialidad().getNombre();
-             List<Medico> lista = gestorMedico.listarMedicosEspecialidad(especialidadActual); // ajusta nombre si tu gestor usa otro método
+             List<Medico> lista = gestorMedico.listarMedicosEspecialidad(especialidadActual); // usa la interfaz para filtrar por especialidad
              System.out.println(lista);
              for (Medico m : lista) {
                  model.addElement(m);

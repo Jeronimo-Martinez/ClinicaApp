@@ -4,9 +4,10 @@
  */
 package com.mycompany.clinicaapp.Interfaces;
 
+import java.util.List;
+
 import com.mycompany.clinicaapp.Modelos.Especialidad;
 import com.mycompany.clinicaapp.Modelos.Medico;
-import java.util.List;
 
 /**
  *
@@ -23,6 +24,9 @@ public interface IMedicoService {
     List<Medico> listaMedicos();
      
     List<Medico> listarMedicosEspecialidad();
+
+    // Obtener médicos filtrados por nombre de especialidad
+    List<Medico> listarMedicosEspecialidad(String nombreEspecialidad);
     
     boolean editarMedico(Medico medico, String nuevoNombre, Especialidad nuevaEspecialidad);
 
