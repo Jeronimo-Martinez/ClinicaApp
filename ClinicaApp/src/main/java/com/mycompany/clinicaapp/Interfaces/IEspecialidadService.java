@@ -4,10 +4,17 @@
  */
 package com.mycompany.clinicaapp.Interfaces;
 
+import com.mycompany.clinicaapp.Modelos.Especialidad;
+import java.util.List;
+
 /**
  *
  * @author hecto
  */
-public class IEspecialidadService {
+public interface IEspecialidadService {
+    
+    void ingresarEspecialidad (Especialidad especialidad);
+    void eliminarEspecialidad(Especialidad especialidad);
+    List<Especialidad> listarEspecialidades();    
 
 }

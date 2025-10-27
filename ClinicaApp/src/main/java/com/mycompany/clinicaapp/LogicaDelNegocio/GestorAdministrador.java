@@ -117,12 +117,12 @@ public class GestorAdministrador implements IGestorAdministrador {
 
     @Override
     public void eliminarEspecialidad(Especialidad especialidad) {
-        especialidadService.EliminarEspecialidad(especialidad);
+        especialidadService.eliminarEspecialidad(especialidad);
     }
 
     @Override
     public List<Medico> listarMedicos() {
-        return medicoService.listarMedicos();
+        return medicoService.listaMedicos();
     }
 
     @Override

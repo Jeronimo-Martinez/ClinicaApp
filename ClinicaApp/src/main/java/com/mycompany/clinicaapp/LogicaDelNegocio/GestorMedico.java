@@ -37,7 +37,7 @@ public class GestorMedico implements IMedicoService {
     }
 
     @Override
-    public ArrayList<Medico> getListaMedicos() {
+    public ArrayList<Medico> listaMedicos() {
         return listaMedicos;
     }
 
