@@ -92,11 +92,6 @@ public class PanelCitasPaciente extends javax.swing.JFrame {
         configurarTabla();
         cargarCitas(citas);
         tablaCitas.setRowHeight(32);
-        
-        
-    TableColumn colAcciones = tablaCitas.getColumn("Acciones");
-    colAcciones.setCellRenderer(new BotonTablaCita(gestor, tablaCitas));
-    colAcciones.setCellEditor(new BotonTablaCita(gestor, tablaCitas));
 
         
         
@@ -114,28 +109,24 @@ public class PanelCitasPaciente extends javax.swing.JFrame {
     List<Cita> citasActualizadas = citas; 
     
     // Agrega las filas nuevamente
-    for (Cita c : citasActualizadas) {
-        modelo.addRow(new Object[]{
-            c.getId(),
-            c.getFecha().toString(),
-            c.getPaciente().getNombre(),
-            c.getMedico().getNombre(),
-            "Acciones"
-        });
-    }
-        TableColumn colAcciones = tablaCitas.getColumn("Acciones");
-        colAcciones.setCellRenderer(new BotonTablaCita(gestor, tablaCitas));
-        colAcciones.setCellEditor(new BotonTablaCita(gestor, tablaCitas));
+        for (Cita c : citasActualizadas) {
+            modelo.addRow(new Object[]{
+                c.getId(),
+                c.getFecha().toString(),
+                c.getPaciente().getNombre(),
+                c.getMedico().getNombre()
+            });
+        }
     }
 
   
     private void configurarTabla(){
-        modelotabla = new DefaultTableModel(new Object[]{"ID", "Fecha", "Paciente", "Médico", "Acciones"},0){
+        modelotabla = new DefaultTableModel(new Object[]{"ID", "Fecha", "Paciente", "Médico"},0){
             @Override
-        public boolean isCellEditable(int fila, int columna) {
-            // Evita que el usuario edite las celdas 
-            return columna == 4; // solo la columna de botones debe permitir interaccion
-        }
+            public boolean isCellEditable(int fila, int columna) {
+                // Para pacientes ninguna celda es editable desde la tabla (no pueden modificar citas)
+                return false;
+            }
         };
         tablaCitas.setModel(modelotabla);
 

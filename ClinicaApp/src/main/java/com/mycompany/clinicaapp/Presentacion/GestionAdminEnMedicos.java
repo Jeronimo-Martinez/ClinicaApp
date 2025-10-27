@@ -71,11 +71,14 @@ public class GestionAdminEnMedicos extends JPanel {
         JButton btnEditar = new JButton("Editar");
         JButton btnEliminar = new JButton("Eliminar");
         JButton btnVer = new JButton("Ver Médicos");
+    JButton btnVolver = new JButton("Volver");
 
         panelBotones.add(btnRegistrar);
         panelBotones.add(btnEditar);
         panelBotones.add(btnEliminar);
         panelBotones.add(btnVer);
+    // Botón para volver al panel administrador
+    panelBotones.add(btnVolver);
 
         add(panelBotones, BorderLayout.SOUTH);
 
@@ -83,6 +86,13 @@ public class GestionAdminEnMedicos extends JPanel {
         btnEditar.addActionListener(this::editarMedico);
         btnEliminar.addActionListener(this::eliminarMedico);
         btnVer.addActionListener(this::verMedicos);
+        btnVolver.addActionListener((ActionEvent e) -> {
+            // Volver al panel administrador
+            javax.swing.JFrame ventana = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
+            ventana.setContentPane(new PanelAdministrador(gestor));
+            ventana.revalidate();
+            ventana.repaint();
+        });
     }
 
     /**
