@@ -8,6 +8,8 @@ import com.mycompany.clinicaapp.Interfaces.IMedicoService;
 import com.mycompany.clinicaapp.Modelos.Especialidad;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -17,7 +19,7 @@ public class GestorMedico implements IMedicoService {
 
     private final ArrayList<Medico> listaMedicos = new ArrayList<>();
 
-    private GestorMedico() {
+    public GestorMedico() {
         Especialidad cardio = new Especialidad("Cardiología");
         Especialidad general = new Especialidad("Medicina General");
         listaMedicos.add(new Medico("1111", "Andrés Gómez", cardio, "1111"));
@@ -79,6 +81,12 @@ public class GestorMedico implements IMedicoService {
         }
         return false; // no encontrado
 }
+    public List<Medico> listarMedicosEspecialidad(String nombreEspecialidad){
+        return this.listaMedicos.stream().filter(m -> (m.getEspecialidad().getNombre() == null ? nombreEspecialidad == null : m.getEspecialidad().getNombre().equals(nombreEspecialidad))).collect(Collectors.toList());
+    }
+    public List<Medico> listarMedicos(){
+        return listaMedicos;
+    }
     
 }
 
