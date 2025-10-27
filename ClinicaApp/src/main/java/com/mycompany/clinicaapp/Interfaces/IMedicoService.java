@@ -22,7 +22,7 @@ public interface IMedicoService {
 
     List<Medico> listaMedicos();
      
-    List<Medico> listarMedicosEspecialidad();
+    public List<Medico> listarMedicosEspecialidad(String nombreEspecialidad);
     
     boolean editarMedico(Medico medico, String nuevoNombre, Especialidad nuevaEspecialidad);
 

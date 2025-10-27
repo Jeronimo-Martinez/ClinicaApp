@@ -45,7 +45,7 @@ public class GestorMedico implements IMedicoService {
     
     
     @Override
-     public List<Medico> listarMedicosEspecialidad(String nombreEspecialidad){
+    public List<Medico> listarMedicosEspecialidad(String nombreEspecialidad){
         return this.listaMedicos.stream().filter(m -> (m.getEspecialidad().getNombre() == null ? nombreEspecialidad == null : m.getEspecialidad().getNombre().equals(nombreEspecialidad))).collect(Collectors.toList());
     }
     
