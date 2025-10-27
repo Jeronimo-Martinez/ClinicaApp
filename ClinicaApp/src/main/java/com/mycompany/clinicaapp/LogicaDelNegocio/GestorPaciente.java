@@ -98,8 +98,8 @@ public class GestorPaciente implements IPacienteService{
     /**
      * Este método permite que el paciente inicie sesión
      *
-     * @param cedula
-     * @param contrasena
+     * @param cedula Cédula del paciente
+     * @param contrasena Contraseña del paciente
      * @return Paciente
      */
     public Paciente iniciarSesion(String cedula, String contrasena) {
