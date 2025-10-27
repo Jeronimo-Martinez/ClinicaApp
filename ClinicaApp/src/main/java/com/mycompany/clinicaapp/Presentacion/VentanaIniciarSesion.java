@@ -17,7 +17,10 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.List;
 import javax.swing.ButtonGroup;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorAdministrador;
+import com.mycompany.clinicaapp.Modelos.Administrador;
 
 /**
  *
@@ -51,9 +54,10 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
     initComponents();
 
     // Inicialización de radio buttons u otros componentes
-    ButtonGroup grupoUsuarios = new ButtonGroup();
+        ButtonGroup grupoUsuarios = new ButtonGroup();
     grupoUsuarios.add(rbPaciente);
     grupoUsuarios.add(rbMedico);
+    grupoUsuarios.add(rbAdmin);
 }
 
 
@@ -76,8 +80,9 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtusuario = new javax.swing.JTextField();
         txtpassword = new javax.swing.JPasswordField();
-        rbPaciente = new javax.swing.JRadioButton();
-        rbMedico = new javax.swing.JRadioButton();
+    rbPaciente = new javax.swing.JRadioButton();
+    rbMedico = new javax.swing.JRadioButton();
+    rbAdmin = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -154,6 +159,14 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
             }
         });
 
+        rbAdmin.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        rbAdmin.setText("Administrador");
+        rbAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbAdminActionPerformed(evt);
+            }
+        });
+
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("¿Aún no tienes una cuenta?");
 
@@ -175,10 +188,12 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
                                         .addGap(194, 194, 194)
                                         .addComponent(btningresar))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(134, 134, 134)
+                                        .addGap(120, 120, 120)
                                         .addComponent(rbPaciente)
-                                        .addGap(56, 56, 56)
-                                        .addComponent(rbMedico))
+                                        .addGap(30, 30, 30)
+                                        .addComponent(rbMedico)
+                                        .addGap(30, 30, 30)
+                                        .addComponent(rbAdmin))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel2)
@@ -213,7 +228,8 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(rbPaciente)
-                    .addComponent(rbMedico))
+                    .addComponent(rbMedico)
+                    .addComponent(rbAdmin))
                 .addGap(18, 18, 18)
                 .addComponent(btningresar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
@@ -240,9 +256,9 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         return;
         }
         
-        if (!rbPaciente.isSelected() && !rbMedico.isSelected()) {
+        if (!rbPaciente.isSelected() && !rbMedico.isSelected() && !rbAdmin.isSelected()) {
         JOptionPane.showMessageDialog(this, 
-            "Seleccione si es Paciente o Médico antes de iniciar sesión.", 
+            "Seleccione si es Paciente, Médico o Administrador antes de iniciar sesión.", 
             "Selección requerida", 
             JOptionPane.WARNING_MESSAGE);
         return;
@@ -285,6 +301,28 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
                 JOptionPane.ERROR_MESSAGE);
         }
         }
+        else if (rbAdmin.isSelected()) {
+            // Validar administrador utilizando el singleton GestorAdministrador
+            GestorAdministrador gAdmin = GestorAdministrador.getInstanciaAdministrador(medicoService, pacienteService, especialidadService);
+            Administrador admin = gAdmin.iniciarSesion(usuarioingresado, contrasenaingresada);
+            if (admin != null) {
+                JOptionPane.showMessageDialog(this,
+                    "Inicio de sesión exitoso. Bienvenido administrador: " + admin.getNombre());
+                // Abrir PanelAdministrador en una ventana
+                JFrame ventanaAdmin = new JFrame("Panel Administrador");
+                ventanaAdmin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                ventanaAdmin.setContentPane(new PanelAdministrador(gAdmin));
+                ventanaAdmin.pack();
+                ventanaAdmin.setLocationRelativeTo(null);
+                ventanaAdmin.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this,
+                    "Credenciales incorrectas para administrador.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
     
     }//GEN-LAST:event_btningresarActionPerformed
 
@@ -300,8 +338,12 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         
     }//GEN-LAST:event_rbPacienteActionPerformed
 
+    private void rbAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbAdminActionPerformed
+        // No action required here; handled at login
+    }//GEN-LAST:event_rbAdminActionPerformed
+
     private void btnregistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrarseActionPerformed
-        VentanaRegistrarse ventanaRegistro = new VentanaRegistrarse();
+        VentanaRegistrarse ventanaRegistro = new VentanaRegistrarse(medicoService, pacienteService, especialidadService);
         ventanaRegistro.setVisible(true);
         Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (pantalla.width - ventanaRegistro.getWidth()) / 2;
@@ -358,6 +400,7 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
     private javax.swing.JLabel lbltitle;
     private javax.swing.JRadioButton rbMedico;
     private javax.swing.JRadioButton rbPaciente;
+    private javax.swing.JRadioButton rbAdmin;
     private javax.swing.JPasswordField txtpassword;
     private javax.swing.JTextField txtusuario;
     // End of variables declaration//GEN-END:variables
