@@ -127,7 +127,7 @@ public class PanelPaciente extends JPanel {
                     // Se crea la lista de citas del paciente que se necesita para el panelCita
                     List<Cita> citasPaciente = gestorCita.consultarCitasPaciente(pacienteAutenticado);
 
-                    PanelCitas panelCita = new PanelCitas(citasPAciente, gestorCita, pacienteAutenticado);
+                    PanelCitas panelCita = new PanelCitas(citasPaciente, gestorCita, pacienteAutenticado);
                     ventanaPrincipal = (JFrame) SwingUtilities.getWindowAncestor(PanelPaciente.this);
                     ventanaPrincipal.setContentPane(panelCita);
                     ventanaPrincipal.revalidate();
