@@ -3,11 +3,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.clinicaapp.Interfaces;
-
+import com.mycompany.clinicaapp.Modelos.Especialidad;
+import java.util.List;
 /**
  *
  * @author hecto
  */
-public class IEspecialidadService {
 
+
+public interface IEspecialidadService {
+
+    boolean ingresarEspecialidad(Especialidad especialidad);
+
+    List<Especialidad> listarEspecialidades();
+
+    boolean eliminarEspecialidad(Especialidad especialidad);
 }

@@ -68,6 +68,17 @@ public class GestorMedico implements IMedicoService {
         }
         return null;
     }
-
+    @Override
+    public boolean editarMedico(Medico medico) {
+        for (int i = 0; i < listaMedicos.size(); i++) {
+            Medico actual = listaMedicos.get(i);
+            if (actual.getCedula().equals(medico.getCedula())) {
+                listaMedicos.set(i, medico); // reemplaza el objeto completo
+                return true;
+            }
+        }
+        return false; // no encontrado
+}
+    
 }
 
