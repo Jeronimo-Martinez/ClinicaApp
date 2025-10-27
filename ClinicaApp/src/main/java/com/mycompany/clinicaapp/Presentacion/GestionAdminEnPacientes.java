@@ -1,5 +1,6 @@
 package com.mycompany.clinicaapp.Presentacion;
 
+import com.mycompany.clinicaapp.Interfaces.IGestorAdministrador;
 import com.mycompany.clinicaapp.Modelos.*;
 import com.mycompany.clinicaapp.Interfaces.IGestorAdministrador;
 import javax.swing.*;
@@ -16,7 +17,7 @@ public class GestionAdminEnPacientes extends JPanel {
 
     private final IGestorAdministrador gestor;
 
-    private JTextField txtCedula, txtNombre, txtEdad, txtTelefono, txtContrasena;
+    private JTextField txtCedula, txtNombre, txtEdad, txtTelefono;
     private JTable tablaPacientes;
     private DefaultTableModel modeloTabla;
 

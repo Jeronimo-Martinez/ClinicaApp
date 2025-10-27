@@ -34,19 +34,23 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
      * @param pacienteService
      * @param especialidadService
      */
-   public VentanaIniciarSesion(IMedicoService medicoService,
+    public VentanaIniciarSesion() {
+        this(new GestorMedico(), new GestorPaciente(), null);
+    }
+
+    public VentanaIniciarSesion(IMedicoService medicoService,
                             IPacienteService pacienteService,
                             IEspecialidadService especialidadService) {
-    this.medicoService = medicoService;
-    this.pacienteService = pacienteService;
-    this.especialidadService = especialidadService;
-    initComponents();
+        this.medicoService = medicoService;
+        this.pacienteService = pacienteService;
+        this.especialidadService = especialidadService;
+        initComponents();
 
-    // Inicialización de radio buttons u otros componentes
-    ButtonGroup grupoUsuarios = new ButtonGroup();
-    grupoUsuarios.add(rbPaciente);
-    grupoUsuarios.add(rbMedico);
-}
+        // Inicialización de radio buttons u otros componentes
+        ButtonGroup grupoUsuarios = new ButtonGroup();
+        grupoUsuarios.add(rbPaciente);
+        grupoUsuarios.add(rbMedico);
+    }
 
 
     /**
@@ -225,57 +229,53 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         String contrasenaingresada = new String(txtpassword.getPassword());
 
         if (usuarioingresado.isEmpty() || contrasenaingresada.isEmpty()) {
-        JOptionPane.showMessageDialog(this, 
-            "Por favor, complete todos los campos.", 
-            "Campos vacíos", 
-            JOptionPane.WARNING_MESSAGE);
-        return;
+            JOptionPane.showMessageDialog(this, 
+                "Por favor, complete todos los campos.", 
+                "Campos vacíos", 
+                JOptionPane.WARNING_MESSAGE);
+            return;
         }
         
         if (!rbPaciente.isSelected() && !rbMedico.isSelected()) {
-        JOptionPane.showMessageDialog(this, 
-            "Seleccione si es Paciente o Médico antes de iniciar sesión.", 
-            "Selección requerida", 
-            JOptionPane.WARNING_MESSAGE);
-        return;
+            JOptionPane.showMessageDialog(this, 
+                "Seleccione si es Paciente o Médico antes de iniciar sesión.", 
+                "Selección requerida", 
+                JOptionPane.WARNING_MESSAGE);
+            return;
         }
-        
         
         if (rbPaciente.isSelected()) {
-        Paciente paciente = gestorPaciente.iniciarSesion(usuarioingresado, contrasenaingresada);
-        if (paciente != null) {
-            JOptionPane.showMessageDialog(this, 
-                "Inicio de sesión exitoso. ¡Bienvenido, " + paciente.getNombre() + "!");
-            
-            // TO-DO -> CAMBIAR A PACIENTESERVICE 
-            GestorCita gestor = new GestorCita();
-            List<Cita> citas = gestor.consultarCitasPaciente(paciente);
-            new PanelCitasPaciente(citas,gestor,paciente ).setVisible(true);
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(this, 
-                "Credenciales incorrectas para paciente.", 
-                "Error", 
-                JOptionPane.ERROR_MESSAGE);
-        }
-
-    } else if (rbMedico.isSelected()) {
-        Medico medico = gestorMedico.iniciarSesion(usuarioingresado, contrasenaingresada);
-        if (medico != null) {
-            JOptionPane.showMessageDialog(this, 
-                "Inicio de sesión exitoso. Bienvenido Dr(a). " + medico.getNombre() + "!");
-            
-            // TO-DO -> CAMBIAR A MEDICO SERVICE
-            GestorCita gestor = new GestorCita();
-            List<Cita> citas = gestor.consultarCitasMedico(medico);
-            new PanelCitasMedico(citas, gestor,medico ).setVisible(true);
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(this, 
-                "Credenciales incorrectas para médico.", 
-                "Error", 
-                JOptionPane.ERROR_MESSAGE);
-        }
+            Paciente paciente = pacienteService.iniciarSesion(usuarioingresado, contrasenaingresada);
+            if (paciente != null) {
+                JOptionPane.showMessageDialog(this, 
+                    "Inicio de sesión exitoso. ¡Bienvenido, " + paciente.getNombre() + "!");
+                
+                GestorCita gestor = new GestorCita();
+                List<Cita> citas = gestor.consultarCitasPaciente(paciente);
+                new PanelCitasPaciente(citas, gestor, paciente).setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, 
+                    "Credenciales incorrectas para paciente.", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        } else if (rbMedico.isSelected()) {
+            Medico medico = medicoService.iniciarSesion(usuarioingresado, contrasenaingresada);
+            if (medico != null) {
+                JOptionPane.showMessageDialog(this, 
+                    "Inicio de sesión exitoso. Bienvenido Dr(a). " + medico.getNombre() + "!");
+                
+                GestorCita gestor = new GestorCita();
+                List<Cita> citas = gestor.consultarCitasMedico(medico);
+                new PanelCitasMedico(citas, gestor, medico).setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, 
+                    "Credenciales incorrectas para médico.", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+            }
         }
     
     }//GEN-LAST:event_btningresarActionPerformed
@@ -333,7 +333,13 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaIniciarSesion().setVisible(true);
+                VentanaIniciarSesion ventana = new VentanaIniciarSesion();
+                // Centrar la ventana en la pantalla
+                Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+                int x = (pantalla.width - ventana.getWidth()) / 2;
+                int y = (pantalla.height - ventana.getHeight()) / 2;
+                ventana.setLocation(x, y);
+                ventana.setVisible(true);
             }
         });
     }

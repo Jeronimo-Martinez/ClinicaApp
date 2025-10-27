@@ -12,8 +12,11 @@ import com.mycompany.clinicaapp.Modelos.Paciente;
 import com.mycompany.clinicaapp.Utilidades.BotonTablaCita;
 import java.awt.Component;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 import java.util.UUID;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
@@ -38,43 +41,35 @@ public class PanelCitasPaciente extends javax.swing.JFrame {
         this.gestor = gestor;
         this.gestorMedico = new GestorMedico();
         this.pacienteActual = paciente;
-        // Obtener dimensiones de la pantalla
+        this.citas = citas;
+        
+        // Configurar fecha con formato placeholder
+        fechaStr.setText("DD/MM/YYYY");
+        
+        // Configurar dimensiones de la ventana
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        
-        // Calcular la mitad del ancho y alto
-        int width = screenSize.width* 2/3;
-        int height = screenSize.height* 2/3;
-        
-        // Centrar la ventana
+        int width = screenSize.width * 2/3;
+        int height = screenSize.height * 2/3;
         int x = (screenSize.width - width) / 2;
         int y = (screenSize.height - height) / 2;
-        
-        // Establecer tamaño y posición
         this.setBounds(x, y, width, height);
-        // Configurar fecha con formato placeholder
-        fechaStr.setText("YYYY-MM-DD");
         
-        // Configurar ComboBox Especialidad
+        // Configurar ComboBox de Especialidades
+        Set<String> especialidades = new HashSet<>();
         DefaultComboBoxModel<String> modeloEsp = new DefaultComboBoxModel<>();
         modeloEsp.addElement("Seleccione especialidad");
-        for(Medico m : gestorMedico.listarMedicos()) {
-            if(m.getEspecialidad() != null && modeloEsp.getIndexOf(m.getEspecialidad().getNombre()) == -1) {
+        
+        for (Medico m : gestorMedico.listaMedicos()) {
+            if (m.getEspecialidad() != null && 
+                especialidades.add(m.getEspecialidad().getNombre())) {
                 modeloEsp.addElement(m.getEspecialidad().getNombre());
             }
         }
         boxEsp.setModel(modeloEsp);
 
-        // Listener para cuando cambie la especialidad
-        boxEsp.addActionListener(evt -> {
-            String especialidadSeleccionada = (String)boxEsp.getSelectedItem();
-            actualizarComboMedicos(especialidadSeleccionada);
-        });
-
-        // Inicializar combo médicos vacío
-        DefaultComboBoxModel<Medico> modeloMed = new DefaultComboBoxModel<>();
-        modeloMed.addElement(null);
-        boxMed.setModel(modeloMed);
-
+        // Configurar ComboBox de Médicos (inicialmente vacío)
+        boxMed.setModel(new DefaultComboBoxModel<>());
+        
         // Configurar renderer para mostrar solo nombre del médico
         boxMed.setRenderer(new DefaultListCellRenderer() {
             @Override
@@ -89,17 +84,20 @@ public class PanelCitasPaciente extends javax.swing.JFrame {
             }
         });
 
+        // Listener para actualizar médicos cuando cambia la especialidad
+        boxEsp.addActionListener(evt -> {
+            String especialidadSeleccionada = (String) boxEsp.getSelectedItem();
+            actualizarComboMedicos(especialidadSeleccionada);
+        });
+
+        // Configurar y cargar tabla
         configurarTabla();
         cargarCitas(citas);
         tablaCitas.setRowHeight(32);
         
-        
         TableColumn colAcciones = tablaCitas.getColumn("Acciones");
         colAcciones.setCellRenderer(new BotonTablaCita(gestor, tablaCitas));
         colAcciones.setCellEditor(new BotonTablaCita(gestor, tablaCitas));
-
-        
-        
     }
 
     private PanelCitasPaciente() {

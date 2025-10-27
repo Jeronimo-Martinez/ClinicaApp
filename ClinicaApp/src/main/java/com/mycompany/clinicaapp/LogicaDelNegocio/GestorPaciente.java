@@ -19,6 +19,10 @@ public class GestorPaciente implements IPacienteService{
 
     public GestorPaciente() {
         this.pacientes = new ArrayList<>();
+        // Datos de ejemplo
+        pacientes.add(new Paciente("1234", "Ana García", "3001234567", 25, "1234"));
+        pacientes.add(new Paciente("5678", "Carlos López", "3005678901", 30, "5678"));
+        pacientes.add(new Paciente("9012", "María Rodríguez", "3009012345", 35, "9012"));
     }
 
     /**

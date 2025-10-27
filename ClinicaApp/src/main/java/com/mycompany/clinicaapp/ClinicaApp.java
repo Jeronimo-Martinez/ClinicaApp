@@ -9,9 +9,18 @@ package com.mycompany.clinicaapp;
  *
  * @author hecto
  */
-public class ClinicaApp {
-   
+import com.mycompany.clinicaapp.Presentacion.VentanaIniciarSesion;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
-    
-    
+public class ClinicaApp {
+    public static void main(String[] args) {
+        VentanaIniciarSesion ventana = new VentanaIniciarSesion();
+        // Centrar la ventana en la pantalla
+        Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (pantalla.width - ventana.getWidth()) / 2;
+        int y = (pantalla.height - ventana.getHeight()) / 2;
+        ventana.setLocation(x, y);
+        ventana.setVisible(true);
+    }
 }

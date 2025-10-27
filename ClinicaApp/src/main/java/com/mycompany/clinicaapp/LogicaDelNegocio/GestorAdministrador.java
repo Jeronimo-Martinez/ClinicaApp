@@ -39,10 +39,6 @@ public class GestorAdministrador implements IGestorAdministrador {
 
     /**
      * Devuelve la única instancia de GestorAdministrador.
-     * @param medicoService
-     * @param pacienteService
-     * @param especialidadService
-     * @return 
      */
     public static GestorAdministrador getInstanciaAdministrador(
         IMedicoService medicoService,
@@ -58,9 +54,6 @@ public class GestorAdministrador implements IGestorAdministrador {
 
     /**
      * Permite iniciar sesión del administrador por usuario y contraseña.
-     * @param cedula
-     * @param contrasena
-     * @return 
      */
     public Administrador iniciarSesion(String cedula, String contrasena) {
         for (Administrador admin : listaAdministradores) {
@@ -77,16 +70,16 @@ public class GestorAdministrador implements IGestorAdministrador {
         return medicoService.agregarMedic(medico);
     }
 
+   
     @Override
-    public boolean editarMedico(Medico medico, String nombre, Especialidad esp) {
-        return medicoService.editarMedico(medico, nombre, esp);
+    public boolean editarMedico(Medico medico, String campo, Especialidad especialidad) {
+        return medicoService.editarMedico(medico, campo, especialidad);
     }
 
     @Override
     public boolean eliminarMedico(String cedula) {
         return medicoService.eliminarMedico(cedula);
     }
-
 
 
 
@@ -118,12 +111,11 @@ public class GestorAdministrador implements IGestorAdministrador {
         especialidadService.eliminarEspecialidad(especialidad);
     }
 
-    @Override
-    public List<Medico> listarMedicos() {
-        return medicoService.listaMedicos();
-    }
 
-
+@Override
+public List<Medico> listarMedicos() {
+    return medicoService.listaMedicos();
+}
 
 @Override
 public List<Paciente> listarPacientes() {
@@ -135,18 +127,15 @@ public List<Especialidad> listarEspecialidades() {
     return especialidadService.listarEspecialidades();
 }
 
-   @Override
 public IMedicoService getMedicoService() {
-    return this.medicoService;
-}
+        return medicoService;
+    }
 
-@Override
-public IPacienteService getPacienteService() {
-    return this.pacienteService;
-}
+    public IPacienteService getPacienteService() {
+        return pacienteService;
+    }
 
-@Override
-public IEspecialidadService getEspecialidadService() {
-    return this.especialidadService;
-}
+    public IEspecialidadService getEspecialidadService() {
+        return especialidadService;
+    }
 }

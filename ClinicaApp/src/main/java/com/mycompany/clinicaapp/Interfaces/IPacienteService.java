@@ -12,4 +12,5 @@ public interface IPacienteService {
     boolean editarPaciente (Paciente paciente);
     boolean eliminarPaciente (Paciente paciente);
     List<Paciente> listarPacientes ();
+    Paciente iniciarSesion(String usuario, String contrasena);
 }

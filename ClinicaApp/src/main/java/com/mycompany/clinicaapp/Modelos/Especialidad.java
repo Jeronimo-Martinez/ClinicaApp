@@ -24,6 +24,8 @@ public class Especialidad {
         this.nombre = nombre;
     }
     
-    
- 
+    @Override
+    public String toString() {
+        return nombre != null ? nombre : "Sin especialidad";
+    }
 }

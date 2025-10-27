@@ -56,8 +56,9 @@ public class Medico {
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
-
     
-    
-    
+    @Override
+    public String toString() {
+        return nombre != null ? nombre : (cedula != null ? cedula : "Médico sin nombre");
+    }
 }
