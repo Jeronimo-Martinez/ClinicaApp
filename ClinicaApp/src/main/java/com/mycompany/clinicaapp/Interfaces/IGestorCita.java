@@ -18,5 +18,6 @@ public interface IGestorCita {
     List<Cita> consultarCitasPaciente(Paciente paciente);
     boolean eliminarCita(String idCita);
     boolean modificarCita(String idCita, Cita nueva);
-     List<Cita> getCitas();
+    List<Cita> getCitas();
+    
 }

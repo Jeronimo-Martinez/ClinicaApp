@@ -1,0 +1,91 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.clinicaapp.Utilidades;
+
+/**
+ *
+ * @author jmart
+ */
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorCita;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.table.*;
+
+public class BotonTablaCita extends AbstractCellEditor implements TableCellRenderer, TableCellEditor {
+    private JPanel panel;
+    private JButton btnModificar;
+    private JButton btnEliminar;
+    private JTable tabla;
+    private GestorCita gestor;
+
+    public BotonTablaCita(GestorCita gestor, JTable tabla) {
+        this.gestor = gestor;
+        this.tabla = tabla;
+        crearPanelBotones();
+    }
+
+    private void crearPanelBotones() {
+        panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
+        btnModificar = new JButton("Modificar");
+        btnEliminar = new JButton("Eliminar");
+
+        // Diseño más compacto
+        btnModificar.setFocusPainted(false);
+        btnModificar.setMargin(new Insets(2, 5, 2, 5));
+        btnEliminar.setFocusPainted(false);
+        btnEliminar.setMargin(new Insets(2, 5, 2, 5));
+
+        panel.add(btnModificar);
+        panel.add(btnEliminar);
+
+        // Acción de los botones
+        btnModificar.addActionListener(e -> {
+            int fila = tabla.getSelectedRow();
+            if (fila >= 0) {
+                int id = Integer.parseInt(tabla.getValueAt(fila, 0).toString());
+                JOptionPane.showMessageDialog(tabla, "Modificar cita ID: " + id);
+                // Aquí podrías abrir tu formulario de edición
+            }
+            fireEditingStopped();
+        });
+
+        btnEliminar.addActionListener(e -> {
+            int fila = tabla.getSelectedRow();
+            if (fila >= 0) {
+                String id = tabla.getValueAt(fila, 0).toString();
+                int confirmar = JOptionPane.showConfirmDialog(tabla,
+                        "¿Eliminar cita ID " + id + "?", "Confirmar eliminación",
+                        JOptionPane.YES_NO_OPTION);
+                if (confirmar == JOptionPane.YES_OPTION) {
+                    gestor.eliminarCita(id);
+                    ((DefaultTableModel) tabla.getModel()).removeRow(fila);
+                }
+            }
+            fireEditingStopped();
+        });
+    }
+
+    // Renderiza los botones (lo que se ve)
+    @Override
+    public Component getTableCellRendererComponent(JTable table, Object value,
+                                                   boolean isSelected, boolean hasFocus,
+                                                   int row, int column) {
+        return panel;
+    }
+
+    // Devuelve el panel cuando se hace clic
+    @Override
+    public Component getTableCellEditorComponent(JTable table, Object value,
+                                                 boolean isSelected, int row, int column) {
+        return panel;
+    }
+
+    @Override
+    public Object getCellEditorValue() {
+        return null;
+    }
+}
+

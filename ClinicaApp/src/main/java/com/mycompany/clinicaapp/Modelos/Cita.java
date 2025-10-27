@@ -63,4 +63,12 @@ public class Cita {
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
+    @Override
+    public String toString(){
+        return "id='" + id + '\'' +
+               ", fecha=" + fecha +
+               ", medico=" + medico.getNombre() +
+               ", paciente=" + paciente.getNombre() +
+               '}';
+    }
 }

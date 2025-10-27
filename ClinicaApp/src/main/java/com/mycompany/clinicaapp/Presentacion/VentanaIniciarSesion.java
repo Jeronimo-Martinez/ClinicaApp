@@ -7,10 +7,13 @@ import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorPaciente;
 import com.mycompany.clinicaapp.Interfaces.IMedicoService;
 import com.mycompany.clinicaapp.Interfaces.IPacienteService;
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorCita;
+import com.mycompany.clinicaapp.Modelos.Cita;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import com.mycompany.clinicaapp.Modelos.Paciente;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 
@@ -23,8 +26,8 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
     /**
      * Creates new form VentanaPrincipal
      */
-    private GestorPaciente gestorPaciente = new GestorPaciente();
-    private GestorMedico gestorMedico = new GestorMedico();
+    GestorPaciente gestorPaciente = GestorPaciente.getInstanciaPaciente();
+    GestorMedico gestorMedico = GestorMedico.getInstanciaMedico();
     
     public VentanaIniciarSesion() {
         initComponents();
@@ -32,7 +35,7 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         ButtonGroup grupoUsuarios = new ButtonGroup();
         grupoUsuarios.add(rbPaciente);
         grupoUsuarios.add(rbMedico);
-        
+        grupoUsuarios.add(rbAdministrador);
    
   
           
@@ -60,6 +63,7 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         rbPaciente = new javax.swing.JRadioButton();
         rbMedico = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
+        rbAdministrador = new javax.swing.JRadioButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -138,6 +142,9 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("¿Aún no tienes una cuenta?");
 
+        rbAdministrador.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        rbAdministrador.setText("Administrador");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -155,19 +162,21 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(194, 194, 194)
                                         .addComponent(btningresar))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(134, 134, 134)
-                                        .addComponent(rbPaciente)
-                                        .addGap(56, 56, 56)
-                                        .addComponent(rbMedico))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel1))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(rbPaciente)
+                                            .addGap(56, 56, 56)
+                                            .addComponent(rbMedico)
+                                            .addGap(34, 34, 34)
+                                            .addComponent(rbAdministrador))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel2)
+                                                .addComponent(jLabel1))
+                                            .addGap(18, 18, 18)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(txtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                 .addGap(34, 34, 34))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnregistrarse)
@@ -194,7 +203,8 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(rbPaciente)
-                    .addComponent(rbMedico))
+                    .addComponent(rbMedico)
+                    .addComponent(rbAdministrador))
                 .addGap(18, 18, 18)
                 .addComponent(btningresar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
@@ -221,9 +231,9 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         return;
         }
         
-        if (!rbPaciente.isSelected() && !rbMedico.isSelected()) {
+        if (!rbPaciente.isSelected() && !rbMedico.isSelected() && !rbAdministrador.isSelected()) {
         JOptionPane.showMessageDialog(this, 
-            "Seleccione si es Paciente o Médico antes de iniciar sesión.", 
+            "Seleccione si es Paciente, Médico o Administrador antes de iniciar sesión.", 
             "Selección requerida", 
             JOptionPane.WARNING_MESSAGE);
         return;
@@ -236,8 +246,10 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, 
                 "Inicio de sesión exitoso. ¡Bienvenido, " + paciente.getNombre() + "!");
             
-           
-            new IPacienteService().setVisible(true);
+            GestorCita gestor = new GestorCita();
+            List<Cita> citas = gestor.getCitas();
+            ListaCitasPaciente form = new ListaCitasPaciente(citas,gestor);
+            form.setVisible(true);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, 
@@ -247,13 +259,16 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         }
 
     } else if (rbMedico.isSelected()) {
-        Medico medico = gestorMedico.iniciarSesion(usuarioingresado, contrasenaingresada);
+            GestorMedico gestorMedico = GestorMedico.getInstanciaMedico();
+            Medico medico = gestorMedico.iniciarSesion(usuarioingresado, contrasenaingresada);
         if (medico != null) {
+            gestorMedico.setMedicoActual(medico);
             JOptionPane.showMessageDialog(this, 
                 "Inicio de sesión exitoso. Bienvenido Dr(a). " + medico.getNombre() + "!");
             
-           
-            new IMedicoService().setVisible(true);
+            PanelMedico panel = new PanelMedico();
+            panel.setVisible(true);
+            panel.setLocationRelativeTo(null);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, 
@@ -333,6 +348,7 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbltitle;
+    private javax.swing.JRadioButton rbAdministrador;
     private javax.swing.JRadioButton rbMedico;
     private javax.swing.JRadioButton rbPaciente;
     private javax.swing.JPasswordField txtpassword;
