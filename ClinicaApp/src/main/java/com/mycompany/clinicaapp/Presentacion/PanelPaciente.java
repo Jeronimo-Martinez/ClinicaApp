@@ -42,6 +42,9 @@ public class PanelPaciente extends JPanel {
         configurarEventosdelPanelPaciente();
     }
 
+    /**
+     * Este método inicializa las componentes del panelPaciente
+     */
     private void inicializarComponentes() {
         setLayout(new BorderLayout(15, 15));
         setBackground(new Color(245, 247, 252));
@@ -50,6 +53,11 @@ public class PanelPaciente extends JPanel {
         add(crearPanelDatosPaciente(), BorderLayout.CENTER);
         add(crearPanelBotones(), BorderLayout.SOUTH);
     }
+
+    /**
+     * Este método crea el panelDatosPaciente
+     * @return panelDatos
+     */
 
     private JPanel crearPanelDatosPaciente() {
         JPanel panelDatos = new JPanel (new GridLayout(4, 2, 12, 12));
@@ -73,6 +81,11 @@ public class PanelPaciente extends JPanel {
         return panelDatos;
     }
 
+    /**
+     * Este método crea el panelBotones
+     * @return panelBotones
+     * 
+     */
     private JPanel crearPanelBotones() {
         JPanel panelBotones = new JPanel(new GridLayout(1, 4, 10, 10));
 
@@ -89,6 +102,9 @@ public class PanelPaciente extends JPanel {
         return panelBotones;
     }
 
+    /**
+     * Este método configura el estilo del panelPaciente
+     */
     private void configurarEstilodelPanelPaciente() {
 
         // Creación de Fuentes
@@ -115,6 +131,9 @@ public class PanelPaciente extends JPanel {
         btnCerrarSesion.setForeground(new Color(255, 255, 255));
     }
 
+    /**
+     * Este método configura los eventos del panelPaciente
+     */
     private void configurarEventosdelPanelPaciente() {
 
         // Configutación del botón "Citas"
@@ -127,7 +146,7 @@ public class PanelPaciente extends JPanel {
                     // Se crea la lista de citas del paciente que se necesita para el panelCita
                     List<Cita> citasPaciente = gestorCita.consultarCitasPaciente(pacienteAutenticado);
 
-                    PanelCitas panelCita = new PanelCitas(citasPaciente, gestorCita, pacienteAutenticado);
+                    PanelCitasPaciente panelCita = new PanelCitasPaciente(citasPaciente, gestorCita, pacienteAutenticado);
                     ventanaPrincipal = (JFrame) SwingUtilities.getWindowAncestor(PanelPaciente.this);
                     ventanaPrincipal.setContentPane(panelCita);
                     ventanaPrincipal.revalidate();
