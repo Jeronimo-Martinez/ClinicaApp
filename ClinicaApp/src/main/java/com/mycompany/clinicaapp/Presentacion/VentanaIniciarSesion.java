@@ -246,8 +246,8 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
                 "Inicio de sesión exitoso. ¡Bienvenido, " + paciente.getNombre() + "!");
             
             GestorCita gestor = new GestorCita();
-            List<Cita> citas = gestor.getCitas();
-            PanelCitasPaciente form = new PanelCitasPaciente(citas,gestor);
+            List<Cita> citas = gestor.consultarCitasPaciente(paciente);
+            PanelCitasPaciente form = new PanelCitasPaciente(citas,gestor,paciente);
             form.setVisible(true);
             this.dispose();
         } else {
@@ -262,9 +262,11 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         if (medico != null) {
             JOptionPane.showMessageDialog(this, 
                 "Inicio de sesión exitoso. Bienvenido Dr(a). " + medico.getNombre() + "!");
-            
-           
-            new VentanaMedica().setVisible(true);
+            GestorCita gestor = new GestorCita();
+            List<Cita> citas = gestor.consultarCitasMedico(medico);
+            PanelCitasMedico form = new PanelCitasMedico(citas,gestor,medico);
+            form.setVisible(true);
+
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, 

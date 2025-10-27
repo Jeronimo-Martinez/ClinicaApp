@@ -22,8 +22,11 @@ public class GestorMedico {
     public GestorMedico() {
         Especialidad cardio = new Especialidad("Cardiología");
         Especialidad general = new Especialidad("Medicina General");
+        Especialidad pediatria = new Especialidad("pediatria");
         listaMedicos.add(new Medico("1111", "Andrés Gómez", cardio, "1111"));
         listaMedicos.add(new Medico("222", "Laura Torres", general, "2222"));
+        listaMedicos.add(new Medico("3333", "Gomez Bustamante",general, "3333"));
+        listaMedicos.add(new Medico("4444", "Sandra Rojas", pediatria, "4444"));
     }
     
     public static GestorMedico getInstanciaMedico() {
@@ -86,6 +89,9 @@ public class GestorMedico {
     }
     public List<Medico> listarMedicosEspecialidad(String nombreEspecialidad){
         return this.listaMedicos.stream().filter(m -> (m.getEspecialidad().getNombre() == null ? nombreEspecialidad == null : m.getEspecialidad().getNombre().equals(nombreEspecialidad))).collect(Collectors.toList());
+    }
+    public List<Medico> listarMedicos(){
+        return listaMedicos;
     }
     
 }

@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  */
 public class GestorPaciente implements IPacienteService{
     private static GestorPaciente instancia;
-    private final ArrayList<Paciente> listaPacientes = new ArrayList<>();
+    public final ArrayList<Paciente> listaPacientes = new ArrayList<>();
 
     public GestorPaciente() {
         listaPacientes.add(new Paciente("0000", "Juan Pérez", "3001234567", 28, "0000"));
