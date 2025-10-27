@@ -17,4 +17,12 @@ public interface IEspecialidadService {
     void eliminarEspecialidad(Especialidad especialidad);
     List<Especialidad> listarEspecialidades();    
 
+
+public interface IEspecialidadService {
+
+    boolean ingresarEspecialidad(Especialidad especialidad);
+
+    List<Especialidad> listarEspecialidades();
+
+    boolean eliminarEspecialidad(Especialidad especialidad);
 }
