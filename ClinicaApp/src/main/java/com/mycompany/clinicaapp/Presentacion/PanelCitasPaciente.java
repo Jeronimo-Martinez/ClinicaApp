@@ -29,7 +29,7 @@ import javax.swing.table.TableColumn;
 public class PanelCitasPaciente extends javax.swing.JFrame {
     private DefaultTableModel modelotabla;
     private GestorCita gestor;
-    private GestorMedico gestorMedico;
+    public GestorMedico gestorMedico;
     private Paciente pacienteActual;
     public List<Cita> citas;
 

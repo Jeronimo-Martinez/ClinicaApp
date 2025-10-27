@@ -19,7 +19,7 @@ public class GestorMedico implements IMedicoService {
 
     private final ArrayList<Medico> listaMedicos = new ArrayList<>();
 
-    private GestorMedico() {
+    public GestorMedico() {
         Especialidad cardio = new Especialidad("Cardiología");
         Especialidad general = new Especialidad("Medicina General");
         listaMedicos.add(new Medico("1111", "Andrés Gómez", cardio, "1111"));
