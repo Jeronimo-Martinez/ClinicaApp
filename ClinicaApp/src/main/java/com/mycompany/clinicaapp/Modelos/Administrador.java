@@ -18,8 +18,11 @@ public class Administrador {
 	}
     // Constructor con parámetros
     public Administrador(String cedula, String contrasena){
-        this.nombre = cedula;
-        this.contrasena= contrasena;
+		// Guardar correctamente la cédula y la contraseña
+		this.cedula = cedula;
+		this.contrasena = contrasena;
+		// Por compatibilidad inicial, también usamos la cédula como nombre si no se especifica otro
+		this.nombre = cedula;
     }
 
 	// Getters y setters

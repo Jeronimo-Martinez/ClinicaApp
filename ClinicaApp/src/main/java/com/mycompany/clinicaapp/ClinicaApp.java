@@ -7,6 +7,7 @@ package com.mycompany.clinicaapp;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorPaciente;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorEspecialidad;
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorAdministrador;
 import com.mycompany.clinicaapp.Presentacion.VentanaIniciarSesion;
 
 /**
@@ -19,6 +20,9 @@ public class ClinicaApp {
 		GestorMedico gestorMedico = new GestorMedico();
 		GestorPaciente gestorPaciente = new GestorPaciente();
 		GestorEspecialidad gestorEspecialidad = new GestorEspecialidad();
+
+		// Inicializar el GestorAdministrador (contendrá el administrador por defecto)
+		GestorAdministrador.getInstanciaAdministrador(gestorMedico, gestorPaciente, gestorEspecialidad);
 
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
