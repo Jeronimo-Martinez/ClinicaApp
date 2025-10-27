@@ -5,7 +5,6 @@
 package com.mycompany.clinicaapp.Interfaces;
 
 import com.mycompany.clinicaapp.Modelos.Medico;
-import java.util.ArrayList;
 
 /**
  *
@@ -19,6 +18,5 @@ public interface IMedicoService {
 
     boolean eliminarMedico(String id);
 
-    ArrayList<Medico> getListaMedicos();
     
 } 
