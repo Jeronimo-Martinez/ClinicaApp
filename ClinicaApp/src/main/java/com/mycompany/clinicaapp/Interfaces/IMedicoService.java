@@ -4,9 +4,10 @@
  */
 package com.mycompany.clinicaapp.Interfaces;
 
+import java.util.List;
+
 import com.mycompany.clinicaapp.Modelos.Especialidad;
 import com.mycompany.clinicaapp.Modelos.Medico;
-import java.util.ArrayList;
 
 /**
  *
@@ -18,13 +19,16 @@ public interface IMedicoService {
 
     boolean eliminarMedico(String cedula);
 
-
     Medico iniciarSesion(String cedula, String contrasena);
 
-    ArrayList<Medico> getListaMedicos();
+    List<Medico> listaMedicos();
+     
+    List<Medico> listarMedicosEspecialidad();
 
-    void editarMedico(Medico medico, String nuevoNombre, Especialidad nuevaEspecialidad);
-
-    boolean editarMedico(Medico medico);
+    // Obtener médicos filtrados por nombre de especialidad
+    List<Medico> listarMedicosEspecialidad(String nombreEspecialidad);
+    
+    boolean editarMedico(Medico medico, String nuevoNombre, Especialidad nuevaEspecialidad);
 
 }
+

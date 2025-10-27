@@ -3,14 +3,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.clinicaapp.Presentacion;
+import com.mycompany.clinicaapp.Interfaces.IEspecialidadService;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorPaciente;
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorEspecialidad;
 import com.mycompany.clinicaapp.Interfaces.IMedicoService;
 import com.mycompany.clinicaapp.Interfaces.IPacienteService;
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorCita;
+import com.mycompany.clinicaapp.Modelos.Cita;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import com.mycompany.clinicaapp.Modelos.Paciente;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 
@@ -20,23 +25,37 @@ import javax.swing.JOptionPane;
  */
 public class VentanaIniciarSesion extends javax.swing.JFrame {
 
+    private final IMedicoService medicoService;
+    private final IPacienteService pacienteService;
+    private final IEspecialidadService especialidadService;
+    // Usar solo las interfaces (inyección). El constructor por defecto seguirá creando implementaciones concretas.
+
     /**
-     * Creates new form VentanaPrincipal
+     * Constructor que recibe los servicios desde el GestorAdministrador
+     * @param medicoService
+     * @param pacienteService
+     * @param especialidadService
      */
-    private GestorPaciente gestorPaciente = new GestorPaciente();
-    private GestorMedico gestorMedico = new GestorMedico();
-    
+    // Constructor por defecto que crea gestores concretos (para compatibilidad con llamadas sin inyección)
     public VentanaIniciarSesion() {
-        initComponents();
-        
-        ButtonGroup grupoUsuarios = new ButtonGroup();
-        grupoUsuarios.add(rbPaciente);
-        grupoUsuarios.add(rbMedico);
-        
-   
-  
-          
+        // Constructor por defecto: crear implementaciones concretas y delegar
+        this(new GestorMedico(), new GestorPaciente(), new GestorEspecialidad());
     }
+
+   public VentanaIniciarSesion(IMedicoService medicoService,
+                            IPacienteService pacienteService,
+                            IEspecialidadService especialidadService) {
+    this.medicoService = medicoService;
+    this.pacienteService = pacienteService;
+    this.especialidadService = especialidadService;
+    initComponents();
+
+    // Inicialización de radio buttons u otros componentes
+    ButtonGroup grupoUsuarios = new ButtonGroup();
+    grupoUsuarios.add(rbPaciente);
+    grupoUsuarios.add(rbMedico);
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -230,14 +249,16 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         }
         
         
-        if (rbPaciente.isSelected()) {
-        Paciente paciente = gestorPaciente.iniciarSesion(usuarioingresado, contrasenaingresada);
+    if (rbPaciente.isSelected()) {
+    Paciente paciente = pacienteService.iniciarSesion(usuarioingresado, contrasenaingresada);
         if (paciente != null) {
             JOptionPane.showMessageDialog(this, 
                 "Inicio de sesión exitoso. ¡Bienvenido, " + paciente.getNombre() + "!");
             
-           
-            new IPacienteService().setVisible(true);
+            // TO-DO -> CAMBIAR A PACIENTESERVICE 
+            GestorCita gestor = new GestorCita();
+            List<Cita> citas = gestor.consultarCitasPaciente(paciente);
+            new PanelCitasPaciente(citas,gestor,paciente ).setVisible(true);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, 
@@ -247,13 +268,15 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         }
 
     } else if (rbMedico.isSelected()) {
-        Medico medico = gestorMedico.iniciarSesion(usuarioingresado, contrasenaingresada);
+        Medico medico = medicoService.iniciarSesion(usuarioingresado, contrasenaingresada);
         if (medico != null) {
             JOptionPane.showMessageDialog(this, 
                 "Inicio de sesión exitoso. Bienvenido Dr(a). " + medico.getNombre() + "!");
             
-           
-            new IMedicoService().setVisible(true);
+            // TO-DO -> CAMBIAR A MEDICO SERVICE
+            GestorCita gestor = new GestorCita();
+            List<Cita> citas = gestor.consultarCitasMedico(medico);
+            new PanelCitasMedico(citas, gestor,medico ).setVisible(true);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, 

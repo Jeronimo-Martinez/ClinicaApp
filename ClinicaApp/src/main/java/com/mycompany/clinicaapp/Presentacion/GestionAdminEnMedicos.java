@@ -1,6 +1,7 @@
 package com.mycompany.clinicaapp.Presentacion;
+
+import com.mycompany.clinicaapp.Interfaces.IGestorAdministrador;
 import com.mycompany.clinicaapp.Modelos.*;
-import com.mycompany.clinicaapp.LogicaDelNegocio.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
@@ -15,16 +16,12 @@ import java.awt.event.ActionEvent;
  * la creación, edición y eliminación de estos.
  */
 public class GestionAdminEnMedicos extends JPanel {
-    //Declaración de variables
-    private final GestorAdministrador gestor;
+
+    private final IGestorAdministrador gestor;
     private JTextField txtCedula, txtNombre, txtContrasena;
     private JComboBox<Especialidad> comboEspecialidad;
 
-    /**
-     * Constructor
-     * @param gestor, se recibe el gestor que viene del panel principal del administrador 
-     */
-    public GestionAdminEnMedicos(GestorAdministrador gestor) {
+    public GestionAdminEnMedicos(IGestorAdministrador gestor) {
         this.gestor = gestor;
         initComponents();
         cargarEspecialidades();
@@ -152,12 +149,13 @@ public class GestionAdminEnMedicos extends JPanel {
             // Crear objeto actualizado
             Medico actualizado = new Medico(cedula, nombre, esp, contrasena);
 
-            boolean exito = gestor.editarMedico(actualizado);
-            if (exito) {
-                JOptionPane.showMessageDialog(this, "Médico actualizado correctamente");
-                limpiarCampos();
-            } else {
-                JOptionPane.showMessageDialog(this, "Error: no se encontró un médico con esa cédula");
+        
+        boolean exito = gestor.editarMedico(actualizado, nombre, esp);
+        if (exito) {
+            JOptionPane.showMessageDialog(this, "Médico actualizado correctamente");
+            limpiarCampos();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error: no se encontró un médico con esa cédula");
         }
 
         } catch (Exception ex) {

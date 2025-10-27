@@ -4,20 +4,30 @@
  */
 package com.mycompany.clinicaapp.LogicaDelNegocio;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.mycompany.clinicaapp.Interfaces.IMedicoService;
 import com.mycompany.clinicaapp.Modelos.Especialidad;
 import com.mycompany.clinicaapp.Modelos.Medico;
-import java.util.ArrayList;
 
 /**
  *
  * @author hecto
  */
+
+
 public class GestorMedico implements IMedicoService {
 
     private final ArrayList<Medico> listaMedicos = new ArrayList<>();
-
-    private GestorMedico() {
+    
+    
+    
+   
+    
+    
+    public GestorMedico() {
         Especialidad cardio = new Especialidad("Cardiología");
         Especialidad general = new Especialidad("Medicina General");
         listaMedicos.add(new Medico("1111", "Andrés Gómez", cardio, "1111"));
@@ -26,20 +36,41 @@ public class GestorMedico implements IMedicoService {
 
     /**
      *
+     * @param nombreEspecialidad
      * @param medico
      * @param nuevoNombre
      * @param nuevaEspecialidad
+     * @return 
      */
     
+    
+    
+    // Método con filtro por nombre de especialidad (no forma parte de la interfaz)
+     public List<Medico> listarMedicosEspecialidad(String nombreEspecialidad){
+        return this.listaMedicos.stream().filter(m -> (m.getEspecialidad().getNombre() == null ? nombreEspecialidad == null : m.getEspecialidad().getNombre().equals(nombreEspecialidad))).collect(Collectors.toList());
+    }
+
+    // Implementación requerida por la interfaz: lista de médicos por especialidad (sin parámetros)
     @Override
-    public void editarMedico(Medico medico, String nuevoNombre, Especialidad nuevaEspecialidad) {
+    public List<Medico> listarMedicosEspecialidad(){
+        return new ArrayList<>(listaMedicos);
+    }
+
+    // Método auxiliar para compatibilidad con código que invoca "listarMedicos()"
+    public List<Medico> listarMedicos(){
+        return listaMedicos();
+    }
+    
+    @Override
+    public boolean editarMedico(Medico medico, String nuevoNombre, Especialidad nuevaEspecialidad) {
         medico.setNombre(nuevoNombre);
         medico.setEspecialidad(nuevaEspecialidad);
+        return true;
     }
 
     @Override
-    public ArrayList<Medico> getListaMedicos() {
-        return listaMedicos;
+    public List<Medico> listaMedicos() {
+        return new ArrayList<>(listaMedicos);
     }
 
     /**
@@ -68,17 +99,5 @@ public class GestorMedico implements IMedicoService {
         }
         return null;
     }
-    @Override
-    public boolean editarMedico(Medico medico) {
-        for (int i = 0; i < listaMedicos.size(); i++) {
-            Medico actual = listaMedicos.get(i);
-            if (actual.getCedula().equals(medico.getCedula())) {
-                listaMedicos.set(i, medico); // reemplaza el objeto completo
-                return true;
-            }
-        }
-        return false; // no encontrado
-}
-    
-}
 
+}

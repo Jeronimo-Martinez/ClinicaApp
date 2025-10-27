@@ -4,18 +4,35 @@
  */
 package com.mycompany.clinicaapp.Presentacion;
 
+import com.mycompany.clinicaapp.Interfaces.IMedicoService;
+import com.mycompany.clinicaapp.Interfaces.IPacienteService;
+import com.mycompany.clinicaapp.Interfaces.IEspecialidadService;
+import com.mycompany.clinicaapp.Modelos.Paciente;
+import javax.swing.JOptionPane;
 /**
  *
  * @author hecto
  */
 public class VentanaRegistrarse extends javax.swing.JFrame {
-
+    private final IMedicoService medicoService;
+    private final IPacienteService pacienteService;
+    private final IEspecialidadService especialidadService;
     /**
      * Creates new form VentanaRegistrarse
      */
     public VentanaRegistrarse() {
+        // por compatibilidad, crear implementaciones locales (no recomendado para producción)
+        this.medicoService = null;
+        this.pacienteService = null;
+        this.especialidadService = null;
         initComponents();
+    }
 
+    public VentanaRegistrarse(IMedicoService medicoService, IPacienteService pacienteService, IEspecialidadService especialidadService) {
+        this.medicoService = medicoService;
+        this.pacienteService = pacienteService;
+        this.especialidadService = especialidadService;
+        initComponents();
     }
 
     /**
@@ -73,6 +90,11 @@ public class VentanaRegistrarse extends javax.swing.JFrame {
 
         btnregistrarse.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnregistrarse.setText("Registrarse");
+        btnregistrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnregistrarseActionPerformed(evt);
+            }
+        });
 
         btnsalir.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnsalir.setText("Salir");
@@ -171,6 +193,59 @@ public class VentanaRegistrarse extends javax.swing.JFrame {
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnsalirActionPerformed
+
+    private void btnregistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrarseActionPerformed
+        // Leer campos
+        String nombre = txtnombre.getText().trim();
+        String cedula = txtcedula.getText().trim();
+        String celular = textcelular.getText().trim();
+        String edadStr = textedad.getText().trim();
+        String contrasena = new String(txtpassword.getPassword()).trim();
+
+        if (nombre.isEmpty() || cedula.isEmpty() || celular.isEmpty() || edadStr.isEmpty() || contrasena.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Complete todos los campos.", "Campos incompletos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int edad;
+        try {
+            edad = Integer.parseInt(edadStr);
+            if (edad <= 0) throw new NumberFormatException();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Edad inválida. Ingrese un número entero positivo.", "Edad inválida", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (pacienteService == null) {
+            // No hay servicio inyectado: crear local para test rápido (no persistirá entre ventanas)
+            com.mycompany.clinicaapp.LogicaDelNegocio.GestorPaciente gp = new com.mycompany.clinicaapp.LogicaDelNegocio.GestorPaciente();
+            Paciente p = new Paciente(cedula, nombre, celular, edad, contrasena);
+            boolean ok = gp.registrarPaciente(p);
+            if (ok) {
+                JOptionPane.showMessageDialog(this, "Registro exitoso. Ahora puede iniciar sesión.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                // Abrir ventana de inicio de sesión
+                new VentanaIniciarSesion().setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo registrar el paciente (posible duplicado).", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            return;
+        }
+
+        // Crear paciente y registrarlo usando el servicio inyectado
+        Paciente paciente = new Paciente(cedula, nombre, celular, edad, contrasena);
+        boolean registrado = pacienteService.registrarPaciente(paciente);
+        if (registrado) {
+            JOptionPane.showMessageDialog(this, "Registro exitoso. Puede iniciar sesión.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            // Abrir ventana de login reutilizando los mismos servicios
+            VentanaIniciarSesion ventanaLogin = new VentanaIniciarSesion(medicoService, pacienteService, especialidadService);
+            ventanaLogin.setVisible(true);
+            ventanaLogin.setLocationRelativeTo(null);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al registrar. Es posible que la cédula ya exista.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnregistrarseActionPerformed
 
     /**
      * @param args the command line arguments

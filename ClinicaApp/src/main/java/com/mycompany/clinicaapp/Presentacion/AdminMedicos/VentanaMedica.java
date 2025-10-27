@@ -11,7 +11,7 @@ import com.mycompany.clinicaapp.Utilidades.AdminMedica.ActivadorJtableMedicoBoto
 import com.mycompany.clinicaapp.Utilidades.AdminMedica.EventosParaBotones;
 import com.mycompany.clinicaapp.Utilidades.AdminMedica.RenderizadoTablaMedico;
 import java.awt.Color;
-import java.util.ArrayList;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -26,9 +26,9 @@ import javax.swing.table.DefaultTableModel;
 public class VentanaMedica extends javax.swing.JPanel {
    private final IMedicoService medicoService;
    private final IInterfazAdminMedica interfazAdmin;
-   ArrayList<Medico> medicos;
+   List<Medico> medicos;
    public void llenarFilas (){
-       
+       medicos = medicoService.listaMedicos();
         
 
         DefaultTableModel model = (DefaultTableModel) tablaMedica.getModel();
@@ -44,7 +44,7 @@ public class VentanaMedica extends javax.swing.JPanel {
     public VentanaMedica(IMedicoService medicoService, IInterfazAdminMedica interfazAdmin) {
         this.interfazAdmin=interfazAdmin;
         this.medicoService=medicoService;
-        this.medicos=medicoService.getListaMedicos();
+        this.medicos=medicoService.listaMedicos();
         initComponents();
         llenarFilas();
         
@@ -61,7 +61,7 @@ public class VentanaMedica extends javax.swing.JPanel {
            @Override
            public void clickEditar(int row) {
                
-               Medico medico = medicoService.getListaMedicos().get(row);
+               Medico medico = medicoService.listaMedicos().get(row);
                VentanaEditarMedico panel = new VentanaEditarMedico(medico, medicoService, interfazAdmin);
                panel.setSize(VentanaMedica.this.getSize());
                panel.setLocation(0, 0);
