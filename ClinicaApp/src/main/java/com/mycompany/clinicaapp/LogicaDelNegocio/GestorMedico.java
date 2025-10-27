@@ -9,15 +9,23 @@ import com.mycompany.clinicaapp.Modelos.Especialidad;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
  * @author hecto
  */
+
+
 public class GestorMedico implements IMedicoService {
 
     private final ArrayList<Medico> listaMedicos = new ArrayList<>();
-
+    
+    
+    
+   
+    
+    
     private GestorMedico() {
         Especialidad cardio = new Especialidad("Cardiología");
         Especialidad general = new Especialidad("Medicina General");
@@ -27,11 +35,20 @@ public class GestorMedico implements IMedicoService {
 
     /**
      *
+     * @param nombreEspecialidad
      * @param medico
      * @param nuevoNombre
      * @param nuevaEspecialidad
      * @return 
      */
+    
+    
+    
+    @Override
+     public List<Medico> listarMedicosEspecialidad(String nombreEspecialidad){
+        return this.listaMedicos.stream().filter(m -> (m.getEspecialidad().getNombre() == null ? nombreEspecialidad == null : m.getEspecialidad().getNombre().equals(nombreEspecialidad))).collect(Collectors.toList());
+    }
+    
     @Override
     public boolean editarMedico(Medico medico, String nuevoNombre, Especialidad nuevaEspecialidad) {
         medico.setNombre(nuevoNombre);

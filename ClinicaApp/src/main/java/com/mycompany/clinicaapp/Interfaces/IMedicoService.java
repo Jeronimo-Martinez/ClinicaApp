@@ -21,7 +21,9 @@ public interface IMedicoService {
     Medico iniciarSesion(String cedula, String contrasena);
 
     List<Medico> listaMedicos();
-
+     
+    List<Medico> listarMedicosEspecialidad();
+    
     boolean editarMedico(Medico medico, String nuevoNombre, Especialidad nuevaEspecialidad);
 
 }
