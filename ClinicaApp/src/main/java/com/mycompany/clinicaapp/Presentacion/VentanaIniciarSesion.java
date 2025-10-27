@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.clinicaapp.Presentacion;
+import com.mycompany.clinicaapp.Interfaces.IEspecialidadService;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorPaciente;
 import com.mycompany.clinicaapp.Interfaces.IMedicoService;
@@ -20,23 +21,30 @@ import javax.swing.JOptionPane;
  */
 public class VentanaIniciarSesion extends javax.swing.JFrame {
 
+    private final IMedicoService medicoService;
+    private final IPacienteService pacienteService;
+    private final IEspecialidadService especialidadService;
+
     /**
-     * Creates new form VentanaPrincipal
+     * Constructor que recibe los servicios desde el GestorAdministrador
+     * @param medicoService
+     * @param pacienteService
+     * @param especialidadService
      */
-    private GestorPaciente gestorPaciente = new GestorPaciente();
-    private GestorMedico gestorMedico = new GestorMedico();
-    
-    public VentanaIniciarSesion() {
-        initComponents();
-        
-        ButtonGroup grupoUsuarios = new ButtonGroup();
-        grupoUsuarios.add(rbPaciente);
-        grupoUsuarios.add(rbMedico);
-        
-   
-  
-          
-    }
+   public VentanaIniciarSesion(IMedicoService medicoService,
+                            IPacienteService pacienteService,
+                            IEspecialidadService especialidadService) {
+    this.medicoService = medicoService;
+    this.pacienteService = pacienteService;
+    this.especialidadService = especialidadService;
+    initComponents();
+
+    // Inicialización de radio buttons u otros componentes
+    ButtonGroup grupoUsuarios = new ButtonGroup();
+    grupoUsuarios.add(rbPaciente);
+    grupoUsuarios.add(rbMedico);
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.

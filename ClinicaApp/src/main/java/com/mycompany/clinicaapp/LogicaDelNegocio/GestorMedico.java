@@ -8,6 +8,7 @@ import com.mycompany.clinicaapp.Interfaces.IMedicoService;
 import com.mycompany.clinicaapp.Modelos.Especialidad;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -37,8 +38,8 @@ public class GestorMedico implements IMedicoService {
     }
 
     @Override
-    public ArrayList<Medico> listaMedicos() {
-        return listaMedicos;
+    public List<Medico> listaMedicos() {
+        return new ArrayList<>(listaMedicos);
     }
 
     /**

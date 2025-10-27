@@ -6,7 +6,6 @@ package com.mycompany.clinicaapp.Interfaces;
 
 import com.mycompany.clinicaapp.Modelos.Especialidad;
 import com.mycompany.clinicaapp.Modelos.Medico;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,7 +21,6 @@ public interface IMedicoService {
     Medico iniciarSesion(String cedula, String contrasena);
 
     List<Medico> listaMedicos();
-
 
     void editarMedico(Medico medico, String nuevoNombre, Especialidad nuevaEspecialidad);
 

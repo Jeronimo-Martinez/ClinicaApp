@@ -1,7 +1,7 @@
 package com.mycompany.clinicaapp.Presentacion;
 
+import com.mycompany.clinicaapp.Interfaces.IGestorAdministrador;
 import com.mycompany.clinicaapp.Modelos.*;
-import com.mycompany.clinicaapp.LogicaDelNegocio.*;
 import javax.swing.*;
 
 import java.awt.*;
@@ -13,11 +13,11 @@ import java.awt.event.ActionEvent;
  */
 public class GestionAdminEnMedicos extends JPanel {
 
-    private final GestorAdministrador gestor;
+    private final IGestorAdministrador gestor;
     private JTextField txtCedula, txtNombre, txtContrasena;
     private JComboBox<Especialidad> comboEspecialidad;
 
-    public GestionAdminEnMedicos(GestorAdministrador gestor) {
+    public GestionAdminEnMedicos(IGestorAdministrador gestor) {
         this.gestor = gestor;
         initComponents();
     }
@@ -98,7 +98,7 @@ public class GestionAdminEnMedicos extends JPanel {
         }
 
         Medico actualizado = new Medico(cedula, nombre, esp, contrasena);
-        boolean exito = gestor.editarMedico(actualizado);
+        boolean exito = gestor.editarMedico(actualizado, nombre, esp);
         if (exito) {
             JOptionPane.showMessageDialog(this, "Médico actualizado correctamente");
             limpiarCampos();

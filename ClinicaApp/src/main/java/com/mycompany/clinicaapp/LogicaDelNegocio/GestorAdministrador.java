@@ -135,15 +135,18 @@ public class GestorAdministrador implements IGestorAdministrador {
         return especialidadService.listarEspecialidades();
     }
 
-    public IMedicoService getMedicoService() {
-        return medicoService;
-    }
+   @Override
+public IMedicoService getMedicoService() {
+    return this.medicoService;
+}
 
-    public IPacienteService getPacienteService() {
-        return pacienteService;
-    }
+@Override
+public IPacienteService getPacienteService() {
+    return this.pacienteService;
+}
 
-    public IEspecialidadService getEspecialidadService() {
-        return especialidadService;
-    }
+@Override
+public IEspecialidadService getEspecialidadService() {
+    return this.especialidadService;
+}
 }

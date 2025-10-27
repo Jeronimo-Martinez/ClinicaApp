@@ -30,4 +30,9 @@ public interface IGestorAdministrador {
     List<Medico> listarMedicos();
 
     List<Especialidad> listarEspecialidades();
+    IMedicoService getMedicoService();
+    
+    IPacienteService getPacienteService();
+    
+    IEspecialidadService getEspecialidadService();
 }

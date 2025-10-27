@@ -4,16 +4,24 @@
  */
 package com.mycompany.clinicaapp.Presentacion.AdminEspecialidad;
 
+import com.mycompany.clinicaapp.Interfaces.IGestorAdministrador;
+import com.mycompany.clinicaapp.Modelos.Especialidad;
+import com.mycompany.clinicaapp.Presentacion.PanelAdministrador;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author johan
  */
-public class AgregarEspecialidad extends javax.swing.JPanel {
 
-    /**
-     * Creates new form AgregarEspecialidad
-     */
-    public AgregarEspecialidad() {
+public class AgregarEspecialidad extends javax.swing.JPanel {
+    private final IGestorAdministrador gestor;
+
+    public AgregarEspecialidad(IGestorAdministrador gestor) {
+        this.gestor = gestor;
+        
         initComponents();
     }
 
@@ -26,14 +34,14 @@ public class AgregarEspecialidad extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        especialidadString = new javax.swing.JScrollPane();
-        especialidad = new javax.swing.JEditorPane();
+        ssss = new javax.swing.JScrollPane();
+        especialidadString = new javax.swing.JEditorPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        agregar = new javax.swing.JButton();
+        cancelar = new javax.swing.JButton();
 
-        especialidadString.setViewportView(especialidad);
+        ssss.setViewportView(especialidadString);
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
@@ -43,9 +51,14 @@ public class AgregarEspecialidad extends javax.swing.JPanel {
         jTextArea1.setText("Diligencie el nombre de la especialidad\n                   que desea añadir  ");
         jScrollPane2.setViewportView(jTextArea1);
 
-        jButton1.setText("Agregar");
+        agregar.setText("Agregar");
+        agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Cancelar");
+        cancelar.setText("Cancelar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -55,9 +68,9 @@ public class AgregarEspecialidad extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1)
+                        .addComponent(agregar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2))
+                        .addComponent(cancelar))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -65,7 +78,7 @@ public class AgregarEspecialidad extends javax.swing.JPanel {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(especialidadString, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ssss, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -74,22 +87,46 @@ public class AgregarEspecialidad extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(especialidadString, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ssss, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(agregar)
+                    .addComponent(cancelar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
+      
+        String nombreEspecialidad = especialidadString.getText().trim();
+        if(nombreEspecialidad.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Por favor, rellene los campos", "Error", JOptionPane.ERROR_MESSAGE );
+            return;
+        }
+        Especialidad nueva = new Especialidad(nombreEspecialidad);
+        gestor.registrarEspecialidad(nueva);
+        JOptionPane.showMessageDialog(this, "Especialidad agregada correctamente.");
+                PanelAdministrador panel = new PanelAdministrador(gestor);
+                    panel.setSize(this.getSize());
+                    panel.setLocation(0, 0);
+                    java.awt.Window window = SwingUtilities.getWindowAncestor(this);
+                    if (window instanceof JFrame frame) {
+                        frame.setTitle("");
+                        frame.setContentPane(panel);
+                        frame.revalidate();
+                        frame.repaint();
+        
+                    }
+        
+    }//GEN-LAST:event_agregarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JEditorPane especialidad;
-    private javax.swing.JScrollPane especialidadString;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton agregar;
+    private javax.swing.JButton cancelar;
+    private javax.swing.JEditorPane especialidadString;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JScrollPane ssss;
     // End of variables declaration//GEN-END:variables
 }
