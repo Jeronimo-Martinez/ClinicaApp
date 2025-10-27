@@ -14,7 +14,7 @@ import java.util.List;
 public class GestionAdminEnPacientes extends JPanel {
     //  Declaración de variables
     private final GestorAdministrador gestor;
-    private JTextField txtCedula, txtNombre, txtEdad, txtTelefono;
+    private JTextField txtCedula, txtNombre, txtEdad, txtTelefono, txtContrasena;
     private JTable tablaPacientes;
     private DefaultTableModel modeloTabla;
     /**
@@ -51,6 +51,10 @@ public class GestionAdminEnPacientes extends JPanel {
         panelForm.add(new JLabel("Teléfono:"));
         txtTelefono = new JTextField();
         panelForm.add(txtTelefono);
+
+        panelForm.add(new JLabel("Contraseña"));
+        txtContrasena = new JTextField();
+        panelForm.add(txtContrasena);
 
         add(panelForm, BorderLayout.NORTH);
 
@@ -92,6 +96,7 @@ public class GestionAdminEnPacientes extends JPanel {
     String nombre = txtNombre.getText().trim();
     String edadTexto = txtEdad.getText().trim();
     String telefono = txtTelefono.getText().trim();
+    String contrasena = txtContrasena.getText().trim();
 
     // Validar que los campos obligatorios no estén vacíos
     if (cedula.isEmpty() || nombre.isEmpty() || edadTexto.isEmpty() || telefono.isEmpty()) {
@@ -119,7 +124,7 @@ public class GestionAdminEnPacientes extends JPanel {
     }
 
     // Crear el nuevo paciente
-    Paciente nuevo = new Paciente(cedula, nombre, telefono, edad);
+    Paciente nuevo = new Paciente(cedula, nombre, telefono, edad, contrasena);
     boolean exito = gestor.registrarPaciente(nuevo);
 
     // Mensaje según el resultado
@@ -144,6 +149,7 @@ public class GestionAdminEnPacientes extends JPanel {
             String nombre = txtNombre.getText().trim();
             String telefono = txtTelefono.getText().trim();
             String edadTexto = txtEdad.getText().trim();
+            String contrasena = txtContrasena.getText().trim();
 
             // Validar campos vacíos
             if (cedula.isEmpty() || nombre.isEmpty() || telefono.isEmpty() || edadTexto.isEmpty()) {
@@ -171,7 +177,7 @@ public class GestionAdminEnPacientes extends JPanel {
             }
 
             // Crear objeto actualizado
-            Paciente actualizado = new Paciente(cedula, nombre, telefono, edad);
+            Paciente actualizado = new Paciente(cedula, nombre, telefono, edad, contrasena);
             boolean exito = gestor.editarPaciente(actualizado);
 
             if (exito) {
