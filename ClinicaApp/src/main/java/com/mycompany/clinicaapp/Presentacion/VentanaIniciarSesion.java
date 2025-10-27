@@ -7,10 +7,13 @@ import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
 import com.mycompany.clinicaapp.LogicaDelNegocio.GestorPaciente;
 import com.mycompany.clinicaapp.Interfaces.IMedicoService;
 import com.mycompany.clinicaapp.Interfaces.IPacienteService;
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorCita;
+import com.mycompany.clinicaapp.Modelos.Cita;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import com.mycompany.clinicaapp.Modelos.Paciente;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 
@@ -236,8 +239,10 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, 
                 "Inicio de sesión exitoso. ¡Bienvenido, " + paciente.getNombre() + "!");
             
-           
-            new IPacienteService().setVisible(true);
+            // TO-DO -> CAMBIAR A PACIENTESERVICE 
+            GestorCita gestor = new GestorCita();
+            List<Cita> citas = gestor.consultarCitasPaciente(paciente);
+            new PanelCitasPaciente(citas,gestor,paciente ).setVisible(true);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, 
@@ -252,8 +257,10 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, 
                 "Inicio de sesión exitoso. Bienvenido Dr(a). " + medico.getNombre() + "!");
             
-           
-            new IMedicoService().setVisible(true);
+            // TO-DO -> CAMBIAR A MEDICO SERVICE
+            GestorCita gestor = new GestorCita();
+            List<Cita> citas = gestor.consultarCitasMedico(medico);
+            new PanelCitasMedico(citas, gestor,medico ).setVisible(true);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, 
