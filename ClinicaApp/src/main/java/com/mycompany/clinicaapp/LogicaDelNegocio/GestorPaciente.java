@@ -12,7 +12,7 @@ import java.util.List;
 public class GestorPaciente implements IPacienteService{
 
     private List<Paciente> pacientes;
-
+    private static GestorPaciente instancia; // Modifique esto
     /**
      * Constructor por defecto 
      */
@@ -109,6 +109,13 @@ public class GestorPaciente implements IPacienteService{
             }
         }
         return null;
+    }
+    
+    public static GestorPaciente getInstanciaPaciente() { // Esto tambien
+        if (instancia == null) {
+            instancia = new GestorPaciente();
+        }
+        return instancia;
     }
 
 }

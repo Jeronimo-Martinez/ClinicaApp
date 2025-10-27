@@ -175,7 +175,7 @@ public class VentanaAgregarMedico extends javax.swing.JPanel {
     Especialidad esp= new Especialidad(nombreEspecialidad);
     Medico medico= new Medico(cedulaMedico,nombreMedico , esp, contrasenaMedico);
     
-        medicoService.agregarMedic(medico);    
+        medicoService.registrarMedico(medico);    
         JOptionPane.showMessageDialog(this, "Se ha agregado un nuevo médico",null,JOptionPane.INFORMATION_MESSAGE);
         VentanaMedica panel = new VentanaMedica(medicoService, interfazAdmin);
                     panel.setSize(this.getSize());

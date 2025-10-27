@@ -141,4 +141,7 @@ public class GestorMedico implements IMedicoService {
     public void setMedicoActual(Medico medico) {
         this.medicoActual = medico;
     }
+    
+    public ArrayList<Medico> getListaMedicos() {
+        return new ArrayList<>(listaMedicos);     }
     }
