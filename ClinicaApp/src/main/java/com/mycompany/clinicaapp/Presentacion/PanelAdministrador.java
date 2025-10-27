@@ -1,5 +1,5 @@
 package com.mycompany.clinicaapp.Presentacion;
-import com.mycompany.clinicaapp.LogicaDelNegocio.GestorAdministrador;
+
 import com.mycompany.clinicaapp.Interfaces.IGestorAdministrador;
 import javax.swing.*;
 import java.awt.*;

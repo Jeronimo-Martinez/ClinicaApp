@@ -1,4 +1,5 @@
 package com.mycompany.clinicaapp.Presentacion;
+
 import com.mycompany.clinicaapp.Interfaces.IGestorAdministrador;
 import com.mycompany.clinicaapp.Modelos.*;
 import javax.swing.*;
@@ -10,13 +11,10 @@ import java.util.List;
  * Panel para que el administrador pueda eliminar y crear especialidades
  */
 public class GestorAdminEnEspecialidad extends JPanel {
-    //Declaración de variables
+
     private final IGestorAdministrador gestor;
     private JTextField txtNombre;
-    /**
-     * Constructor
-     * @param gestor
-     */
+
     public GestorAdminEnEspecialidad(IGestorAdministrador gestor) {
         this.gestor = gestor;
         initComponents();

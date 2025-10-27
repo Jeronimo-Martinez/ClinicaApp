@@ -10,6 +10,7 @@ import com.mycompany.clinicaapp.Modelos.Especialidad;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -29,7 +30,7 @@ public class VentanaAgregarMedico extends javax.swing.JPanel {
      private void cargarEspecialidades() {
         especialidades.removeAllItems();
         Set<String> nombresEspecialidades = new HashSet<>();
-        ArrayList<Medico> medicos = medicoService.getListaMedicos();
+        List<Medico> medicos = medicoService.listaMedicos();
         for (Medico m : medicos) {
             if (m.getEspecialidad() != null) {
                 nombresEspecialidades.add(m.getEspecialidad().getNombre());

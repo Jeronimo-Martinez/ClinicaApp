@@ -111,6 +111,10 @@ public class GestorAdministrador implements IGestorAdministrador {
         especialidadService.eliminarEspecialidad(especialidad);
     }
 
+    @Override
+    public List<Medico> listarMedicos() {
+        return medicoService.listaMedicos();
+    }
 
 @Override
 public List<Medico> listarMedicos() {
@@ -127,15 +131,18 @@ public List<Especialidad> listarEspecialidades() {
     return especialidadService.listarEspecialidades();
 }
 
+   @Override
 public IMedicoService getMedicoService() {
-        return medicoService;
-    }
+    return this.medicoService;
+}
 
-    public IPacienteService getPacienteService() {
-        return pacienteService;
-    }
+@Override
+public IPacienteService getPacienteService() {
+    return this.pacienteService;
+}
 
-    public IEspecialidadService getEspecialidadService() {
-        return especialidadService;
-    }
+@Override
+public IEspecialidadService getEspecialidadService() {
+    return this.especialidadService;
+}
 }

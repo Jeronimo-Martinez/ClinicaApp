@@ -1,4 +1,6 @@
 package com.mycompany.clinicaapp.Presentacion;
+
+import com.mycompany.clinicaapp.Interfaces.IGestorAdministrador;
 import com.mycompany.clinicaapp.Modelos.*;
 import com.mycompany.clinicaapp.Interfaces.IGestorAdministrador;
 import javax.swing.*;
@@ -12,15 +14,13 @@ import java.util.List;
  * registrar, editar y eliminar.
  */
 public class GestionAdminEnPacientes extends JPanel {
-    //  Declaración de variables
+
     private final IGestorAdministrador gestor;
-    private JTextField txtCedula, txtNombre, txtEdad, txtTelefono, txtContrasena;
+
+    private JTextField txtCedula, txtNombre, txtEdad, txtTelefono;
     private JTable tablaPacientes;
     private DefaultTableModel modeloTabla;
-    /**
-     * Constructor
-     * @param gestor, se recibe el gestor que viene del panel principal del administrador 
-     */
+
     public GestionAdminEnPacientes(IGestorAdministrador gestor) {
         this.gestor = gestor;
         initComponents();

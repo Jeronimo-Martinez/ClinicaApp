@@ -8,7 +8,7 @@ import com.mycompany.clinicaapp.Interfaces.IMedicoService;
 import com.mycompany.clinicaapp.Modelos.Especialidad;
 import com.mycompany.clinicaapp.Modelos.Medico;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
+import java.util.List;
 
 /**
  * 
@@ -56,12 +56,10 @@ public class GestorMedico implements IMedicoService {
             medico.getEspecialidad() == null ||
             medico.getEspecialidad().getNombre().isEmpty()) {
 
-            JOptionPane.showMessageDialog(null,
-                "Por favor complete todos los campos.",
-                "Campos vacíos",
-                JOptionPane.WARNING_MESSAGE);
-            return false;
-        }
+    @Override
+    public List<Medico> listaMedicos() {
+        return new ArrayList<>(listaMedicos);
+    }
 
         // Validar duplicados
         for (Medico existente : listaMedicos) {
