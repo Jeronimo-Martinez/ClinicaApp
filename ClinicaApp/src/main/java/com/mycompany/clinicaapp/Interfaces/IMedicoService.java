@@ -18,6 +18,7 @@ public interface IMedicoService {
 
     boolean eliminarMedico(String cedula);
 
+
     Medico iniciarSesion(String cedula, String contrasena);
 
     ArrayList<Medico> getListaMedicos();
