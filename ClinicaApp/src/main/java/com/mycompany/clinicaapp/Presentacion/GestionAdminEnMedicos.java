@@ -1,11 +1,23 @@
 package com.mycompany.clinicaapp.Presentacion;
 
-import com.mycompany.clinicaapp.Interfaces.IGestorAdministrador;
-import com.mycompany.clinicaapp.Modelos.*;
-import javax.swing.*;
-import java.awt.*;
-import java.util.List;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.util.List;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+import com.mycompany.clinicaapp.Interfaces.IGestorAdministrador;
+import com.mycompany.clinicaapp.Modelos.Especialidad;
+import com.mycompany.clinicaapp.Modelos.Medico;
 
 
 
@@ -43,14 +55,14 @@ public class GestionAdminEnMedicos extends JPanel {
         txtNombre = new JTextField();
         panelForm.add(txtNombre);
 
-        add(new JLabel("Contraseña:"));
-        txtContrasena = new JTextField();
-        add(txtContrasena);
+    // Añadir contraseña al formulario (antes se añadía al contenedor raíz por error)
+    panelForm.add(new JLabel("Contraseña:"));
+    txtContrasena = new JTextField();
+    panelForm.add(txtContrasena);
 
         panelForm.add(new JLabel("Especialidad:"));
-        comboEspecialidad = new JComboBox<>();
-        cargarEspecialidades();
-        panelForm.add(comboEspecialidad);
+    comboEspecialidad = new JComboBox<>();
+    panelForm.add(comboEspecialidad);
 
         add(panelForm, BorderLayout.CENTER);
 
