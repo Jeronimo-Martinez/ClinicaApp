@@ -1,22 +1,22 @@
 package com.mycompany.clinicaapp.Presentacion;
-import com.mycompany.clinicaapp.Interfaces.IPacienteService;
-import com.mycompany.clinicaapp.Interfaces.IHistorialService;
 import com.mycompany.clinicaapp.Interfaces.IGestorCita;
+import com.mycompany.clinicaapp.Interfaces.IPacienteService;
 import com.mycompany.clinicaapp.Modelos.Paciente;
+import com.mycompany.clinicaapp.Modelos.Cita;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import javax.swing.JFrame;
+import java.util.List;
 
 public class PanelPaciente extends JPanel {
 
     private final IPacienteService gestorPaciente;
+    private final IGestorCita gestorCita;
     private Paciente pacienteAutenticado;
-    //private final IGestorCita gestorCita; // Esto ahorita se va
-    //private final IHistorialService gestorHistorial; // Igual con esta
     private JButton btnCitas;
-    private JButton btnHistorialMedico;
     private JButton btnEditarDatos;
     private JButton btnCerrarSesion;
     private JTextField txtNombre;
@@ -24,6 +24,7 @@ public class PanelPaciente extends JPanel {
     private JTextField txtEdad;
     private JTextField txtTelefono;
     private JLabel tituloPanelPaciente;
+    private JFrame ventanaPrincipal;
 
     /**
      * Este es el constructor del panel paciente
@@ -31,9 +32,11 @@ public class PanelPaciente extends JPanel {
      * @param gestorPaciente Servicio que gestiona las operaciones del paciente 
      * @param pacienteAutenticado Paciente que se ha autenticado
      */
-    public PanelPaciente(IPacienteService gestorPaciente, Paciente pacienteAutenticado) {
+    public PanelPaciente(IPacienteService gestorPaciente, IGestorCita gestorCita, Paciente pacienteAutenticado, JFrame ventanaPrincipal) {
         this.gestorPaciente = gestorPaciente;
+        this.gestorCita = gestorCita;
         this.pacienteAutenticado = pacienteAutenticado;
+        this.ventanaPrincipal = ventanaPrincipal;
         inicializarComponentes();
         configurarEstilodelPanelPaciente();
         configurarEventosdelPanelPaciente();
@@ -75,13 +78,11 @@ public class PanelPaciente extends JPanel {
 
         // Creación de los bontones en el panelBotones
         btnCitas = new JButton("Citas");
-        btnHistorialMedico = new JButton("Historial Médico");
         btnEditarDatos = new JButton("Editar Datos");
         btnCerrarSesion = new JButton("Cerrar Sesión");
 
         // Se añaden los botones al panelBotones
         panelBotones.add(btnCitas);
-        panelBotones.add(btnHistorialMedico);
         panelBotones.add(btnEditarDatos);
         panelBotones.add(btnCerrarSesion);
 
@@ -102,26 +103,42 @@ public class PanelPaciente extends JPanel {
         txtEdad.setFont(fuenteCuerpo);
         txtTelefono.setFont(fuenteCuerpo);
         btnCitas.setFont(fuenteBtn);
-        btnHistorialMedico.setFont(fuenteBtn);
         btnEditarDatos.setFont(fuenteBtn);
         btnCerrarSesion.setFont(fuenteBtn);
 
         // Personalización de color de los botones y fuentes
         btnCitas.setBackground(new Color(66, 133, 244));
-        btnHistorialMedico.setBackground(new Color(66, 133, 244));
         btnCerrarSesion.setBackground(new Color(229, 57, 53));
         tituloPanelPaciente.setForeground(new Color(51, 51, 51));
         btnCitas.setForeground(new Color(255, 255, 255));
         btnEditarDatos.setForeground(new Color(255, 255, 255));
-        btnHistorialMedico.setForeground(new Color(255, 255, 255));
         btnCerrarSesion.setForeground(new Color(255, 255, 255));
     }
 
     private void configurarEventosdelPanelPaciente() {
 
         // Configutación del botón "Citas"
-        
-        // Configuración del botón "Historial Médico"
+        btnCitas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent clickEvento) {
+                
+                try {
+                    
+                    // Se crea la lista de citas del paciente que se necesita para el panelCita
+                    List<Cita> citasPaciente = gestorCita.consultarCitasPaciente(pacienteAutenticado);
+
+                    PanelCitas panelCita = new PanelCitas(citasPAciente, gestorCita, pacienteAutenticado);
+                    ventanaPrincipal = (JFrame) SwingUtilities.getWindowAncestor(PanelPaciente.this);
+                    ventanaPrincipal.setContentPane(panelCita);
+                    ventanaPrincipal.revalidate();
+                    ventanaPrincipal.repaint();
+
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(PanelPaciente.this, "¡Ups! Ha ocurrido un error al abrir el panel de citas ...", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
 
         // Configuración del botón "Editar Datos"
         btnEditarDatos.addActionListener(new ActionListener() {
@@ -195,5 +212,21 @@ public class PanelPaciente extends JPanel {
         });
 
         // Configuración del botón "Cerrar Sesión"
+        btnCerrarSesion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent clickEvento) {
+                int opcion = JOptionPane.showConfirmDialog(PanelPaciente.this, "¿Está seguro que quiere cerrar la sesión?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION);
+
+                // En caso de que el paciente diga que sí
+                if (opcion == JOptionPane.YES_OPTION) {
+                    ventanaPrincipal = (JFrame) SwingUtilities.getWindowAncestor(PanelPaciente.this);
+                    ventanaPrincipal.getContentPane().removeAll();
+                    ventanaPrincipal.add(new VentanaIniciarSesion());
+                    ventanaPrincipal.revalidate();
+                    ventanaPrincipal.repaint();
+                }
+            }
+        });
+
     }
 }
