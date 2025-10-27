@@ -4,14 +4,29 @@
  */
 package com.mycompany.clinicaapp;
 
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorMedico;
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorPaciente;
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorEspecialidad;
+import com.mycompany.clinicaapp.Presentacion.VentanaIniciarSesion;
 
 /**
- *
- * @author hecto
+ * Punto de entrada de la aplicación.
+ * Crea instancias concretas de los gestores y abre la ventana de inicio de sesión
  */
 public class ClinicaApp {
-   
 
-    
-    
+	public static void main(String[] args) {
+		GestorMedico gestorMedico = new GestorMedico();
+		GestorPaciente gestorPaciente = new GestorPaciente();
+		GestorEspecialidad gestorEspecialidad = new GestorEspecialidad();
+
+		java.awt.EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				VentanaIniciarSesion ventana = new VentanaIniciarSesion(gestorMedico, gestorPaciente, gestorEspecialidad);
+				ventana.setLocationRelativeTo(null);
+				ventana.setVisible(true);
+			}
+		});
+	}
+
 }

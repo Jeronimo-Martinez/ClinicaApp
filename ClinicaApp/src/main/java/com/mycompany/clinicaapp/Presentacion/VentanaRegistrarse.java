@@ -4,20 +4,34 @@
  */
 package com.mycompany.clinicaapp.Presentacion;
 
-import com.mycompany.clinicaapp.LogicaDelNegocio.GestorPaciente;
+import com.mycompany.clinicaapp.Interfaces.IMedicoService;
+import com.mycompany.clinicaapp.Interfaces.IPacienteService;
+import com.mycompany.clinicaapp.Interfaces.IEspecialidadService;
 import com.mycompany.clinicaapp.Modelos.Paciente;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author hecto
  */
 public class VentanaRegistrarse extends javax.swing.JFrame {
-
+    private final IMedicoService medicoService;
+    private final IPacienteService pacienteService;
+    private final IEspecialidadService especialidadService;
     /**
      * Creates new form VentanaRegistrarse
      */
     public VentanaRegistrarse() {
+        // por compatibilidad, crear implementaciones locales (no recomendado para producción)
+        this.medicoService = null;
+        this.pacienteService = null;
+        this.especialidadService = null;
+        initComponents();
+    }
+
+    public VentanaRegistrarse(IMedicoService medicoService, IPacienteService pacienteService, IEspecialidadService especialidadService) {
+        this.medicoService = medicoService;
+        this.pacienteService = pacienteService;
+        this.especialidadService = especialidadService;
         initComponents();
     }
 
@@ -30,48 +44,63 @@ public class VentanaRegistrarse extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel4 = new javax.swing.JLabel();
-        txtCedula = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtTelefono = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         lbltitle = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        btnRegistrarse = new javax.swing.JButton();
-        txtEdad = new javax.swing.JTextField();
-        btnVolver = new javax.swing.JButton();
+        btnregistrarse = new javax.swing.JButton();
+        btnsalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
-        txtContrasena = new javax.swing.JPasswordField();
+        txtnombre = new javax.swing.JTextField();
+        txtpassword = new javax.swing.JPasswordField();
+        jLabel4 = new javax.swing.JLabel();
+        txtcedula = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        textcelular = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        textedad = new javax.swing.JTextField();
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel4.setText("Cedula:");
-
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel5.setText("Celular:");
 
         lbltitle.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lbltitle.setText("Por favor complete sus datos personales para crear su cuenta");
         lbltitle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jLabel6.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel6.setText("Edad:");
-
-        btnRegistrarse.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnRegistrarse.setText("Registrarse");
-        btnRegistrarse.addActionListener(new java.awt.event.ActionListener() {
+        btnregistrarse.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnregistrarse.setText("Registrarse");
+        btnregistrarse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarseActionPerformed(evt);
+                btnregistrarseActionPerformed(evt);
             }
         });
 
-        btnVolver.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnVolver.setText("Volver");
-        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+        btnsalir.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnsalir.setText("Salir");
+        btnsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolverActionPerformed(evt);
+                btnsalirActionPerformed(evt);
             }
         });
 
@@ -81,23 +110,23 @@ public class VentanaRegistrarse extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel2.setText("Contraseña:");
 
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel4.setText("Cedula:");
+
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel5.setText("Celular:");
+
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel6.setText("Edad:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnRegistrarse)
-                .addGap(216, 216, 216)
-                .addComponent(btnVolver)
-                .addGap(38, 38, 38))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(lbltitle))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
+                        .addGap(89, 89, 89)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,98 +134,118 @@ public class VentanaRegistrarse extends javax.swing.JFrame {
                                     .addComponent(jLabel1))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtcedula, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textcelular, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(125, 125, 125)
-                                .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel6))))
-                .addContainerGap(82, Short.MAX_VALUE))
+                                .addComponent(textedad, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel6)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addComponent(lbltitle)))
+                .addContainerGap(103, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnregistrarse)
+                .addGap(216, 216, 216)
+                .addComponent(btnsalir)
+                .addGap(38, 38, 38))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(lbltitle)
-                .addGap(28, 28, 28)
+                .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtcedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textcelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                    .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegistrarse)
-                    .addComponent(btnVolver))
+                    .addComponent(btnregistrarse)
+                    .addComponent(btnsalir))
                 .addGap(39, 39, 39))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        VentanaIniciarSesion ventana = new VentanaIniciarSesion();
-        ventana.setVisible(true);
-        ventana.setLocationRelativeTo(null); // Centra la ventana
-        this.dispose();
-    }//GEN-LAST:event_btnVolverActionPerformed
+    private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnsalirActionPerformed
 
-    private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
-        GestorPaciente gestor = GestorPaciente.getInstanciaPaciente();
-        String nombre = txtNombre.getText();
-        String telefono = txtTelefono.getText();
-        String cedula = txtCedula.getText();
-        String contrasena = new String(txtContrasena.getPassword());
-        String edadTexto = txtEdad.getText();
-        if (nombre.isEmpty() || telefono.isEmpty() || cedula.isEmpty() || contrasena.isEmpty() || edadTexto.isEmpty()) {
-            JOptionPane.showMessageDialog(this,
-                "Por favor, complete todos los campos antes de continuar.",
-                "Campos vacíos",
-                JOptionPane.WARNING_MESSAGE);
+    private void btnregistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrarseActionPerformed
+        // Leer campos
+        String nombre = txtnombre.getText().trim();
+        String cedula = txtcedula.getText().trim();
+        String celular = textcelular.getText().trim();
+        String edadStr = textedad.getText().trim();
+        String contrasena = new String(txtpassword.getPassword()).trim();
+
+        if (nombre.isEmpty() || cedula.isEmpty() || celular.isEmpty() || edadStr.isEmpty() || contrasena.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Complete todos los campos.", "Campos incompletos", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
-        
+
         int edad;
         try {
-            edad = Integer.parseInt(edadTexto);
+            edad = Integer.parseInt(edadStr);
+            if (edad <= 0) throw new NumberFormatException();
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this,
-                "Por favor, ingrese un número válido en el campo de edad.",
-                "Edad inválida",
-                JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Edad inválida. Ingrese un número entero positivo.", "Edad inválida", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        Paciente pacienteNuevo = new Paciente(cedula, nombre, telefono, edad, contrasena);
-                
-        boolean registrado = gestor.registrarPaciente(pacienteNuevo);
-        
-        if (registrado) {
-        txtNombre.setText("");
-        txtTelefono.setText("");
-        txtCedula.setText("");
-        txtEdad.setText("");
-        txtContrasena.setText("");
+
+        if (pacienteService == null) {
+            // No hay servicio inyectado: crear local para test rápido (no persistirá entre ventanas)
+            com.mycompany.clinicaapp.LogicaDelNegocio.GestorPaciente gp = new com.mycompany.clinicaapp.LogicaDelNegocio.GestorPaciente();
+            Paciente p = new Paciente(cedula, nombre, celular, edad, contrasena);
+            boolean ok = gp.registrarPaciente(p);
+            if (ok) {
+                JOptionPane.showMessageDialog(this, "Registro exitoso. Ahora puede iniciar sesión.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                // Abrir ventana de inicio de sesión
+                new VentanaIniciarSesion().setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo registrar el paciente (posible duplicado).", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            return;
         }
-    }//GEN-LAST:event_btnRegistrarseActionPerformed
+
+        // Crear paciente y registrarlo usando el servicio inyectado
+        Paciente paciente = new Paciente(cedula, nombre, celular, edad, contrasena);
+        boolean registrado = pacienteService.registrarPaciente(paciente);
+        if (registrado) {
+            JOptionPane.showMessageDialog(this, "Registro exitoso. Puede iniciar sesión.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            // Abrir ventana de login reutilizando los mismos servicios
+            VentanaIniciarSesion ventanaLogin = new VentanaIniciarSesion(medicoService, pacienteService, especialidadService);
+            ventanaLogin.setVisible(true);
+            ventanaLogin.setLocationRelativeTo(null);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al registrar. Es posible que la cédula ya exista.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnregistrarseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -224,6 +273,7 @@ public class VentanaRegistrarse extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(VentanaRegistrarse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -234,18 +284,20 @@ public class VentanaRegistrarse extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRegistrarse;
-    private javax.swing.JButton btnVolver;
+    private javax.swing.JButton btnregistrarse;
+    private javax.swing.JButton btnsalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbltitle;
-    private javax.swing.JTextField txtCedula;
-    private javax.swing.JPasswordField txtContrasena;
-    private javax.swing.JTextField txtEdad;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtTelefono;
+    private javax.swing.JTextField textcelular;
+    private javax.swing.JTextField textedad;
+    private javax.swing.JTextField txtcedula;
+    private javax.swing.JTextField txtnombre;
+    private javax.swing.JPasswordField txtpassword;
     // End of variables declaration//GEN-END:variables
 }
