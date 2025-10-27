@@ -1,6 +1,7 @@
 package com.mycompany.clinicaapp.Presentacion;
 import com.mycompany.clinicaapp.Interfaces.IGestorCita;
 import com.mycompany.clinicaapp.Interfaces.IPacienteService;
+import com.mycompany.clinicaapp.LogicaDelNegocio.GestorCita;
 import com.mycompany.clinicaapp.Modelos.Paciente;
 import com.mycompany.clinicaapp.Modelos.Cita;
 import javax.swing.*;
@@ -14,7 +15,7 @@ import java.util.List;
 public class PanelPaciente extends JPanel {
 
     private final IPacienteService gestorPaciente;
-    private final IGestorCita gestorCita;
+    private final GestorCita gestorCita;
     private Paciente pacienteAutenticado;
     private JButton btnCitas;
     private JButton btnEditarDatos;
@@ -32,7 +33,7 @@ public class PanelPaciente extends JPanel {
      * @param gestorPaciente Servicio que gestiona las operaciones del paciente 
      * @param pacienteAutenticado Paciente que se ha autenticado
      */
-    public PanelPaciente(IPacienteService gestorPaciente, IGestorCita gestorCita, Paciente pacienteAutenticado, JFrame ventanaPrincipal) {
+    public PanelPaciente(IPacienteService gestorPaciente, GestorCita gestorCita, Paciente pacienteAutenticado, JFrame ventanaPrincipal) {
         this.gestorPaciente = gestorPaciente;
         this.gestorCita = gestorCita;
         this.pacienteAutenticado = pacienteAutenticado;
@@ -127,7 +128,7 @@ public class PanelPaciente extends JPanel {
                     // Se crea la lista de citas del paciente que se necesita para el panelCita
                     List<Cita> citasPaciente = gestorCita.consultarCitasPaciente(pacienteAutenticado);
 
-                    PanelCitas panelCita = new PanelCitas(citasPaciente, gestorCita, pacienteAutenticado);
+                    PanelCitasPaciente panelCita = new PanelCitasPaciente(citasPaciente, gestorCita, pacienteAutenticado);
                     ventanaPrincipal = (JFrame) SwingUtilities.getWindowAncestor(PanelPaciente.this);
                     ventanaPrincipal.setContentPane(panelCita);
                     ventanaPrincipal.revalidate();
