@@ -90,8 +90,11 @@ public class GestionAdminEnMedicos extends JPanel {
             // Volver al panel administrador
             javax.swing.JFrame ventana = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
             ventana.setContentPane(new PanelAdministrador(gestor));
+            // Asegurar que el frame se actualice y mantenga tamaño razonable
             ventana.revalidate();
             ventana.repaint();
+            ventana.pack();
+            ventana.setLocationRelativeTo(null);
         });
     }
 
