@@ -56,11 +56,12 @@ public class PanelPaciente extends JPanel {
         JPanel panelDatos = new JPanel (new GridLayout(4, 2, 12, 12));
         panelDatos.setBorder(BorderFactory.createTitledBorder("Datos Personales: "));
 
-        txtNombre = new JTextField(pacienteAutenticado.getNombre());
-        txtCedula = new JTextField(pacienteAutenticado.getCedula());
-        txtCedula.setEditable(false);
-        txtEdad = new JTextField(pacienteAutenticado.getEdad());
-        txtTelefono = new JTextField(pacienteAutenticado.getTelefono());
+    txtNombre = new JTextField(pacienteAutenticado.getNombre());
+    txtCedula = new JTextField(pacienteAutenticado.getCedula());
+    txtCedula.setEditable(false);
+    // Mostrar la edad como texto (evitar usar el constructor que toma columnas)
+    txtEdad = new JTextField(String.valueOf(pacienteAutenticado.getEdad()));
+    txtTelefono = new JTextField(pacienteAutenticado.getTelefono());
 
         panelDatos.add(new JLabel("Nombre: "));
         panelDatos.add(txtNombre);
@@ -168,12 +169,10 @@ public class PanelPaciente extends JPanel {
                             JOptionPane.showMessageDialog(PanelPaciente.this, "La edad debe ser un número positivo", "Advertencia", JOptionPane.WARNING_MESSAGE);
                             return;
                         }
-                    } catch (Exception e) {
+                    } catch (NumberFormatException ex) {
                         JOptionPane.showMessageDialog(PanelPaciente.this, "La edad debe ser un número", "Advertencia", JOptionPane.WARNING_MESSAGE);
-
+                        return; // evitar continuar y provocar crash
                     }
-
-                    edadValidacionNumero = Integer.parseInt(edad);
 
                     // Se comprueba que el nombre sean solo letras con opción de espacios
                     if (!nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+")){

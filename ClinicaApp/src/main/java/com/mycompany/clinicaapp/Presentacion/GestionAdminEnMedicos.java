@@ -1,11 +1,23 @@
 package com.mycompany.clinicaapp.Presentacion;
 
-import com.mycompany.clinicaapp.Interfaces.IGestorAdministrador;
-import com.mycompany.clinicaapp.Modelos.*;
-import javax.swing.*;
-import java.awt.*;
-import java.util.List;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.util.List;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+import com.mycompany.clinicaapp.Interfaces.IGestorAdministrador;
+import com.mycompany.clinicaapp.Modelos.Especialidad;
+import com.mycompany.clinicaapp.Modelos.Medico;
 
 
 
@@ -43,14 +55,14 @@ public class GestionAdminEnMedicos extends JPanel {
         txtNombre = new JTextField();
         panelForm.add(txtNombre);
 
-        add(new JLabel("Contraseña:"));
-        txtContrasena = new JTextField();
-        add(txtContrasena);
+    // Añadir contraseña al formulario (antes se añadía al contenedor raíz por error)
+    panelForm.add(new JLabel("Contraseña:"));
+    txtContrasena = new JTextField();
+    panelForm.add(txtContrasena);
 
         panelForm.add(new JLabel("Especialidad:"));
-        comboEspecialidad = new JComboBox<>();
-        cargarEspecialidades();
-        panelForm.add(comboEspecialidad);
+    comboEspecialidad = new JComboBox<>();
+    panelForm.add(comboEspecialidad);
 
         add(panelForm, BorderLayout.CENTER);
 
@@ -59,11 +71,14 @@ public class GestionAdminEnMedicos extends JPanel {
         JButton btnEditar = new JButton("Editar");
         JButton btnEliminar = new JButton("Eliminar");
         JButton btnVer = new JButton("Ver Médicos");
+    JButton btnVolver = new JButton("Volver");
 
         panelBotones.add(btnRegistrar);
         panelBotones.add(btnEditar);
         panelBotones.add(btnEliminar);
         panelBotones.add(btnVer);
+    // Botón para volver al panel administrador
+    panelBotones.add(btnVolver);
 
         add(panelBotones, BorderLayout.SOUTH);
 
@@ -71,6 +86,16 @@ public class GestionAdminEnMedicos extends JPanel {
         btnEditar.addActionListener(this::editarMedico);
         btnEliminar.addActionListener(this::eliminarMedico);
         btnVer.addActionListener(this::verMedicos);
+        btnVolver.addActionListener((ActionEvent e) -> {
+            // Volver al panel administrador
+            javax.swing.JFrame ventana = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
+            ventana.setContentPane(new PanelAdministrador(gestor));
+            // Asegurar que el frame se actualice y mantenga tamaño razonable
+            ventana.revalidate();
+            ventana.repaint();
+            ventana.pack();
+            ventana.setLocationRelativeTo(null);
+        });
     }
 
     /**

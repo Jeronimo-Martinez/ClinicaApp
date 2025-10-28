@@ -1,9 +1,19 @@
 package com.mycompany.clinicaapp.Presentacion;
 
-import com.mycompany.clinicaapp.Interfaces.IGestorAdministrador;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+import com.mycompany.clinicaapp.Interfaces.IGestorAdministrador;
 
 
 /**
@@ -67,20 +77,46 @@ public class PanelAdministrador extends JPanel {
         panelContenedor.add(nuevoPanel, BorderLayout.CENTER);
 
         JButton btnVolver = new JButton("Volver al Panel Administrador");
-        btnVolver.addActionListener(a -> volverAlPanelAdministrador());
+        // Use the captured ventana reference so the action still works even after
+        // this panel has been replaced in the frame's content pane.
+        btnVolver.addActionListener(a -> {
+            if (ventana != null) {
+                ventana.setContentPane(new PanelAdministrador(gestor));
+                ventana.revalidate();
+                ventana.repaint();
+                ventana.pack();
+                ventana.setLocationRelativeTo(null);
+                ventana.setVisible(true);
+            } else {
+                // Fallback: no ancestor frame found, open a new window with the admin panel
+                JFrame nueva = new JFrame("Panel Administrador");
+                nueva.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                nueva.setContentPane(new PanelAdministrador(gestor));
+                nueva.pack();
+                nueva.setLocationRelativeTo(null);
+                nueva.setVisible(true);
+            }
+        });
         panelContenedor.add(btnVolver, BorderLayout.SOUTH);
 
-        ventana.setContentPane(panelContenedor);
-        ventana.revalidate();
-        ventana.repaint();
+        if (ventana != null) {
+            ventana.setContentPane(panelContenedor);
+            ventana.revalidate();
+            ventana.repaint();
+            ventana.pack();
+            ventana.setLocationRelativeTo(null);
+        } else {
+            // If no ancestor frame is available, open a new window to display the panel
+            JFrame nueva = new JFrame("Administrador");
+            nueva.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            nueva.setContentPane(panelContenedor);
+            nueva.pack();
+            nueva.setLocationRelativeTo(null);
+            nueva.setVisible(true);
+        }
     }
 
-    private void volverAlPanelAdministrador() {
-        JFrame ventana = (JFrame) SwingUtilities.getWindowAncestor(this);
-        ventana.setContentPane(new PanelAdministrador(gestor));
-        ventana.revalidate();
-        ventana.repaint();
-    }
+    
 
     private void cerrarSesion(ActionEvent e) {
         int opcion = JOptionPane.showConfirmDialog(
